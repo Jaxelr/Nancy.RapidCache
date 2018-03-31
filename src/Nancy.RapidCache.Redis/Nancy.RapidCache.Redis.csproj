@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>Nancy.RapidCache.Redis</PackageId>
+    <Authors>Jaxel Rojas</Authors>
+    <Company />
+    <Product>Nancy.RapidCache.Redis</Product>
+    <Copyright>Copyright 2018</Copyright>
+    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/Jaxelr/Nancy.RapidCache</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Jaxelr/Nancy.RapidCache</RepositoryUrl>
+    <PackageTags>cache;nancyfx;redis</PackageTags>
+    <Version>0.1.0</Version>
+    <Description>This library ads Redis support as a store for RapidCache.</Description>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageVersion>0.1.0</PackageVersion>
+    <PackageReleaseNotes>Initial version adding usage of StackExchange.Redis library</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="StackExchange.Redis" Version="1.2.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Nancy.RapidCache\Nancy.RapidCache.csproj" />
+  </ItemGroup>
+
+</Project>

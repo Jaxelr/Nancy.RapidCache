@@ -1,0 +1,29 @@
+version: '1.0.{build}'
+image: Visual Studio 2017
+branches:
+  only:
+  - master
+  - develop
+init:
+  - cmd: git config --global core.autocrlf true
+before_build:
+  - cmd: dotnet --version
+  - cmd: dotnet restore ./Nancy.RapidCache.sln -v quiet
+build_script:
+  - cmd: dotnet publish ./src/Nancy.RapidCache/Nancy.RapidCache.csproj -v quiet
+  - cmd: dotnet publish ./src/Nancy.RapidCache.Redis/Nancy.RapidCache.Redis.csproj -v quiet
+test_script: 
+  - cmd: dotnet test ./tests/Nancy.RapidCache.Tests.csproj -v quiet
+artifacts:
+  - path: '**\*.nupkg'
+skip_commits:
+  files:
+    - '**/*.md'
+deploy:
+- provider: NuGet
+  server: https://www.myget.org/F/nancy-rapid-cache/api/v2/package
+  on:
+    branch: master  
+  api_key:
+    secure: 6xhHSsDvB9arsrSDLuynnbxaVS+BwaoJU96RfQenc5FOnUYvP8SHM6kbvrmpvja2
+  skip_symbols: true

@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nancy.RapidCache", "src\Nancy.RapidCache\Nancy.RapidCache.csproj", "{52FD488C-472C-4D2B-B60A-B2B5EA97BBB3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nancy.RapidCache.SampleApplication", "samples\Nancy.RapidCache.SampleApplication.csproj", "{56F1A6DA-7C81-4099-9BE9-8876780BD65E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{A916D343-9154-4239-A2C8-8F5BCBF2AE35}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		appveyor.yml = appveyor.yml
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nancy.RapidCache.Tests", "tests\Nancy.RapidCache.Tests.csproj", "{D4A1672D-A47B-4169-8216-1B0526E30981}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nancy.RapidCache.Redis", "src\Nancy.RapidCache.Redis\Nancy.RapidCache.Redis.csproj", "{7FB87E29-9306-428F-A26F-1E71E37C28AC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B3747F77-626C-4002-958D-41467C955F6B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{47F7C6AC-2FE2-4638-A475-CB29BCC4A882}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{52FD488C-472C-4D2B-B60A-B2B5EA97BBB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52FD488C-472C-4D2B-B60A-B2B5EA97BBB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52FD488C-472C-4D2B-B60A-B2B5EA97BBB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52FD488C-472C-4D2B-B60A-B2B5EA97BBB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56F1A6DA-7C81-4099-9BE9-8876780BD65E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56F1A6DA-7C81-4099-9BE9-8876780BD65E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56F1A6DA-7C81-4099-9BE9-8876780BD65E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56F1A6DA-7C81-4099-9BE9-8876780BD65E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4A1672D-A47B-4169-8216-1B0526E30981}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4A1672D-A47B-4169-8216-1B0526E30981}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4A1672D-A47B-4169-8216-1B0526E30981}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4A1672D-A47B-4169-8216-1B0526E30981}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FB87E29-9306-428F-A26F-1E71E37C28AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FB87E29-9306-428F-A26F-1E71E37C28AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FB87E29-9306-428F-A26F-1E71E37C28AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FB87E29-9306-428F-A26F-1E71E37C28AC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{52FD488C-472C-4D2B-B60A-B2B5EA97BBB3} = {B3747F77-626C-4002-958D-41467C955F6B}
+		{D4A1672D-A47B-4169-8216-1B0526E30981} = {47F7C6AC-2FE2-4638-A475-CB29BCC4A882}
+		{7FB87E29-9306-428F-A26F-1E71E37C28AC} = {B3747F77-626C-4002-958D-41467C955F6B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CF3E688B-A195-4C64-B28E-3290DD9F6EF2}
+	EndGlobalSection
+EndGlobal
