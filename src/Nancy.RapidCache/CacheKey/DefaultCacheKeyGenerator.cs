@@ -6,7 +6,7 @@ namespace Nancy.RapidCache.CacheKey
     /// <summary>
     /// Default cache key use by the Container to obtain keys.
     /// Plausible values are query, form, accept
-    /// By default the host, scheme, path and ports are used as unique key.
+    /// By default the host, scheme, path and ports of an url are used as unique key.
     /// </summary>
     public class DefaultCacheKeyGenerator : ICacheKeyGenerator
     {

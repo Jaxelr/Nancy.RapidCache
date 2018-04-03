@@ -1,5 +1,4 @@
-﻿using Nancy.RapidCache.CacheKey;
-using Nancy.RapidCache.Extensions;
+﻿using Nancy.RapidCache.Extensions;
 using Nancy.Routing;
 using System;
 
@@ -11,7 +10,7 @@ namespace Nancy.RapidCache.Tests.Mocks
         {
             base.ApplicationStartup(container, pipelines);
 
-            this.EnableRapidCache(container.Resolve<IRouteResolver>(), ApplicationPipelines, new DefaultCacheKeyGenerator(new[] { "query", "form", "accept" }));
+            this.EnableRapidCache(container.Resolve<IRouteResolver>(), ApplicationPipelines);
             pipelines.AfterRequest.AddItemToStartOfPipeline(ConfigureCache);
         }
 

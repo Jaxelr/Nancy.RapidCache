@@ -1,11 +1,10 @@
-﻿using Nancy.RapidCache.CacheStore;
-using Nancy.RapidCache.Projection;
+﻿using Nancy.RapidCache.Projection;
 using StackExchange.Redis;
 using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace Nancy.RapidCache.AspNetCore.CacheStore
+namespace Nancy.RapidCache.CacheStore
 {
     /// <summary>
     /// Implementation for usage with Redis Cache.
