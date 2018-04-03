@@ -3,7 +3,7 @@ using Nancy.RapidCache.CacheKey;
 using System.Collections.Generic;
 using Xunit;
 
-namespace Nancy.RapidCache.AspNetCore.Tests
+namespace Nancy.RapidCache.Tests
 {
     public class DefaultKeyGeneratorTests
     {
@@ -147,7 +147,7 @@ namespace Nancy.RapidCache.AspNetCore.Tests
         {
             //Arrange
 
-            var keyGen = new DefaultCacheKeyGenerator(new string[] { nameof(FORM),  nameof(QUERY), nameof(ACCEPT) });
+            var keyGen = new DefaultCacheKeyGenerator(new string[] { nameof(FORM), nameof(QUERY), nameof(ACCEPT) });
             var request = new MockRequest(
                     method: METHOD,
                     path: PATH,
