@@ -8,6 +8,16 @@ namespace Nancy.RapidCache.Extensions
     public static class NancyBootstrapperExtensions
     {
         /// <summary>
+        /// Enables Nancy.RapidCache using default store and key generator
+        /// </summary>
+        /// <param name="bootstrapper"></param>
+        /// <param name="routeResolver"> </param>
+        /// <param name="pipelines"></param>
+        /// <param name="varyParams"></param>
+        public static void EnableRapidCache(this INancyBootstrapper bootstrapper, IRouteResolver routeResolver, IPipelines pipelines)
+            => RapidCache.Enable(bootstrapper, routeResolver, pipelines);
+
+        /// <summary>
         /// Enables Nancy.RapidCache using the supplied parameters
         /// </summary>
         /// <param name="bootstrapper"></param>

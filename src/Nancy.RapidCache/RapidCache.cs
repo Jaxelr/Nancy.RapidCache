@@ -34,6 +34,15 @@ namespace Nancy.RapidCache
             }
         }
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="nancyBootstrapper"></param>
+        /// <param name="routeResolver"></param>
+        /// <param name="pipelines"></param>
+        /// <param name="varyParams"> </param>
+        public static void Enable(INancyBootstrapper nancyBootstrapper, IRouteResolver routeResolver, IPipelines pipelines)
+            => Enable(nancyBootstrapper, routeResolver, pipelines, new DefaultCacheKeyGenerator(), new MemoryCacheStore());
 
         /// <summary>
         ///

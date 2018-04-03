@@ -14,7 +14,11 @@ namespace Asp.Net.Example
             base.ApplicationStartup(container, pipelines);
 
             /*enable RapidCache, vary by url params query, form and accept headers */
-            this.EnableRapidCache(container.Resolve<IRouteResolver>(), ApplicationPipelines, new DefaultCacheKeyGenerator(new[] { "query", "form", "accept" }));
+            this.EnableRapidCache(container.Resolve<IRouteResolver>(), ApplicationPipelines, new[] { "query", "form", "accept" });
+
+            /* Can also call just with the pipelines and it will equally work since the constructor equivalent is query, form, accept headers */
+            //this.EnableRapidCache(container.Resolve<IRouteResolver>(), ApplicationPipelines);
+
             //pipelines.AfterRequest.AddItemToStartOfPipeline(ConfigureCache);
 
             /* Enable cache using the DiskCacheStore, vary by url query, form and accept headers */
