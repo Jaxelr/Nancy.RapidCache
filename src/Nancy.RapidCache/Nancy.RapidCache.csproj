@@ -14,7 +14,7 @@
     <Description>Port of the Lightning Cache Nancy Fx Library for Nancy 2.</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageVersion>0.1.0</PackageVersion>
-    <PackageReleaseNotes>Refactored the Default Key Generator.</PackageReleaseNotes>
+    <PackageReleaseNotes>Initial version with new constructors for easier usage.</PackageReleaseNotes>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="1.1.2" />
