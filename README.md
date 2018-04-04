@@ -113,7 +113,7 @@ namespace WebApplication
 
  along with the url that identifies your resource (this is using the DefaultKeyGenerator). 
 
-## Example usage of other Cache Stores
+## Using other Cache Stores
 
 ### DiskCacheStore
 
@@ -137,7 +137,7 @@ namespace WebApplication
 }
 ```
 
-## Example usage of the RedisCacheStore
+### RedisCacheStore
 
 RapidCache provides a small lib for integration with Redis, given that you provide a valid connection. It is provided as a separate package, so install it first via nuget:
 
@@ -166,7 +166,7 @@ namespace WebApplication
 }
 ```
 
-## Example definining your own cache key generation using ICacheKeyGenerator
+## Definining your own cache key generation using ICacheKeyGenerator
 
 Define your own key per request that will help you cache to the level of granulatity as needed.
 
