@@ -13,9 +13,9 @@ namespace Nancy.RapidCache.CacheKey
         private static IEnumerable<string> _varyParams;
 
         /// <summary>
-        /// Defaults usage to url + query, accept header and form values
+        /// Defaults usage to url only
         /// </summary>
-        public DefaultCacheKeyGenerator() : this(new string[] { "query", "accept", "form" })
+        public DefaultCacheKeyGenerator()
         {
         }
 
