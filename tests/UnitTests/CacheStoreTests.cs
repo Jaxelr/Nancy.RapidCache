@@ -1,5 +1,5 @@
 ﻿using Nancy.RapidCache.CacheStore;
-using Nancy.RapidCache.Tests.Mocks;
+using Nancy.RapidCache.Tests.Fakes;
 using System;
 using Xunit;
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace Nancy.RapidCache.Tests.Mocks
+namespace Nancy.RapidCache.Tests.Fakes
 {
     public class FakeRequest : Request
     {

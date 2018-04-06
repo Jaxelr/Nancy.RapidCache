@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Text;
 
-namespace Nancy.RapidCache.Tests.Mocks
+namespace Nancy.RapidCache.Tests.Fakes
 {
     public class FakeResponse : Response
     {

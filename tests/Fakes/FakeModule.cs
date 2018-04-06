@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Nancy.RapidCache.Tests.Mocks
+namespace Nancy.RapidCache.Tests.Fakes
 {
     public class FakeModule : NancyModule
     {

@@ -1,4 +1,4 @@
-﻿using Nancy.RapidCache.Tests.Mocks;
+﻿using Nancy.RapidCache.Tests.Fakes;
 using Nancy.RapidCache.CacheKey;
 using System.Collections.Generic;
 using Xunit;
