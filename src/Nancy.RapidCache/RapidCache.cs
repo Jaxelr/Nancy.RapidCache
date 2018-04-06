@@ -154,7 +154,7 @@ namespace Nancy.RapidCache
 
         /// <summary>
         /// caches response before it is sent to client if it is a CacheableResponse or if the NegotationContext has the nancy-rapidcache
-        /// ache header set.
+        /// header set.
         /// </summary>
         /// <param name="context"></param>
         private static void SetCache(NancyContext context)
