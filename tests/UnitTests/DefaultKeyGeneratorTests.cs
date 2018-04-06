@@ -3,7 +3,7 @@ using Nancy.RapidCache.CacheKey;
 using System.Collections.Generic;
 using Xunit;
 
-namespace Nancy.RapidCache.Tests
+namespace Nancy.RapidCache.Tests.UnitTests
 {
     public class DefaultKeyGeneratorTests
     {
@@ -26,8 +26,30 @@ namespace Nancy.RapidCache.Tests
         public void Keyed_by_url_only()
         {
             //Arrange
+            var keyGen = new DefaultCacheKeyGenerator();
+            var request = new FakeRequest(
+                    method: METHOD,
+                    path: PATH,
+                    headers: Acceptheader,
+                    body: null,
+                    protocol: PROTOCOL,
+                    query: QUERY);
+
+            //Act
+            string key = keyGen.Get(request);
+
+            //Assert
+            Assert.DoesNotContain(ACCEPT, key);
+            Assert.DoesNotContain(QUERY, key);
+            Assert.Contains(PATH, key);
+        }
+
+        [Fact]
+        public void Keyed_by_url_only_empty_array()
+        {
+            //Arrange
             var keyGen = new DefaultCacheKeyGenerator(new string[] { });
-            var request = new MockRequest(
+            var request = new FakeRequest(
                     method: METHOD,
                     path: PATH,
                     headers: Acceptheader,
@@ -50,7 +72,7 @@ namespace Nancy.RapidCache.Tests
             //Arrange
 
             var keyGen = new DefaultCacheKeyGenerator(new string[] { nameof(QUERY) });
-            var request = new MockRequest(
+            var request = new FakeRequest(
                     method: METHOD,
                     path: PATH,
                     headers: Acceptheader,
@@ -73,7 +95,7 @@ namespace Nancy.RapidCache.Tests
             //Arrange
 
             var keyGen = new DefaultCacheKeyGenerator(new string[] { nameof(ACCEPT) });
-            var request = new MockRequest(
+            var request = new FakeRequest(
                     method: METHOD,
                     path: PATH,
                     headers: Acceptheader,
@@ -97,7 +119,7 @@ namespace Nancy.RapidCache.Tests
             //Arrange
 
             var keyGen = new DefaultCacheKeyGenerator(new string[] { nameof(QUERY), nameof(ACCEPT) });
-            var request = new MockRequest(
+            var request = new FakeRequest(
                     method: METHOD,
                     path: PATH,
                     headers: Acceptheader,
@@ -121,7 +143,7 @@ namespace Nancy.RapidCache.Tests
             //Arrange
 
             var keyGen = new DefaultCacheKeyGenerator(new string[] { nameof(FORM) });
-            var request = new MockRequest(
+            var request = new FakeRequest(
                     method: METHOD,
                     path: PATH,
                     headers: Acceptheader,
@@ -148,7 +170,7 @@ namespace Nancy.RapidCache.Tests
             //Arrange
 
             var keyGen = new DefaultCacheKeyGenerator(new string[] { nameof(FORM), nameof(QUERY), nameof(ACCEPT) });
-            var request = new MockRequest(
+            var request = new FakeRequest(
                     method: METHOD,
                     path: PATH,
                     headers: Acceptheader,

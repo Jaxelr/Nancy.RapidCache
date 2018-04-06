@@ -2,9 +2,9 @@
 
 namespace Nancy.RapidCache.Tests.Mocks
 {
-    public class MockModule : NancyModule
+    public class FakeModule : NancyModule
     {
-        public MockModule()
+        public FakeModule()
         {
             Get("/CachedResponse", _ =>
             {

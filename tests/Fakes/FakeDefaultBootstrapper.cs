@@ -4,7 +4,7 @@ using System;
 
 namespace Nancy.RapidCache.Tests.Mocks
 {
-    public class MockMemoryBootstrapper : DefaultNancyBootstrapper
+    public class FakeDefaultBootstrapper : DefaultNancyBootstrapper
     {
         protected override void ApplicationStartup(TinyIoc.TinyIoCContainer container, Bootstrapper.IPipelines pipelines)
         {

@@ -2,7 +2,7 @@ using Nancy.RapidCache.Tests.Mocks;
 using Nancy.Testing;
 using Xunit;
 
-namespace Nancy.RapidCache.Tests
+namespace Nancy.RapidCache.Tests.UnitTests
 {
     public class RapidCacheUnitTests
     {
@@ -12,7 +12,7 @@ namespace Nancy.RapidCache.Tests
         public void Cached_response_request()
         {
             //Arrange
-            var browser = new Browser(new MockMemoryBootstrapper());
+            var browser = new Browser(new FakeDefaultBootstrapper());
 
             //Act
             var response = browser.Get(CACHED_RESPONSE_PATH);

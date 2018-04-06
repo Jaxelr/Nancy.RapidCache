@@ -3,9 +3,9 @@ using System.Text;
 
 namespace Nancy.RapidCache.Tests.Mocks
 {
-    public class MockResponse : Response
+    public class FakeResponse : Response
     {
-        public MockResponse()
+        public FakeResponse()
         {
             StatusCode = HttpStatusCode.OK;
             ContentType = "text/plain";
