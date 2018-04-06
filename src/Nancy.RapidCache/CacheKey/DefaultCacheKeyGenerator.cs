@@ -10,7 +10,7 @@ namespace Nancy.RapidCache.CacheKey
     /// </summary>
     public class DefaultCacheKeyGenerator : ICacheKeyGenerator
     {
-        private static IEnumerable<string> _varyParams;
+        private IEnumerable<string> _varyParams;
 
         /// <summary>
         /// Defaults usage to url only
@@ -36,31 +36,34 @@ namespace Nancy.RapidCache.CacheKey
 
             var query = new Dictionary<string, string>();
 
-            if (request.Query is DynamicDictionary &&
-                _varyParams.Contains(nameof(request.Query).ToLowerInvariant()))
+            if (_varyParams is IEnumerable<string>)
             {
-                var dynDict = (request.Query as DynamicDictionary);
-                foreach (string key in dynDict.Keys)
+                if (request.Query is DynamicDictionary &&
+                    _varyParams.Contains(nameof(request.Query).ToLowerInvariant()))
                 {
-                    query[key] = (string) dynDict[key];
+                    var dynDict = (request.Query as DynamicDictionary);
+                    foreach (string key in dynDict.Keys)
+                    {
+                        query[key] = (string) dynDict[key];
+                    }
                 }
-            }
 
-            if (request.Form is DynamicDictionary &&
-                _varyParams.Contains(nameof(request.Form).ToLowerInvariant()))
-            {
-                var dynDict = (request.Form as DynamicDictionary);
-                foreach (string key in dynDict.Keys)
+                if (request.Form is DynamicDictionary &&
+                    _varyParams.Contains(nameof(request.Form).ToLowerInvariant()))
                 {
-                    query[key] = (string) dynDict[key];
+                    var dynDict = (request.Form as DynamicDictionary);
+                    foreach (string key in dynDict.Keys)
+                    {
+                        query[key] = (string) dynDict[key];
+                    }
                 }
-            }
 
-            if (request.Headers.Accept?.Count() > 0 &&
-                _varyParams.Contains(nameof(request.Headers.Accept).ToLowerInvariant()))
-            {
-                string acceptHeaders = string.Join(",", request.Headers.Accept.Select(x => x.Item1));
-                query.Add(nameof(request.Headers.Accept), acceptHeaders);
+                if (request.Headers.Accept?.Count() > 0 &&
+                    _varyParams.Contains(nameof(request.Headers.Accept).ToLowerInvariant()))
+                {
+                    string acceptHeaders = string.Join(",", request.Headers.Accept.Select(x => x.Item1));
+                    query.Add(nameof(request.Headers.Accept), acceptHeaders);
+                }
             }
 
             var url = new Url
