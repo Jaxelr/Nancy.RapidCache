@@ -21,18 +21,9 @@ namespace Nancy.RapidCache
         private static bool _enabled;
         private static ICacheStore _cacheStore;
         private static ICacheKeyGenerator _cacheKeyGenerator;
-        private static INancyEngine _nancyEngine;
         private static IRouteResolver _routeResolver;
         private static INancyBootstrapper _nancyBootstrapper;
-
-        private static INancyEngine NancyEngine
-        {
-            get
-            {
-                _nancyEngine = _nancyEngine ?? _nancyBootstrapper.GetEngine();
-                return _nancyEngine;
-            }
-        }
+        private static INancyEngine NancyEngine => _nancyBootstrapper.GetEngine();
 
         /// <summary>
         ///
@@ -75,6 +66,11 @@ namespace Nancy.RapidCache
         public static void Enable(INancyBootstrapper nancyBootstrapper, IRouteResolver routeResolver, IPipelines pipeline, ICacheKeyGenerator cacheKeyGenerator, ICacheStore cacheStore)
         {
             if (_enabled)
+            {
+                return;
+            }
+
+            if (cacheKeyGenerator is null || cacheStore is null)
             {
                 return;
             }
