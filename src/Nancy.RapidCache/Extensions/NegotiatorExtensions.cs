@@ -13,6 +13,6 @@ namespace Nancy.RapidCache.Extensions
         /// <param name="expiration"></param>
         /// <returns></returns>
         public static Negotiator AsCacheable(this Negotiator negotiator, DateTime expiration)
-            => negotiator.WithHeader("nancy-RapidCache", expiration.ToString(CultureInfo.InvariantCulture));
+            => negotiator.WithHeader("nancy-rapidcache", expiration.ToString(CultureInfo.InvariantCulture));
     }
 }

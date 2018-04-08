@@ -182,7 +182,7 @@ namespace Nancy.RapidCache
                     _cacheStore.Set(key, context, cacheableResponse.Expiration);
                 }
             }
-            else if (context.NegotiationContext.Headers.ContainsKey(CACHE_HEADER))
+            else if (context.NegotiationContext.Headers.ContainsKey(CACHE_HEADER.ToLowerInvariant()))
             {
                 var expiration = DateTime.Parse(context.NegotiationContext.Headers[CACHE_HEADER], CultureInfo.InvariantCulture);
                 context.NegotiationContext.Headers.Remove(CACHE_HEADER);
