@@ -1,5 +1,5 @@
 ﻿using Nancy.RapidCache.CacheKey;
-using Nancy.RapidCache.Tests.Mocks;
+using Nancy.RapidCache.Tests.Fakes;
 using System.Collections.Generic;
 using Xunit;
 
@@ -21,6 +21,7 @@ namespace Nancy.RapidCache.Tests.UnitTests
         [Fact]
         public void Keyed_by_url()
         {
+            //Arrange
             var keyGen = new UrlHashKeyGenerator();
             var request = new FakeRequest(
                 method: METHOD,
