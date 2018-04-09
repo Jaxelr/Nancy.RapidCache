@@ -104,7 +104,7 @@ namespace WebApplication
 }
 ```
 
- *Keep in mind that for *Post* methods, the requests the body is __NOT__ keyed in this scenario. 
+ *Keep in mind that for *Post* methods, the requests body is __NOT__ part of the key in this scenario. 
  In context, you can filter by the values of: 
  
  * Query
@@ -168,7 +168,7 @@ namespace WebApplication
 
 ## Definining your own cache key generation using ICacheKeyGenerator
 
-Define your own key per request that will help you cache to the level of granulatity as needed.
+Define your own key per resolver that will help you cache to the level of granulatity you need. 
 
 ```c#
 using System;
@@ -191,11 +191,11 @@ namespace WebApplication
         {
             public string Get(Request request)
             {
-               using(var md5 = new System.Security.Cryptography.MD5CryptoServiceProvider())
-               {
-                   var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(request.Url.ToString()));
-                   return Convert.ToBase64String(hash);
-               }
+                using (var md5 = MD5.Create())
+                {
+                    byte[] hash = md5.ComputeHash(Encoding.UTF8.GetBytes(request.Url.ToString()));
+                    return Convert.ToBase64String(hash);
+                }
             }
         }
     }
