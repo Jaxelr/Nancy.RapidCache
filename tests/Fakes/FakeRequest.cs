@@ -4,6 +4,10 @@ using System.IO;
 
 namespace Nancy.RapidCache.Tests.Fakes
 {
+    /// <summary>
+    /// Using the sample FakeRequest from NancyFx
+    /// https://github.com/NancyFx/Nancy/blob/master/test/Nancy.Tests/Fakes/FakeRequest.cs
+    /// </summary>
     public class FakeRequest : Request
     {
         public FakeRequest(string method, string path)

@@ -1,5 +1,6 @@
 ﻿using Nancy.RapidCache.Extensions;
 using Nancy.RapidCache.Projection;
+using Nancy.RapidCache.Tests.Extensions;
 using Nancy.RapidCache.Tests.Fakes;
 using Nancy.Responses.Negotiation;
 using System;
@@ -28,6 +29,7 @@ namespace Nancy.RapidCache.Tests.UnitTests
             Assert.Equal(fakeResponse.ContentType, cacheableResponse.ContentType);
             Assert.Equal(fakeResponse.Headers, cacheableResponse.Headers);
             Assert.Equal(fakeResponse.StatusCode, cacheableResponse.StatusCode);
+            Assert.Equal(fakeResponse.GetContents(), cacheableResponse.GetContents());
         }
 
         [Fact]
