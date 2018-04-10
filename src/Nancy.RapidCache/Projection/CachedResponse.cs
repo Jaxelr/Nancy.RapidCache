@@ -22,7 +22,7 @@ namespace Nancy.RapidCache.Projection
             Contents = GetContents(OldResponseOutput);
             Expiration = response.Expiration;
 
-            Headers["X-Nancy-RapidCache-Expiration"] = response.Expiration.ToString(CultureInfo.InvariantCulture);
+            Headers[Helper.CacheExpiry] = response.Expiration.ToString(CultureInfo.InvariantCulture);
         }
 
         /// <summary>

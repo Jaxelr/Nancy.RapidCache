@@ -12,7 +12,7 @@ namespace Nancy.RapidCache.Tests.UnitTests
     public class Projection
     {
         private DateTime expirationDate = DateTime.Now.AddMinutes(15);
-        private const string CACHE_KEY = "nancy-rapidcache";
+        private string CACHE_KEY = Helper.CacheHeader;
 
         [Fact]
         public void Cacheable_response_created()
