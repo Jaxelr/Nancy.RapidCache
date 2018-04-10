@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Nancy.RapidCache.Tests.UnitTests
 {
-    public class RapidCacheUnitTests
+    public class RapidCache
     {
         private const string CACHED_RESPONSE_PATH = "/CachedResponse";
 

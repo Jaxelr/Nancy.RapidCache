@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Nancy.RapidCache.Tests.UnitTests
 {
-    public class CacheStoreTests
+    public class CacheStore
     {
         private const string TEST_KEY_1 = "TestKeyRequest1";
         private const string TEST_KEY_2 = "TestKeyRequest2";

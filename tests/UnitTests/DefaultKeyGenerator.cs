@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Nancy.RapidCache.Tests.UnitTests
 {
-    public class DefaultKeyGeneratorTests
+    public class DefaultKeyGenerator
     {
         private const string ACCEPT = "Accept";
         private const string ACCEPT_VALUE = "application/json";
@@ -17,7 +17,7 @@ namespace Nancy.RapidCache.Tests.UnitTests
         private const string FORM_VALUE = "FakeFormValue";
         private readonly Dictionary<string, IEnumerable<string>> Acceptheader = new Dictionary<string, IEnumerable<string>>();
 
-        public DefaultKeyGeneratorTests()
+        public DefaultKeyGenerator()
         {
             Acceptheader.Add(ACCEPT, new[] { ACCEPT_VALUE });
         }

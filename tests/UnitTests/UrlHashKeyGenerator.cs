@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Nancy.RapidCache.Tests.UnitTests
 {
-    public class UrlHashKeyGeneratorTests
+    public class UrlHashKeyGenerator
     {
         private const string ACCEPT = "Accept";
         private const string ACCEPT_VALUE = "text/plain";
@@ -13,7 +13,7 @@ namespace Nancy.RapidCache.Tests.UnitTests
         private const string PATH = "FakierPath";
         private readonly Dictionary<string, IEnumerable<string>> Acceptheader = new Dictionary<string, IEnumerable<string>>();
 
-        public UrlHashKeyGeneratorTests()
+        public UrlHashKeyGenerator()
         {
             Acceptheader.Add(ACCEPT, new[] { ACCEPT_VALUE });
         }
@@ -22,7 +22,7 @@ namespace Nancy.RapidCache.Tests.UnitTests
         public void Keyed_by_url()
         {
             //Arrange
-            var keyGen = new UrlHashKeyGenerator();
+            var keyGen = new CacheKey.UrlHashKeyGenerator();
             var request = new FakeRequest(
                 method: METHOD,
                 path: PATH,
