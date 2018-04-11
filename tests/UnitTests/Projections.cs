@@ -26,5 +26,39 @@ namespace Nancy.RapidCache.Tests.UnitTests
             Assert.Equal(fakeResponse.StatusCode, cacheableResponse.StatusCode);
             Assert.Equal(fakeResponse.GetContents(), cacheableResponse.GetContents());
         }
+
+        [Fact]
+        public void Serializable_response_created()
+        {
+            //Arrange
+            var fakeResponse = new FakeResponse();
+
+            //Act
+            var serializableResponse = new SerializableResponse(fakeResponse, expirationDate);
+
+            //Assert
+            Assert.NotNull(serializableResponse);
+            Assert.Equal(fakeResponse.ContentType, serializableResponse.ContentType);
+            Assert.Equal(fakeResponse.Headers, serializableResponse.Headers);
+            Assert.Equal(fakeResponse.StatusCode, serializableResponse.StatusCode);
+            Assert.Equal(fakeResponse.GetContents(), serializableResponse.Contents);
+        }
+
+        [Fact]
+        public void CachedResponse_response_created()
+        {
+            //Arrange
+            var fakeResponse = new FakeResponse();
+
+            //Act
+            var cachedResponse = new CachedResponse(new SerializableResponse(fakeResponse, expirationDate));
+
+            //Assert
+            Assert.NotNull(cachedResponse);
+            Assert.Equal(fakeResponse.ContentType, cachedResponse.ContentType);
+            Assert.Equal(fakeResponse.Headers, cachedResponse.Headers);
+            Assert.Equal(fakeResponse.StatusCode, cachedResponse.StatusCode);
+            Assert.Equal(fakeResponse.GetContents(), cachedResponse.GetContentAsString());
+        }
     }
 }
