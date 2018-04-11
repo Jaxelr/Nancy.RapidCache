@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Nancy.RapidCache.Tests.UnitTests
 {
-    public class DefaultKeyGenerator
+    public class KeyGenerators
     {
         private const string ACCEPT = "Accept";
         private const string ACCEPT_VALUE = "application/json";
@@ -17,13 +17,13 @@ namespace Nancy.RapidCache.Tests.UnitTests
         private const string FORM_VALUE = "FakeFormValue";
         private readonly Dictionary<string, IEnumerable<string>> Acceptheader = new Dictionary<string, IEnumerable<string>>();
 
-        public DefaultKeyGenerator()
+        public KeyGenerators()
         {
             Acceptheader.Add(ACCEPT, new[] { ACCEPT_VALUE });
         }
 
         [Fact]
-        public void Keyed_by_url_only()
+        public void Default_keyed_by_url_only()
         {
             //Arrange
             var keyGen = new DefaultCacheKeyGenerator();
@@ -45,7 +45,7 @@ namespace Nancy.RapidCache.Tests.UnitTests
         }
 
         [Fact]
-        public void Keyed_by_url_only_empty_array()
+        public void Default_keyed_by_url_only_empty_array()
         {
             //Arrange
             var keyGen = new DefaultCacheKeyGenerator(new string[] { });
@@ -67,7 +67,7 @@ namespace Nancy.RapidCache.Tests.UnitTests
         }
 
         [Fact]
-        public void Keyed_by_query()
+        public void Default_keyed_by_query()
         {
             //Arrange
 
@@ -90,7 +90,7 @@ namespace Nancy.RapidCache.Tests.UnitTests
         }
 
         [Fact]
-        public void Keyed_by_header()
+        public void Default_keyed_by_header()
         {
             //Arrange
 
@@ -114,7 +114,7 @@ namespace Nancy.RapidCache.Tests.UnitTests
         }
 
         [Fact]
-        public void Keyed_by_header_and_query()
+        public void Default_keyed_by_header_and_query()
         {
             //Arrange
 
@@ -138,7 +138,7 @@ namespace Nancy.RapidCache.Tests.UnitTests
         }
 
         [Fact]
-        public void Keyed_by_form()
+        public void Default_keyed_by_form()
         {
             //Arrange
 
@@ -165,7 +165,7 @@ namespace Nancy.RapidCache.Tests.UnitTests
         }
 
         [Fact]
-        public void Keyed_by_form_header_query()
+        public void Default_keyed_by_form_header_query()
         {
             //Arrange
 
@@ -190,6 +190,27 @@ namespace Nancy.RapidCache.Tests.UnitTests
             Assert.Contains(FORM, key);
             Assert.Contains(FORM_VALUE, key);
             Assert.Contains(PATH, key);
+        }
+
+        [Fact]
+        public void UrlHashKey_Keyed_by_url()
+        {
+            //Arrange
+            var keyGen = new CacheKey.UrlHashKeyGenerator();
+            var request = new FakeRequest(
+                method: METHOD,
+                path: PATH,
+                headers: Acceptheader);
+
+            //Act
+            string key = keyGen.Get(request);
+            byte[] bytekey = System.Convert.FromBase64String(key);
+
+            //Assert
+
+            //Validating lengths from hash created.
+            Assert.Equal(24, key.Length);
+            Assert.Equal(16, bytekey.Length);
         }
     }
 }

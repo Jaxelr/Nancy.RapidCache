@@ -1,10 +1,12 @@
 ﻿using Nancy.RapidCache.Extensions;
 using Nancy.RapidCache.Tests.Fakes;
+using Nancy.RapidCache.Tests.Extensions;
 using Nancy.Responses.Negotiation;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using Xunit;
+using Nancy.RapidCache.Projection;
 
 namespace Nancy.RapidCache.Tests.UnitTests
 {
@@ -28,6 +30,23 @@ namespace Nancy.RapidCache.Tests.UnitTests
             Assert.NotNull(cacheableNegotiator);
             Assert.True(cacheableNegotiator.NegotiationContext.Headers.ContainsKey(CACHE_KEY));
             Assert.True(cacheableNegotiator.NegotiationContext.Headers.Contains(headerKey));
+        }
+
+        [Fact]
+        public void Cacheable_response_create()
+        {
+            //Arrange
+            var fakeResponse = new FakeResponse();
+
+            //Act
+            var cacheableResponse = fakeResponse.AsCacheable(expirationDate);
+            string responseContents = ((CacheableResponse) cacheableResponse).GetContents();
+
+            //Assert
+            Assert.NotNull(cacheableResponse);
+            Assert.Equal(fakeResponse.ContentType, cacheableResponse.ContentType);
+            Assert.Equal(fakeResponse.StatusCode, cacheableResponse.StatusCode);
+            Assert.Equal(fakeResponse.GetContents(), responseContents);
         }
     }
 }
