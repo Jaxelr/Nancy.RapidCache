@@ -13,7 +13,7 @@ namespace Nancy.RapidCache.Tests.UnitTests
     public class Extensions
     {
         private DateTime expirationDate = DateTime.Now.AddMinutes(15);
-        private string CACHE_KEY = Helper.CacheHeader;
+        private string CACHE_KEY = Defaults.CacheHeader;
 
         [Fact]
         public void Cacheable_negotiator_created()

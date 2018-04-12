@@ -15,8 +15,8 @@ namespace Nancy.RapidCache
     /// </summary>
     public class RapidCache
     {
-        private static readonly string NO_REQUEST_CACHE_KEY = Helper.NoRequestCacheKey;
-        private static readonly string CACHE_HEADER = Helper.CacheHeader;
+        private static readonly string NO_REQUEST_CACHE_KEY = Defaults.NoRequestCacheKey;
+        private static readonly string CACHE_HEADER = Defaults.CacheHeader;
 
         private static bool _enabled;
         private static ICacheStore _cacheStore;
