@@ -9,9 +9,11 @@ namespace Nancy.RapidCache.Tests.Fakes
     {
         public FakeResponse()
         {
+            byte[] datum = Encoding.UTF8.GetBytes($"Hello World, my custom id is: {Guid.NewGuid()}");
+
             StatusCode = HttpStatusCode.OK;
             ContentType = "text/plain";
-            Contents = stream => new MemoryStream(Encoding.UTF8.GetBytes($"Hello World, my custom id is: {Guid.NewGuid()}"));
+            Contents = stream => stream.Write(datum, 0, datum.Length);
         }
 
         public string GetContents()
