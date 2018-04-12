@@ -33,7 +33,7 @@ namespace Asp.Net.Example
         {
             if (context.Response.StatusCode == HttpStatusCode.OK)
             {
-                context.Response = context.Response.AsCacheable(DateTime.Now.AddSeconds(30));
+                context.Response = context.Response.AsCacheable(DateTime.UtcNow.AddSeconds(30));
             }
         }
     }

@@ -130,7 +130,7 @@ namespace Nancy.RapidCache
 
             var response = _cacheStore.Get(key);
 
-            if (response == null || response?.Expiration < DateTime.Now)
+            if (response == null || response?.Expiration < DateTime.UtcNow)
             {
                 return null;
             }
@@ -177,7 +177,7 @@ namespace Nancy.RapidCache
             {
                 var currentCache = _cacheStore.Get(key);
 
-                if (currentCache == null || currentCache?.Expiration < DateTime.Now)
+                if (currentCache == null || currentCache?.Expiration < DateTime.UtcNow)
                 {
                     _cacheStore.Set(key, context, cacheableResponse.Expiration);
                 }

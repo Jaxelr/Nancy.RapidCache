@@ -89,7 +89,7 @@ namespace Nancy.RapidCache.CacheStore
         private void DeleteExpiredCacheFiles()
         {
             string[] files = FileKeyExpirationRecord
-            .Where(record => DateTime.Now >= record.Value.Add(_expiredFilesDeletionOffset))
+            .Where(record => DateTime.UtcNow >= record.Value.Add(_expiredFilesDeletionOffset))
             .Select(record => record.Key)
             .ToArray();
             foreach (string file in files)
