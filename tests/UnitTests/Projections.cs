@@ -1,6 +1,6 @@
 ﻿using Nancy.RapidCache.Projection;
-using Nancy.RapidCache.Tests.Extensions;
 using Nancy.RapidCache.Tests.Fakes;
+using Nancy.RapidCache.Tests.Helpers;
 using System;
 using Xunit;
 
@@ -24,7 +24,7 @@ namespace Nancy.RapidCache.Tests.UnitTests
             Assert.Equal(fakeResponse.ContentType, cacheableResponse.ContentType);
             Assert.Equal(fakeResponse.Headers, cacheableResponse.Headers);
             Assert.Equal(fakeResponse.StatusCode, cacheableResponse.StatusCode);
-            Assert.Equal(fakeResponse.GetContents(), cacheableResponse.GetContents());
+            Assert.Equal(fakeResponse.GetContents(), cacheableResponse.Contents.ConvertStream());
         }
 
         [Fact]
@@ -58,7 +58,7 @@ namespace Nancy.RapidCache.Tests.UnitTests
             Assert.Equal(fakeResponse.ContentType, cachedResponse.ContentType);
             Assert.Equal(fakeResponse.Headers, cachedResponse.Headers);
             Assert.Equal(fakeResponse.StatusCode, cachedResponse.StatusCode);
-            Assert.Equal(fakeResponse.GetContents(), cachedResponse.GetContentAsString());
+            Assert.Equal(fakeResponse.GetContents(), cachedResponse.Contents.ConvertStream());
         }
     }
 }

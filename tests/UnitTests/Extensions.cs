@@ -1,12 +1,11 @@
 ﻿using Nancy.RapidCache.Extensions;
 using Nancy.RapidCache.Tests.Fakes;
-using Nancy.RapidCache.Tests.Extensions;
+using Nancy.RapidCache.Tests.Helpers;
 using Nancy.Responses.Negotiation;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using Xunit;
-using Nancy.RapidCache.Projection;
 
 namespace Nancy.RapidCache.Tests.UnitTests
 {
@@ -40,13 +39,12 @@ namespace Nancy.RapidCache.Tests.UnitTests
 
             //Act
             var cacheableResponse = fakeResponse.AsCacheable(expirationDate);
-            string responseContents = ((CacheableResponse) cacheableResponse).GetContents();
 
             //Assert
             Assert.NotNull(cacheableResponse);
             Assert.Equal(fakeResponse.ContentType, cacheableResponse.ContentType);
             Assert.Equal(fakeResponse.StatusCode, cacheableResponse.StatusCode);
-            Assert.Equal(fakeResponse.GetContents(), responseContents);
+            Assert.Equal(fakeResponse.GetContents(), cacheableResponse.Contents.ConvertStream());
         }
     }
 }
