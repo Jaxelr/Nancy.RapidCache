@@ -15,8 +15,8 @@ namespace Nancy.RapidCache
     /// </summary>
     public class RapidCache
     {
-        private static readonly string NO_REQUEST_CACHE_KEY = Defaults.NoRequestCacheKey;
-        private static readonly string CACHE_HEADER = Defaults.CacheHeader;
+        private static readonly string NoRequestQueryKey = Defaults.NoRequestQueryKey;
+        private static readonly string CacheHeader = Defaults.CacheHeader;
 
         private static bool _enabled;
         private static ICacheStore _cacheStore;
@@ -115,7 +115,7 @@ namespace Nancy.RapidCache
         {
             if (context.Request.Query is DynamicDictionary)
             {
-                if ((context.Request.Query as DynamicDictionary).ContainsKey(NO_REQUEST_CACHE_KEY))
+                if ((context.Request.Query as DynamicDictionary).ContainsKey(NoRequestQueryKey))
                 {
                     return null;
                 }
@@ -130,7 +130,7 @@ namespace Nancy.RapidCache
 
             var response = _cacheStore.Get(key);
 
-            if (response == null || response?.Expiration < DateTime.UtcNow)
+            if (response == null || response.Expiration < DateTime.UtcNow)
             {
                 return null;
             }
@@ -182,10 +182,10 @@ namespace Nancy.RapidCache
                     _cacheStore.Set(key, context, cacheableResponse.Expiration);
                 }
             }
-            else if (context.NegotiationContext.Headers.ContainsKey(CACHE_HEADER.ToLowerInvariant()))
+            else if (context.NegotiationContext.Headers.ContainsKey(CacheHeader.ToLowerInvariant()))
             {
-                var expiration = DateTime.Parse(context.NegotiationContext.Headers[CACHE_HEADER], CultureInfo.InvariantCulture);
-                context.NegotiationContext.Headers.Remove(CACHE_HEADER);
+                var expiration = DateTime.Parse(context.NegotiationContext.Headers[CacheHeader], CultureInfo.InvariantCulture);
+                context.NegotiationContext.Headers.Remove(CacheHeader);
                 _cacheStore.Set(key, context, expiration);
             }
         }
@@ -217,7 +217,7 @@ namespace Nancy.RapidCache
 
                     RequestSyncKeys.Add(key);
 
-                    request.Query[NO_REQUEST_CACHE_KEY] = NO_REQUEST_CACHE_KEY;
+                    request.Query[NoRequestQueryKey] = NoRequestQueryKey;
 
                     var context2 = NancyEngine.HandleRequest(request);
 
