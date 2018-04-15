@@ -12,10 +12,10 @@
     <RepositoryUrl>https://github.com/Jaxelr/Nancy.RapidCache</RepositoryUrl>
     <PackageTags>cache;nancyfx</PackageTags>
     <Version>0.1.1</Version>
-    <Description>Port of the Lightning Cache Nancy Fx Library for Nancy 2.</Description>
+    <Description>Port of the Lightning Cache Nancy Fx Library for Nancy 2</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageVersion>0.1.1</PackageVersion>
-    <PackageReleaseNotes>Added key generator of url md5 hash.</PackageReleaseNotes>
+    <PackageReleaseNotes>Added key generator of url md5 hash</PackageReleaseNotes>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="1.1.2" />
