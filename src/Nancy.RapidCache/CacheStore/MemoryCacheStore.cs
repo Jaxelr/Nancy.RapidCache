@@ -55,9 +55,9 @@ namespace Nancy.RapidCache.CacheStore
                 return;
             }
 
-            if (context.Response is Response)
+            if (context.Response is Response response)
             {
-                _cache[key] = new SerializableResponse(context.Response, absoluteExpiration);
+                _cache[key] = new SerializableResponse(response, absoluteExpiration);
             }
         }
     }

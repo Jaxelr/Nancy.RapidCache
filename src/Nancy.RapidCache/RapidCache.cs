@@ -113,9 +113,9 @@ namespace Nancy.RapidCache
         /// <returns>cached response or null</returns>
         private static Response CheckCache(NancyContext context)
         {
-            if (context.Request.Query is DynamicDictionary)
+            if (context.Request.Query is DynamicDictionary dict)
             {
-                if ((context.Request.Query as DynamicDictionary).ContainsKey(NoRequestQueryKey))
+                if (dict.ContainsKey(NoRequestQueryKey))
                 {
                     return null;
                 }

@@ -38,23 +38,21 @@ namespace Nancy.RapidCache.CacheKey
 
             if (_varyParams is IEnumerable<string>)
             {
-                if (request.Query is DynamicDictionary &&
+                if (request.Query is DynamicDictionary dynQuery &&
                     _varyParams.Contains(nameof(request.Query).ToLowerInvariant()))
                 {
-                    var dynDict = (request.Query as DynamicDictionary);
-                    foreach (string key in dynDict.Keys)
+                    foreach (string key in dynQuery.Keys)
                     {
-                        query[key] = (string) dynDict[key];
+                        query[key] = (string) dynQuery[key];
                     }
                 }
 
-                if (request.Form is DynamicDictionary &&
+                if (request.Form is DynamicDictionary dynForm &&
                     _varyParams.Contains(nameof(request.Form).ToLowerInvariant()))
                 {
-                    var dynDict = (request.Form as DynamicDictionary);
-                    foreach (string key in dynDict.Keys)
+                    foreach (string key in dynForm.Keys)
                     {
-                        query[key] = (string) dynDict[key];
+                        query[key] = (string) dynForm[key];
                     }
                 }
 
