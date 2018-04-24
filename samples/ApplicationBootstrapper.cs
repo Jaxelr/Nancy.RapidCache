@@ -32,7 +32,9 @@ namespace Asp.Net.Example
 
         public void ConfigureCache(NancyContext context)
         {
-            if (context.Response.StatusCode == HttpStatusCode.OK && context.Request.Method == "GET")
+            if (context.Response.StatusCode == HttpStatusCode.OK &&
+                (context.Request.Method == "GET" ||
+                context.Request.Method == "HEAD"))
             {
                 context.Response = context.Response.AsCacheable(DateTime.UtcNow.AddSeconds(30));
             }
