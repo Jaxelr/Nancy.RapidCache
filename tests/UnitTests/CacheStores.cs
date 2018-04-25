@@ -1,5 +1,6 @@
 ﻿using Nancy.RapidCache.CacheStore;
 using Nancy.RapidCache.Tests.Fakes;
+using Nancy.RapidCache.Tests.Helpers;
 using System;
 using Xunit;
 
@@ -24,10 +25,10 @@ namespace Nancy.RapidCache.Tests.UnitTests
             var response = cache.Get(TEST_KEY_1);
 
             //Assert
-            //Missing Contents comparison.
             Assert.Equal(context.Response.ContentType, response.ContentType);
             Assert.Equal(context.Response.StatusCode, response.StatusCode);
-            Assert.Equal(response.Expiration, expirationDate);
+            Assert.Equal(expirationDate, response.Expiration);
+            Assert.Equal(context.Response.Contents.ConvertStream(), response.Contents.ConvertStream());
         }
 
         [Fact]

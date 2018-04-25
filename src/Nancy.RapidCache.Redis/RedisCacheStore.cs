@@ -52,7 +52,7 @@ namespace Nancy.RapidCache.CacheStore
         /// <param name="absoluteExpiration"></param>
         public void Set(string key, NancyContext context, DateTime absoluteExpiration)
         {
-            int length = (absoluteExpiration - DateTime.Now).Seconds;
+            int length = (absoluteExpiration - DateTime.UtcNow).Seconds;
             var span = new TimeSpan(0, 0, length);
 
             if (context.Response is CacheableResponse && length > 0)
