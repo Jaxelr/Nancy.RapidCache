@@ -221,10 +221,17 @@ namespace Nancy.RapidCache
 
                     var context2 = NancyEngine.HandleRequest(request);
 
+#if NETSTANDARD1_6
                     if (context2.Result.Response.StatusCode != HttpStatusCode.OK)
                     {
                         _cacheStore.Remove(key);
                     }
+#else
+                    if (context2.Response.StatusCode != HttpStatusCode.OK)
+                    {
+                        _cacheStore.Remove(key);
+                    }
+#endif
                 }
                 catch (Exception)
                 {
