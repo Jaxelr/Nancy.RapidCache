@@ -11,6 +11,7 @@ configuration:
 before_build:
   - cmd: dotnet --version
 build_script:
+  - cmd: dotnet build ./src/Nancy.RapidCache/Nancy.RapidCache.csproj -v quiet
   - cmd: dotnet publish ./src/Nancy.RapidCache/Nancy.RapidCache.csproj -v quiet -f=netstandard1.6
   - cmd: dotnet publish ./src/Nancy.RapidCache.Redis/Nancy.RapidCache.Redis.csproj -v quiet
 test_script: 
