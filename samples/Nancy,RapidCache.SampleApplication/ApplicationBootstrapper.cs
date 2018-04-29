@@ -2,7 +2,6 @@
 using Nancy.RapidCache.CacheStore;
 using Nancy.RapidCache.Extensions;
 using Nancy.Routing;
-using System;
 using Nancy.TinyIoc;
 using Nancy.Bootstrapper;
 
@@ -36,7 +35,7 @@ namespace Asp.Net.Example
                 (context.Request.Method == "GET" ||
                 context.Request.Method == "HEAD"))
             {
-                context.Response = context.Response.AsCacheable(DateTime.UtcNow.AddSeconds(30));
+                context.Response = context.Response.AsCacheable(System.DateTime.UtcNow.AddSeconds(30));
             }
         }
     }
