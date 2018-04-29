@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.6;net451;</TargetFrameworks>
+    <TargetFrameworks>netstandard1.6;net45;</TargetFrameworks>
     <PackageId>Nancy.RapidCache</PackageId>
     <Authors>Jaxel Rojas</Authors>
     <Product>Nancy.RapidCache</Product>
@@ -15,9 +15,6 @@
     <PackageVersion>0.1.1</PackageVersion>
     <PackageReleaseNotes>Added key generator of url md5 hash</PackageReleaseNotes>
   </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Http" Version="1.1.2" />
-  </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.6' ">
     <PackageReference Include="Nancy" Version="2.0.0-clinteastwood" />
@@ -29,13 +26,13 @@
     <DefineConstants>NETSTANDARD1_6</DefineConstants>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net451' ">
+  <ItemGroup Condition="'$(TargetFramework)' == 'net45' ">
     <PackageReference Include="Nancy" Version="1.4.4" />
     <PackageReference Include="Nancy.Authentication.Forms" Version="1.4.1" />
     <PackageReference Include="Microsoft.CSharp" Version="4.4.1" />
   </ItemGroup>
 
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net451' ">
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net45' ">
     <DefineConstants>NET451</DefineConstants>
   </PropertyGroup>
 </Project>
