@@ -28,6 +28,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{A568
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nancy,RapidCache.SampleApplication.net452", "samples\Nancy,RapidCache.SampleApplication.net452\Nancy,RapidCache.SampleApplication.net452.csproj", "{9B3CABB5-4AD2-4AA0-8B41-E293CCD9563E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{83AC5CFB-C840-4F71-A859-7F6201BA8837}"
+	ProjectSection(SolutionItems) = preProject
+		.github\CONTRIBUTING.md = .github\CONTRIBUTING.md
+		.github\ISSUE_TEMPLATE.md = .github\ISSUE_TEMPLATE.md
+		.github\PULL_REQUEST_TEMPLATE.md = .github\PULL_REQUEST_TEMPLATE.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +71,7 @@ Global
 		{D4A1672D-A47B-4169-8216-1B0526E30981} = {47F7C6AC-2FE2-4638-A475-CB29BCC4A882}
 		{7FB87E29-9306-428F-A26F-1E71E37C28AC} = {B3747F77-626C-4002-958D-41467C955F6B}
 		{9B3CABB5-4AD2-4AA0-8B41-E293CCD9563E} = {A568B937-CD6C-499B-8FDA-C40505220C7A}
+		{83AC5CFB-C840-4F71-A859-7F6201BA8837} = {A916D343-9154-4239-A2C8-8F5BCBF2AE35}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CF3E688B-A195-4C64-B28E-3290DD9F6EF2}
