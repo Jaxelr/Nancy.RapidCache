@@ -20,7 +20,7 @@ Package | NuGet (Stable) | MyGet (Prerelease)
 
 Install via nuget https://nuget.org/packages/Nancy.RapidCache
 
-```
+```powershell
 PM> Install-Package Nancy.RapidCache
 ```
 
