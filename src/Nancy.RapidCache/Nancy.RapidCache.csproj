@@ -9,11 +9,11 @@
     <PackageProjectUrl>https://github.com/Jaxelr/Nancy.RapidCache</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Jaxelr/Nancy.RapidCache</RepositoryUrl>
     <PackageTags>cache;nancyfx</PackageTags>
-    <Version>0.1.1</Version>
+    <Version>0.1.2</Version>
     <Description>Cache library that integrates with Nancyfx</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageVersion>0.1.1</PackageVersion>
-    <PackageReleaseNotes>Added key generator of url md5 hash</PackageReleaseNotes>
+    <PackageVersion>0.1.2</PackageVersion>
+    <PackageReleaseNotes>Added compatibility with Nancy version 1.X</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.6' ">
@@ -33,6 +33,6 @@
   </ItemGroup>
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net45' ">
-    <DefineConstants>NET451</DefineConstants>
+    <DefineConstants>NET45</DefineConstants>
   </PropertyGroup>
 </Project>
