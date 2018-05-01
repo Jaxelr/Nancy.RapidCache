@@ -1,4 +1,4 @@
-Nancy.RapidCache
+Nancy.RapidCache [![Mit License][mit-img]][mit]
 ====================
 
 Cache content asynchronously inside NancyFx. Allows you to set a timespan of lifecycle for your cache. Also allows to redefine the desired Cache backend and desires key request. By default it provides a default memory cache and a default uri key.
@@ -7,14 +7,14 @@ Cache content asynchronously inside NancyFx. Allows you to set a timespan of lif
 
 | Appveyor  |
 | :---:     |
-| [![Build status](https://ci.appveyor.com/api/projects/status/3cfeq9e3lh4edbcg?svg=true)](https://ci.appveyor.com/project/Jaxelr/nancy-rapidcache) |
+| [![Build status][build-img]][build] |
 
 ## Packages
 
 Package | NuGet (Stable) | MyGet (Prerelease)
 | :--- | :---: | :---: |
-| Nancy.RapidCache | [![NuGet](https://img.shields.io/nuget/v/Nancy.RapidCache.svg)](https://www.nuget.org/packages/Nancy.RapidCache) | [![MyGet](https://img.shields.io/myget/nancy-rapid-cache/v/Nancy.RapidCache.svg)](https://www.myget.org/feed/nancy-rapid-cache/package/nuget/Nancy.RapidCache) |
-| Nancy.RapidCache.Redis | [![NuGet](https://img.shields.io/nuget/v/Nancy.RapidCache.Redis.svg)](https://www.nuget.org/packages/Nancy.RapidCache.Redis) | [![MyGet](https://img.shields.io/myget/nancy-rapid-cache/v/Nancy.RapidCache.Redis.svg)](https://www.myget.org/feed/nancy-rapid-cache/package/nuget/Nancy.RapidCache.Redis) |
+| Nancy.RapidCache | [![NuGet][nuget-rapid-img]][nuget-rapid] | [![MyGet][myget-rapid-img]][myget-rapid] |
+| Nancy.RapidCache.Redis | [![NuGet][nuget-redis-img]][nuget-redis] | [![MyGet][myget-redis-img]][myget-redis] |
 
 ## Installation
 
@@ -201,3 +201,19 @@ namespace WebApplication
     }
 }
 ```
+
+For more details please check the [documentation][wiki].
+
+[mit-img]: http://img.shields.io/badge/License-MIT-blue.svg
+[mit]: https://github.com/Jaxelr/Nancy.RapidCache/blob/master/LICENSE
+[build-img]: https://ci.appveyor.com/api/projects/status/3cfeq9e3lh4edbcg?svg=true
+[build]: https://ci.appveyor.com/project/Jaxelr/nancy-rapidcache
+[nuget-rapid-img]: https://img.shields.io/nuget/v/Nancy.RapidCache.svg
+[nuget-rapid]: https://www.nuget.org/packages/Nancy.RapidCache
+[myget-rapid-img]: https://img.shields.io/myget/nancy-rapid-cache/v/Nancy.RapidCache.svg
+[myget-rapid]: https://www.myget.org/feed/nancy-rapid-cache/package/nuget/Nancy.RapidCache
+[nuget-redis-img]: https://img.shields.io/nuget/v/Nancy.RapidCache.Redis.svg
+[nuget-redis]: https://www.nuget.org/packages/Nancy.RapidCache.Redis
+[myget-redis-img]: https://img.shields.io/myget/nancy-rapid-cache/v/Nancy.RapidCache.Redis.svg
+[myget-redis]: https://www.myget.org/feed/nancy-rapid-cache/package/nuget/Nancy.RapidCache.Redis
+[wiki]: https://github.com/Jaxelr/Nancy.RapidCache/wiki
