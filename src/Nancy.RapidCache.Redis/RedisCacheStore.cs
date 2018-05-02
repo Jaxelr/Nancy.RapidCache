@@ -55,7 +55,7 @@ namespace Nancy.RapidCache.CacheStore
             int length = (absoluteExpiration - DateTime.UtcNow).Seconds;
             var span = new TimeSpan(0, 0, length);
 
-            if (context.Response is CacheableResponse && length > 0)
+            if (context.Response is Response && length > 0)
             {
                 var serialize = new SerializableResponse(context.Response, absoluteExpiration);
                 _cache.StringSet(key, Serialize(serialize), expiry: span);
