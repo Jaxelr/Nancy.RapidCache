@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.IO;
+using static Nancy.RapidCache.Defaults;
 
 namespace Nancy.RapidCache.Projection
 {
@@ -22,7 +23,7 @@ namespace Nancy.RapidCache.Projection
             Contents = GetContents(OldResponseOutput);
             Expiration = response.Expiration;
 
-            Headers[Defaults.CacheExpiry] = response.Expiration.ToString(CultureInfo.InvariantCulture);
+            Headers[CacheExpiry] = response.Expiration.ToString(CultureInfo.InvariantCulture);
         }
 
         /// <summary>

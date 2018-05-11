@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Nancy.Responses.Negotiation;
+using System;
 using System.Globalization;
-using Nancy.Responses.Negotiation;
+using static Nancy.RapidCache.Defaults;
 
 namespace Nancy.RapidCache.Extensions
 {
@@ -13,6 +14,6 @@ namespace Nancy.RapidCache.Extensions
         /// <param name="expiration"></param>
         /// <returns></returns>
         public static Negotiator AsCacheable(this Negotiator negotiator, DateTime expiration)
-            => negotiator.WithHeader(Defaults.CacheHeader, expiration.ToString(CultureInfo.InvariantCulture));
+            => negotiator.WithHeader(CacheHeader, expiration.ToString(CultureInfo.InvariantCulture));
     }
 }

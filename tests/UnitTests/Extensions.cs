@@ -6,13 +6,14 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using Xunit;
+using static Nancy.RapidCache.Defaults;
 
 namespace Nancy.RapidCache.Tests.UnitTests
 {
     public class Extensions
     {
         private DateTime expirationDate = DateTime.Now.AddMinutes(15);
-        private string CACHE_KEY = Defaults.CacheHeader;
+        private readonly string CACHE_KEY = CacheHeader;
 
         [Fact]
         public void Cacheable_negotiator_created()

@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Threading;
-using Nancy.Bootstrapper;
+﻿using Nancy.Bootstrapper;
 using Nancy.RapidCache.CacheKey;
 using Nancy.RapidCache.CacheStore;
 using Nancy.RapidCache.Projection;
 using Nancy.Routing;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Threading;
+using static Nancy.RapidCache.Defaults;
 
 namespace Nancy.RapidCache
 {
@@ -15,9 +16,6 @@ namespace Nancy.RapidCache
     /// </summary>
     public class RapidCache
     {
-        private static readonly string NoRequestQueryKey = Defaults.NoRequestQueryKey;
-        private static readonly string CacheHeader = Defaults.CacheHeader;
-
         private static bool _enabled;
         private static ICacheStore _cacheStore;
         private static ICacheKeyGenerator _cacheKeyGenerator;
