@@ -20,6 +20,12 @@ namespace Nancy.RapidCache.CacheStore
             _cache = _redis.GetDatabase();
         }
 
+        public RedisCacheStore(ConfigurationOptions options)
+        {
+            _redis = ConnectionMultiplexer.Connect(options);
+            _cache = _redis.GetDatabase();
+        }
+
         /// <summary>
         /// Removes the object from the cache by key.
         /// </summary>
