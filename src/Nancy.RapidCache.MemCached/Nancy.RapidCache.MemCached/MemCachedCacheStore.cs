@@ -7,9 +7,9 @@ namespace Nancy.RapidCache.CacheStore
 {
     public class MemcachedCacheStore : ICacheStore
     {
-        private readonly IMemcachedClient _cache;
+        private readonly MemcachedClient _cache;
 
-        public MemcachedCacheStore(IMemcachedClient cache)
+        public MemcachedCacheStore(MemcachedClient cache)
         {
             _cache = cache;
         }
@@ -25,13 +25,18 @@ namespace Nancy.RapidCache.CacheStore
 
             _cache = new MemcachedClient(config);
         }
+
+        public MemcachedCacheStore(Enyim.Caching.Configuration.MemcachedClientConfiguration config)
+        {
+            _cache = new MemcachedClient(config);
+        }
 #endif
 
         /// <summary>
         /// Remove the key from the cache
         /// </summary>
         /// <param name="key"></param>
-        public void Remove(string key) => _cache.Remove(key);
+        public void Remove(string key) => _cache.ExecuteRemove(key);
 
         /// <summary>
         /// Gets the key from the cache or returns null
@@ -41,13 +46,18 @@ namespace Nancy.RapidCache.CacheStore
         public CachedResponse Get(string key)
         {
 
-            var result = _cache.Get<SerializableResponse>(key);
+            var result = _cache.ExecuteTryGet(key, out object tmp);
 
-            if (result is SerializableResponse)
+            if (result.Success)
             {
-                return new CachedResponse(result);
+#if NET45
+                return new CachedResponse((SerializableResponse)tmp);
+#else
+                //Clunky.
+                var obj = Newtonsoft.Json.Linq.JObject.FromObject(tmp);
+                return new CachedResponse(obj.ToObject<SerializableResponse>());
+#endif
             }
-
             return null;
         }
 
@@ -65,12 +75,7 @@ namespace Nancy.RapidCache.CacheStore
             {
                 var serialize = new SerializableResponse(context.Response, absoluteExpiration);
 
-                bool done = _cache.Store(Enyim.Caching.Memcached.StoreMode.Set, key, context);
-
-                if (done)
-                {
-                }
-
+                 _cache.ExecuteStore(Enyim.Caching.Memcached.StoreMode.Set, key, context, absoluteExpiration);
             }
         }
     }
