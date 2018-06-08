@@ -35,7 +35,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{83AC
 		.github\PULL_REQUEST_TEMPLATE.md = .github\PULL_REQUEST_TEMPLATE.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nancy.RapidCache.Memcached", "src\Nancy.RapidCache.MemCached\Nancy.RapidCache.MemCached\Nancy.RapidCache.Memcached.csproj", "{1B7A5967-0DBD-4DC0-A7EC-FFB3843B36DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nancy.RapidCache.Memcached", "src\Nancy.RapidCache.Memcached\Nancy.RapidCache.Memcached.csproj", "{1B7A5967-0DBD-4DC0-A7EC-FFB3843B36DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
