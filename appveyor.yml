@@ -10,6 +10,9 @@ configuration:
   - Release
 before_build:
   - cmd: dotnet --version
+  - choco install redis-64
+  - redis-server --service-install
+  - redis-server --service-start 
 build_script:
   - cmd: dotnet build ./src/Nancy.RapidCache/Nancy.RapidCache.csproj -v quiet
   - cmd: dotnet build ./src/Nancy.RapidCache.Redis/Nancy.RapidCache.Redis.csproj -v quiet
