@@ -55,7 +55,7 @@ namespace Nancy.RapidCache.CacheStore
                 return;
             }
 
-            if (context.Response is Response response)
+            if (context.Response is Response response && absoluteExpiration > DateTime.UtcNow)
             {
                 _cache[key] = new SerializableResponse(response, absoluteExpiration);
             }
