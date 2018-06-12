@@ -6,18 +6,20 @@ using Xunit;
 
 namespace Nancy.RapidCache.Tests.UnitTests
 {
-    public class CacheStores
+    public class RedisCacheStoreUnitTest
     {
-        private const string TEST_KEY_1 = "TestKeyRequest1";
-        private const string TEST_KEY_2 = "TestKeyRequest2";
-        private DateTime expirationDate = DateTime.Now.AddMinutes(15);
+        private const string TEST_KEY_1 = "RedisRequest1";
+        private const string TEST_KEY_2 = "RedisRequest2";
+        private const string TEST_KEY_3 = "RedisRequest3";
+        private const string LOCALHOST = "127.0.0.1:6379";
+
 
         [Fact]
-        public void Memory_cache_set_get()
+        public void Redis_cache_set_get()
         {
             //Arrange
-
-            var cache = new MemoryCacheStore();
+            var expirationDate = DateTime.UtcNow.AddMinutes(15);
+            var cache = new RedisCacheStore(LOCALHOST);
             var context = new NancyContext() { Response = new FakeResponse() { } };
 
             //Act
@@ -32,11 +34,28 @@ namespace Nancy.RapidCache.Tests.UnitTests
         }
 
         [Fact]
-        public void Memory_cache_set_remove_get()
+        public void Redis_cache_set_get_expired()
+        {
+            //Arrange
+            var expiredDate = DateTime.UtcNow;
+            var cache = new RedisCacheStore(LOCALHOST);
+            var context = new NancyContext() { Response = new FakeResponse() { } };
+
+            //Act
+            cache.Set(TEST_KEY_3, context, expiredDate);
+            var response = cache.Get(TEST_KEY_3);
+
+            //Assert
+            Assert.Null(response);
+            Assert.NotNull(context.Response);
+        }
+
+        [Fact]
+        public void Redis_cache_set_remove_get()
         {
             //Arrange
             var expirationDate = DateTime.Now.AddMinutes(15);
-            var cache = new MemoryCacheStore();
+            var cache = new RedisCacheStore(LOCALHOST);
             var context = new NancyContext() { Response = new FakeResponse() { } };
 
             //Act
