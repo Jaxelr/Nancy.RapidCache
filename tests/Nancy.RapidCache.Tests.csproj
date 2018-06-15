@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="2.1.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
     <PackageReference Include="Nancy" Version="2.0.0-clinteastwood" />
     <PackageReference Include="Nancy.Testing" Version="2.0.0-clinteastwood" />
@@ -16,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\src\Nancy.RapidCache.Memcached\Nancy.RapidCache.Memcached.csproj" />
     <ProjectReference Include="..\src\Nancy.RapidCache.Redis\Nancy.RapidCache.Redis.csproj" />
     <ProjectReference Include="..\src\Nancy.RapidCache\Nancy.RapidCache.csproj" />
   </ItemGroup>

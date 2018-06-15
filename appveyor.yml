@@ -1,4 +1,4 @@
-version: '0.1.2.{build}'
+version: '0.1.3.{build}'
 image: Visual Studio 2017
 branches:
   only:
@@ -12,12 +12,14 @@ before_build:
   - cmd: dotnet --version
   - choco install redis-64
   - redis-server --service-install
-  - redis-server --service-start 
+  - redis-server --service-start
 build_script:
   - cmd: dotnet build ./src/Nancy.RapidCache/Nancy.RapidCache.csproj -v quiet
   - cmd: dotnet build ./src/Nancy.RapidCache.Redis/Nancy.RapidCache.Redis.csproj -v quiet
+  - cmd: dotnet build ./src/Nancy.RapidCache.Memcached/Nancy.RapidCache.Memcached.csproj -v quiet
   - cmd: dotnet publish ./src/Nancy.RapidCache/Nancy.RapidCache.csproj -v quiet -f=netstandard1.6
   - cmd: dotnet publish ./src/Nancy.RapidCache.Redis/Nancy.RapidCache.Redis.csproj -v quiet -f=netstandard2.0
+  - cmd: dotnet publish ./src/Nancy.RapidCache.Memcached/Nancy.RapidCache.Memcached.csproj -v quiet -f=netstandard2.0
 test_script: 
   - cmd: dotnet test ./tests/Nancy.RapidCache.Tests.csproj -v quiet
 artifacts:

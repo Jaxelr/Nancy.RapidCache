@@ -1,5 +1,4 @@
 ﻿using Enyim.Caching;
-using Nancy.RapidCache.CacheStore;
 using Nancy.RapidCache.Projection;
 using System;
 

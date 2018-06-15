@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Nancy.RapidCache\Nancy.RapidCache.csproj" />
+    <ProjectReference Include="..\Nancy.RapidCache\Nancy.RapidCache.csproj" />
   </ItemGroup>
   
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
