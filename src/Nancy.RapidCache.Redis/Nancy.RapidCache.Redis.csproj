@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net45;</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net452;</TargetFrameworks>
     <PackageId>Nancy.RapidCache.Redis</PackageId>
     <Authors>Jaxel Rojas</Authors>
     <Product>Nancy.RapidCache.Redis</Product>
@@ -29,7 +29,7 @@
     <DefineConstants>NETSTANDARD2_0</DefineConstants>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net45' ">
-    <DefineConstants>NET45</DefineConstants>
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net452' ">
+    <DefineConstants>NET452</DefineConstants>
   </PropertyGroup>
 </Project>
