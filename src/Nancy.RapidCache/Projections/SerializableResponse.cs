@@ -18,6 +18,11 @@ namespace Nancy.RapidCache.Projection
         public string Contents { get; set; }
         public DateTime Expiration { get; set; }
 
+        public SerializableResponse()
+        {
+
+        }
+
         public SerializableResponse(Response response, DateTime expiration)
         {
             Expiration = expiration;
