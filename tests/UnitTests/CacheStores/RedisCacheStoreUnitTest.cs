@@ -54,7 +54,7 @@ namespace Nancy.RapidCache.Tests.UnitTests
         public void Redis_cache_set_remove_get()
         {
             //Arrange
-            var expirationDate = DateTime.Now.AddMinutes(15);
+            var expirationDate = DateTime.UtcNow.AddMinutes(15);
             var cache = new RedisCacheStore(LOCALHOST);
             var context = new NancyContext() { Response = new FakeResponse() { } };
 
