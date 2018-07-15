@@ -35,8 +35,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{83AC
 		.github\PULL_REQUEST_TEMPLATE.md = .github\PULL_REQUEST_TEMPLATE.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nancy.RapidCache.Memcached", "src\Nancy.RapidCache.Memcached\Nancy.RapidCache.Memcached.csproj", "{1B7A5967-0DBD-4DC0-A7EC-FFB3843B36DB}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,10 +61,6 @@ Global
 		{9B3CABB5-4AD2-4AA0-8B41-E293CCD9563E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B3CABB5-4AD2-4AA0-8B41-E293CCD9563E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B3CABB5-4AD2-4AA0-8B41-E293CCD9563E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1B7A5967-0DBD-4DC0-A7EC-FFB3843B36DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1B7A5967-0DBD-4DC0-A7EC-FFB3843B36DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1B7A5967-0DBD-4DC0-A7EC-FFB3843B36DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1B7A5967-0DBD-4DC0-A7EC-FFB3843B36DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,7 +72,6 @@ Global
 		{7FB87E29-9306-428F-A26F-1E71E37C28AC} = {B3747F77-626C-4002-958D-41467C955F6B}
 		{9B3CABB5-4AD2-4AA0-8B41-E293CCD9563E} = {A568B937-CD6C-499B-8FDA-C40505220C7A}
 		{83AC5CFB-C840-4F71-A859-7F6201BA8837} = {A916D343-9154-4239-A2C8-8F5BCBF2AE35}
-		{1B7A5967-0DBD-4DC0-A7EC-FFB3843B36DB} = {B3747F77-626C-4002-958D-41467C955F6B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CF3E688B-A195-4C64-B28E-3290DD9F6EF2}
