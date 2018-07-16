@@ -30,15 +30,7 @@ namespace Nancy.RapidCache.CacheStore
         /// Removes the object from the cache by key.
         /// </summary>
         /// <param name="key"></param>
-        public void Remove(string key)
-        {
-            bool ack = _cache.KeyDelete(key);
-
-            if (!ack)
-            {
-                throw new Exception($"Could not complete operation of Delete, using redis configuration: {_redis.Configuration}");
-            }
-        }
+        public void Remove(string key) => _cache.KeyDelete(key);
 
         /// <summary>
         /// Gets the serializable object from redis.

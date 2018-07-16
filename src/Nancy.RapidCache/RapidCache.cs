@@ -63,12 +63,7 @@ namespace Nancy.RapidCache
         /// <param name="cacheStore"></param>
         public static void Enable(INancyBootstrapper nancyBootstrapper, IRouteResolver routeResolver, IPipelines pipeline, ICacheKeyGenerator cacheKeyGenerator, ICacheStore cacheStore)
         {
-            if (_enabled)
-            {
-                return;
-            }
-
-            if (cacheKeyGenerator is null || cacheStore is null)
+            if (_enabled || cacheKeyGenerator is null || cacheStore is null)
             {
                 return;
             }
@@ -84,7 +79,7 @@ namespace Nancy.RapidCache
 
         /// <summary>
         /// Returns the state of the Cache.
-        /// Mostly used for testing purposes since this is a static value.
+        /// Mostly used for discovery purposes since this is a static value.
         /// </summary>
         /// <returns></returns>
         public static bool IsCacheEnabled() => _enabled;
@@ -199,9 +194,8 @@ namespace Nancy.RapidCache
         {
             lock (Lock)
             {
-                var request = context as Request;
 
-                if (request == null || string.IsNullOrEmpty(key))
+                if (!(context is Request request) || string.IsNullOrEmpty(key))
                 {
                     return;
                 }
