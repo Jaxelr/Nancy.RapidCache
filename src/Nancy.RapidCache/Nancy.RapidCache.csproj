@@ -9,10 +9,10 @@
     <PackageProjectUrl>https://github.com/Jaxelr/Nancy.RapidCache</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Jaxelr/Nancy.RapidCache</RepositoryUrl>
     <PackageTags>cache;nancyfx</PackageTags>
-    <Version>0.1.3</Version>
+    <Version>0.1.4</Version>
     <Description>Cache library that integrates with Nancyfx</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageVersion>0.1.3</PackageVersion>
+    <PackageVersion>0.1.4</PackageVersion>
     <PackageReleaseNotes>Upgrade to netstandard 2.0</PackageReleaseNotes>
   </PropertyGroup>
 
