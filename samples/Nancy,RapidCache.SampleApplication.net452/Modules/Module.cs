@@ -1,5 +1,4 @@
-﻿using Nancy;
-using Nancy.RapidCache.Extensions;
+﻿using Nancy.RapidCache.Extensions;
 using System;
 using System.Globalization;
 

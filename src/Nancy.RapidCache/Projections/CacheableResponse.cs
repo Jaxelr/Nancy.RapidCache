@@ -13,8 +13,14 @@ namespace Nancy.RapidCache.Projection
 
         public CacheableResponse(Response response, DateTime expiration)
         {
+            if (expiration.Kind != DateTimeKind.Utc)
+                Expiration = expiration.ToUniversalTime();
+            else
+            {
+                Expiration = expiration;
+            }
+
             _response = response;
-            Expiration = expiration;
             ContentType = response.ContentType;
             Headers = response.Headers;
             StatusCode = response.StatusCode;

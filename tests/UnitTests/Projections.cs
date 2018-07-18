@@ -8,10 +8,10 @@ namespace Nancy.RapidCache.Tests.UnitTests
 {
     public class Projections
     {
-        private DateTime expirationDate = DateTime.Now.AddMinutes(15);
+        private readonly DateTime expirationDate = DateTime.Now.AddMinutes(15);
 
         [Fact]
-        public void Cacheable_response_created()
+        public void Cacheable_response_created_using_local()
         {
             //Arrange
             var fakeResponse = new FakeResponse();
@@ -24,6 +24,26 @@ namespace Nancy.RapidCache.Tests.UnitTests
             Assert.Equal(fakeResponse.ContentType, cacheableResponse.ContentType);
             Assert.Equal(fakeResponse.Headers, cacheableResponse.Headers);
             Assert.Equal(fakeResponse.StatusCode, cacheableResponse.StatusCode);
+            Assert.Equal(expirationDate.ToUniversalTime(), cacheableResponse.Expiration);
+            Assert.Equal(fakeResponse.GetContents(), cacheableResponse.Contents.ConvertStream());
+        }
+
+        [Fact]
+        public void Cacheable_response_created_using_utc()
+        {
+            //Arrange
+            var fakeResponse = new FakeResponse();
+            var utcExpiration = expirationDate.ToUniversalTime();
+
+            //Act
+            var cacheableResponse = new CacheableResponse(fakeResponse, utcExpiration);
+
+            //Assert
+            Assert.NotNull(cacheableResponse);
+            Assert.Equal(fakeResponse.ContentType, cacheableResponse.ContentType);
+            Assert.Equal(fakeResponse.Headers, cacheableResponse.Headers);
+            Assert.Equal(fakeResponse.StatusCode, cacheableResponse.StatusCode);
+            Assert.Equal(utcExpiration, cacheableResponse.Expiration);
             Assert.Equal(fakeResponse.GetContents(), cacheableResponse.Contents.ConvertStream());
         }
 
