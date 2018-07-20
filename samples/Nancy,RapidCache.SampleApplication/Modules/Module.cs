@@ -22,7 +22,7 @@ namespace Asp.Net.Example
             {
                 return Response
                     .AsText($"this is a cached response: {DateTime.Now.ToString(CultureInfo.InvariantCulture)}")
-                    .AsCacheable(DateTime.UtcNow.AddSeconds(_cachedTime));
+                    .AsCacheable(DateTime.Now.AddSeconds(_cachedTime));
             });
 
             Get("/CachedResponse/{hello}", dict =>
