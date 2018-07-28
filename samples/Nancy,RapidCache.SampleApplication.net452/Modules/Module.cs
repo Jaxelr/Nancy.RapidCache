@@ -24,7 +24,7 @@ namespace Nancy.RapidCache.SampleApplication.Net452
 
             Get["/faultyResponse"] = _ =>
             {
-                return new Response() { StatusCode = HttpStatusCode.InternalServerError }.AsCacheable(DateTime.UtcNow.AddSeconds(_cachedTime);
+                return new Response() { StatusCode = HttpStatusCode.InternalServerError }.AsCacheable(DateTime.UtcNow.AddSeconds(_cachedTime));
             };
 
             Get["/faultyConditionalResponse"] = _ =>
