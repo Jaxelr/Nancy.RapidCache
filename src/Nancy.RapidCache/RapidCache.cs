@@ -127,12 +127,13 @@ namespace Nancy.RapidCache
                 return null;
             }
 
-            var removeRapid = context.Request.Query.removeRapid;
-
-            if (removeRapid != null && removeRapid)
+            if (context.Request.Query is DynamicDictionary rmv)
             {
-                _cacheStore.Remove(key);
-                return null;
+                if (rmv.ContainsKey(RemoveCacheKey))
+                { 
+                    _cacheStore.Remove(key);
+                    return null;
+                }
             }
 
             var response = _cacheStore.Get(key);
