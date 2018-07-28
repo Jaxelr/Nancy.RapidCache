@@ -30,8 +30,10 @@ namespace Nancy.RapidCache
         /// <param name="routeResolver"></param>
         /// <param name="pipelines"></param>
         /// <param name="varyParams"> </param>
-        public static void Enable(INancyBootstrapper nancyBootstrapper, IRouteResolver routeResolver, IPipelines pipelines)
-            => Enable(nancyBootstrapper, routeResolver, pipelines, new DefaultCacheKeyGenerator(), new MemoryCacheStore());
+        public static void Enable(INancyBootstrapper nancyBootstrapper, IRouteResolver routeResolver,
+            IPipelines pipelines)
+            => Enable(nancyBootstrapper, routeResolver, pipelines, new DefaultCacheKeyGenerator(),
+                new MemoryCacheStore());
 
         /// <summary>
         ///
@@ -40,8 +42,10 @@ namespace Nancy.RapidCache
         /// <param name="routeResolver"></param>
         /// <param name="pipelines"></param>
         /// <param name="varyParams"> </param>
-        public static void Enable(INancyBootstrapper nancyBootstrapper, IRouteResolver routeResolver, IPipelines pipelines, string[] varyParams)
-            => Enable(nancyBootstrapper, routeResolver, pipelines, new DefaultCacheKeyGenerator(varyParams), new MemoryCacheStore());
+        public static void Enable(INancyBootstrapper nancyBootstrapper, IRouteResolver routeResolver,
+            IPipelines pipelines, string[] varyParams)
+            => Enable(nancyBootstrapper, routeResolver, pipelines, new DefaultCacheKeyGenerator(varyParams),
+                new MemoryCacheStore());
 
         /// <summary>
         ///
@@ -50,7 +54,8 @@ namespace Nancy.RapidCache
         /// <param name="routeResolver"></param>
         /// <param name="pipelines"></param>
         /// <param name="cacheKeyGenerator"></param>
-        public static void Enable(INancyBootstrapper nancyBootstrapper, IRouteResolver routeResolver, IPipelines pipelines, ICacheKeyGenerator cacheKeyGenerator)
+        public static void Enable(INancyBootstrapper nancyBootstrapper, IRouteResolver routeResolver,
+            IPipelines pipelines, ICacheKeyGenerator cacheKeyGenerator)
             => Enable(nancyBootstrapper, routeResolver, pipelines, cacheKeyGenerator, new MemoryCacheStore());
 
         /// <summary>
@@ -61,7 +66,8 @@ namespace Nancy.RapidCache
         /// <param name="pipeline"></param>
         /// <param name="cacheKeyGenerator"></param>
         /// <param name="cacheStore"></param>
-        public static void Enable(INancyBootstrapper nancyBootstrapper, IRouteResolver routeResolver, IPipelines pipeline, ICacheKeyGenerator cacheKeyGenerator, ICacheStore cacheStore)
+        public static void Enable(INancyBootstrapper nancyBootstrapper, IRouteResolver routeResolver,
+            IPipelines pipeline, ICacheKeyGenerator cacheKeyGenerator, ICacheStore cacheStore)
         {
             if (_enabled || cacheKeyGenerator is null || cacheStore is null)
             {
@@ -121,6 +127,14 @@ namespace Nancy.RapidCache
                 return null;
             }
 
+            var removeRapid = context.Request.Query.removeRapid;
+
+            if (removeRapid != null && removeRapid)
+            {
+                _cacheStore.Remove(key);
+                return null;
+            }
+
             var response = _cacheStore.Get(key);
 
             if (response == null || response.Expiration < DateTime.UtcNow)
@@ -177,7 +191,8 @@ namespace Nancy.RapidCache
             }
             else if (context.NegotiationContext.Headers.ContainsKey(CacheHeader.ToLowerInvariant()))
             {
-                var expiration = DateTime.Parse(context.NegotiationContext.Headers[CacheHeader], CultureInfo.InvariantCulture);
+                var expiration = DateTime.Parse(context.NegotiationContext.Headers[CacheHeader],
+                    CultureInfo.InvariantCulture);
                 context.NegotiationContext.Headers.Remove(CacheHeader);
                 _cacheStore.Set(key, context, expiration);
             }
@@ -194,7 +209,6 @@ namespace Nancy.RapidCache
         {
             lock (Lock)
             {
-
                 if (!(context is Request request) || string.IsNullOrEmpty(key))
                 {
                     return;
@@ -213,12 +227,12 @@ namespace Nancy.RapidCache
 
                     var context2 = NancyEngine.HandleRequest(request);
 
-#if NETSTANDARD2_0
+                    #if NETSTANDARD2_0
                     if (context2.Result.Response.StatusCode != HttpStatusCode.OK)
                     {
                         _cacheStore.Remove(key);
                     }
-#else
+                    #else
                     if (context2.Response.StatusCode != HttpStatusCode.OK)
                     {
                         _cacheStore.Remove(key);
