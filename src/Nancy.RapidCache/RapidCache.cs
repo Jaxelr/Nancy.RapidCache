@@ -228,12 +228,12 @@ namespace Nancy.RapidCache
 
                     var context2 = NancyEngine.HandleRequest(request);
 
-                    #if NETSTANDARD2_0
+#if NETSTANDARD2_0
                     if (context2.Result.Response.StatusCode != HttpStatusCode.OK)
                     {
                         _cacheStore.Remove(key);
                     }
-                    #else
+#else
                     if (context2.Response.StatusCode != HttpStatusCode.OK)
                     {
                         _cacheStore.Remove(key);

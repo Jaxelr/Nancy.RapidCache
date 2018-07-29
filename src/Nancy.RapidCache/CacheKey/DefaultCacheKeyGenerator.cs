@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Nancy.RapidCache.CacheKey
@@ -39,16 +40,22 @@ namespace Nancy.RapidCache.CacheKey
             if (_varyParams is IEnumerable<string>)
             {
                 if (request.Query is DynamicDictionary dynQuery &&
-                    _varyParams.Contains(nameof(request.Query).ToLowerInvariant()))
+                    _varyParams.Contains(nameof(request.Query), StringComparer.InvariantCultureIgnoreCase))
                 {
                     foreach (string key in dynQuery.Keys)
                     {
+                        if (key.Equals(Defaults.NoRequestQueryKey, StringComparison.OrdinalIgnoreCase) ||
+                            key.Equals(Defaults.RemoveCacheKey, StringComparison.OrdinalIgnoreCase))
+                        {
+                            continue;
+                        }
+
                         query[key] = (string) dynQuery[key];
                     }
                 }
 
                 if (request.Form is DynamicDictionary dynForm &&
-                    _varyParams.Contains(nameof(request.Form).ToLowerInvariant()))
+                    _varyParams.Contains(nameof(request.Form), StringComparer.InvariantCultureIgnoreCase))
                 {
                     foreach (string key in dynForm.Keys)
                     {
@@ -57,7 +64,7 @@ namespace Nancy.RapidCache.CacheKey
                 }
 
                 if (request.Headers.Accept?.Count() > 0 &&
-                    _varyParams.Contains(nameof(request.Headers.Accept).ToLowerInvariant()))
+                    _varyParams.Contains(nameof(request.Headers.Accept), StringComparer.InvariantCultureIgnoreCase))
                 {
                     string acceptHeaders = string.Join(",", request.Headers.Accept.Select(x => x.Item1));
                     query.Add(nameof(request.Headers.Accept), acceptHeaders);
