@@ -234,3 +234,4 @@ __pycache__/
 *.xsd.cs
 .vscode/
 coverage.xml
+**/testcoverage/*
