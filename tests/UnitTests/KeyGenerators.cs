@@ -22,6 +22,20 @@ namespace Nancy.RapidCache.Tests.UnitTests
             Acceptheader.Add(ACCEPT, new[] { ACCEPT_VALUE });
         }
 
+
+        [Fact]
+        public void Default_keyed_empty()
+        {
+            //Arrange
+            var keyGen = new DefaultCacheKeyGenerator();
+
+            //Act
+            string key = keyGen.Get(null);
+
+            //Assert
+            Assert.Empty(key);
+        }
+
         [Fact]
         public void Default_keyed_by_url_only()
         {
@@ -70,7 +84,6 @@ namespace Nancy.RapidCache.Tests.UnitTests
         public void Default_keyed_by_query()
         {
             //Arrange
-
             var keyGen = new DefaultCacheKeyGenerator(new string[] { nameof(QUERY) });
             var request = new FakeRequest(
                     method: METHOD,
@@ -93,7 +106,6 @@ namespace Nancy.RapidCache.Tests.UnitTests
         public void Default_keyed_by_header()
         {
             //Arrange
-
             var keyGen = new DefaultCacheKeyGenerator(new string[] { nameof(ACCEPT) });
             var request = new FakeRequest(
                     method: METHOD,
@@ -117,7 +129,6 @@ namespace Nancy.RapidCache.Tests.UnitTests
         public void Default_keyed_by_header_and_query()
         {
             //Arrange
-
             var keyGen = new DefaultCacheKeyGenerator(new string[] { nameof(QUERY), nameof(ACCEPT) });
             var request = new FakeRequest(
                     method: METHOD,
@@ -137,11 +148,38 @@ namespace Nancy.RapidCache.Tests.UnitTests
             Assert.Contains(PATH, key);
         }
 
+
+        [Fact]
+        public void Default_keyed_by_header_and_query_and_disabled_query()
+        {
+            //Arrange
+            const string DISABLED = "&rapidCacheDisabled";
+            string query = string.Concat(QUERY, DISABLED);
+
+            var keyGen = new DefaultCacheKeyGenerator(new string[] { nameof(QUERY), nameof(ACCEPT) });
+            var request = new FakeRequest(
+                    method: METHOD,
+                    path: PATH,
+                    headers: Acceptheader,
+                    body: null,
+                    protocol: PROTOCOL,
+                    query: query);
+
+            //Act
+            string key = keyGen.Get(request);
+
+            //Assert
+            Assert.Contains(ACCEPT, key);
+            Assert.Contains(ACCEPT_VALUE, key);
+            Assert.Contains(QUERY, key);
+            Assert.Contains(PATH, key);
+            Assert.DoesNotContain(DISABLED, key);
+        }
+
         [Fact]
         public void Default_keyed_by_form()
         {
             //Arrange
-
             var keyGen = new DefaultCacheKeyGenerator(new string[] { nameof(FORM) });
             var request = new FakeRequest(
                     method: METHOD,
@@ -168,7 +206,6 @@ namespace Nancy.RapidCache.Tests.UnitTests
         public void Default_keyed_by_form_header_query()
         {
             //Arrange
-
             var keyGen = new DefaultCacheKeyGenerator(new string[] { nameof(FORM), nameof(QUERY), nameof(ACCEPT) });
             var request = new FakeRequest(
                     method: METHOD,

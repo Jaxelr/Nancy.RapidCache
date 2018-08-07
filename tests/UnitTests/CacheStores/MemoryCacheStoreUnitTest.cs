@@ -13,6 +13,21 @@ namespace Nancy.RapidCache.Tests.UnitTests
         private const string TEST_KEY_3 = "MemoryRequest3";
 
         [Fact]
+        public void Memory_cache_empty_get()
+        {
+            //Arrange
+            var cache = new MemoryCacheStore();
+            var context = new NancyContext() { Response = new FakeResponse() { } };
+
+            //Act
+            cache.Set(string.Empty, context, DateTime.UtcNow.AddMinutes(1));
+            var response = cache.Get(string.Empty);
+
+            //Assert
+            Assert.Null(response);
+        }
+
+        [Fact]
         public void Memory_cache_set_get()
         {
             //Arrange

@@ -48,6 +48,23 @@ namespace Nancy.RapidCache.Tests.UnitTests
         }
 
         [Fact]
+        public void Serializable_response_created_empty()
+        {
+            //Arrange
+            var fakeResponse = new FakeResponse();
+
+            //Act
+            var serializableResponse = new SerializableResponse();
+
+            //Assert
+            Assert.NotNull(serializableResponse);
+            Assert.Null(serializableResponse.ContentType);
+            Assert.Null(serializableResponse.Headers);
+            Assert.Null(serializableResponse.Contents);
+        }
+
+
+        [Fact]
         public void Serializable_response_created()
         {
             //Arrange
