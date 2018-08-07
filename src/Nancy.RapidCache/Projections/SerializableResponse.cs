@@ -36,12 +36,7 @@ namespace Nancy.RapidCache.Projection
 #if NETSTANDARD1_6
                 memoryStream.TryGetBuffer(out ArraySegment<byte> buffer);
 #else
-                var buffer = new ArraySegment<byte>();
-
-                if (memoryStream != null)
-                {
-                    buffer = new ArraySegment<byte>(memoryStream.GetBuffer());
-                }
+                var buffer = new ArraySegment<byte>(memoryStream?.GetBuffer());
 #endif
                 Contents = Encoding.UTF8.GetString(buffer.Where(a => a != 0).ToArray());
             }
