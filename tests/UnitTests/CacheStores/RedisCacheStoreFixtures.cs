@@ -5,9 +5,9 @@ using StackExchange.Redis;
 using System;
 using Xunit;
 
-namespace Nancy.RapidCache.Tests.UnitTests
+namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
 {
-    public class RedisCacheStoreUnitTest
+    public class RedisCacheStoreFixtures
     {
         private const string TEST_KEY_1 = "RedisRequest1";
         private const string TEST_KEY_2 = "RedisRequest2";
