@@ -146,6 +146,11 @@ namespace Nancy.RapidCache.CacheStore
         /// <param name="absoluteExpiration"></param>
         public void Set(string key, NancyContext context, DateTime absoluteExpiration)
         {
+            if (string.IsNullOrEmpty(key))
+            {
+                return;
+            }
+
             lock (_lock)
             {
                 string fileName = Hash(key);
