@@ -12,7 +12,8 @@ namespace Nancy.RapidCache.Tests.UnitTests
         public void Cached_response_request()
         {
             //Arrange
-            var browser = new Browser(new FakeDefaultBootstrapper());
+            var bootstrapper = new FakeDefaultBootstrapper(); 
+            var browser = new Browser(bootstrapper);
 
             //Act
             var response = browser.Get(CACHED_RESPONSE_PATH);

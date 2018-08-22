@@ -3,6 +3,7 @@ using Nancy.RapidCache.Tests.Helpers;
 using Nancy.RapidCache.Tests.Fakes;
 using System;
 using Xunit;
+using System.IO;
 
 namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
 {
@@ -14,6 +15,7 @@ namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
         private const string TEST_KEY_1 = "FileRequest1";
         private const string TEST_KEY_2 = "FileRequest2";
         private const string TEST_KEY_3 = "FileRequest3";
+        private const string TEST_KEY_4 = "FileRequest4";
 
         [Fact]
         public void Disk_cache_invalid_path() => Assert.Throws<ArgumentException>(() => new DiskCacheStore(InvalidPath));
@@ -34,6 +36,7 @@ namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
 
             //Assert
             Assert.Null(response);
+            Assert.True(Directory.Exists(Path));
         }
 
         [Fact]
@@ -49,6 +52,7 @@ namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
 
             //Assert
             Assert.Null(response);
+            Assert.True(Directory.Exists(Path));
         }
 
         [Fact]
@@ -63,6 +67,27 @@ namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
             cache.Set(TEST_KEY_1, context, expirationDate);
             var response = cache.Get(TEST_KEY_1);
             cache.Remove(TEST_KEY_1);
+
+            //Assert
+            Assert.Equal(context.Response.ContentType, response.ContentType);
+            Assert.Equal(context.Response.StatusCode, response.StatusCode);
+            Assert.Equal(expirationDate, response.Expiration);
+            Assert.Equal(context.Response.Contents.ConvertStream(), response.Contents.ConvertStream());
+        }
+
+        [Fact]
+        public void Disk_cache_set_set_get()
+        {
+            //Arrange
+            var expirationDate = DateTime.UtcNow.AddMinutes(15);
+            var cache = new DiskCacheStore(Path);
+            var context = new NancyContext() { Response = new FakeResponse() { } };
+
+            //Act
+            cache.Set(TEST_KEY_4, context, expirationDate);
+            cache.Set(TEST_KEY_4, context, expirationDate);
+            var response = cache.Get(TEST_KEY_4);
+            cache.Remove(TEST_KEY_4);
 
             //Assert
             Assert.Equal(context.Response.ContentType, response.ContentType);
