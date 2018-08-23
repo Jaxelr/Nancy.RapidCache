@@ -63,7 +63,6 @@ namespace Nancy.RapidCache.Tests.UnitTests
             Assert.Null(serializableResponse.Contents);
         }
 
-
         [Fact]
         public void Serializable_response_created()
         {

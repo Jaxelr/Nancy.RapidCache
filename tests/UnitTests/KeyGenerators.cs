@@ -22,7 +22,6 @@ namespace Nancy.RapidCache.Tests.UnitTests
             Acceptheader.Add(ACCEPT, new[] { ACCEPT_VALUE });
         }
 
-
         [Fact]
         public void Default_keyed_empty()
         {
@@ -147,7 +146,6 @@ namespace Nancy.RapidCache.Tests.UnitTests
             Assert.Contains(QUERY, key);
             Assert.Contains(PATH, key);
         }
-
 
         [Fact]
         public void Default_keyed_by_header_and_query_and_disabled_query()

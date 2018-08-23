@@ -20,7 +20,6 @@ namespace Nancy.RapidCache.Projection
 
         public SerializableResponse()
         {
-
         }
 
         public SerializableResponse(Response response, DateTime expiration)

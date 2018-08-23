@@ -1,5 +1,5 @@
-﻿using System;
-using Nancy.RapidCache.Projection;
+﻿using Nancy.RapidCache.Projection;
+using System;
 
 namespace Nancy.RapidCache.CacheStore
 {

@@ -1,9 +1,9 @@
 ﻿using Nancy.RapidCache.CacheStore;
-using Nancy.RapidCache.Tests.Helpers;
 using Nancy.RapidCache.Tests.Fakes;
+using Nancy.RapidCache.Tests.Helpers;
 using System;
-using Xunit;
 using System.IO;
+using Xunit;
 
 namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
 {

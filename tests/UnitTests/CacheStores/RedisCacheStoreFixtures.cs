@@ -94,14 +94,13 @@ namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
             Assert.NotNull(context.Response);
         }
 
-
         [Fact]
         public void Redis_cache_set_empty_object()
         {
             //Arrange
             var expiredDate = DateTime.UtcNow.AddMinutes(15);
             var cache = new RedisCacheStore(LOCALHOST);
-                        
+
             var context = new NancyContext() { Response = null };
 
             //Act
@@ -114,4 +113,3 @@ namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
         }
     }
 }
-

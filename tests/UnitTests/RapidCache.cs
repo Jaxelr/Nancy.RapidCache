@@ -12,7 +12,7 @@ namespace Nancy.RapidCache.Tests.UnitTests
         public void Cached_response_request()
         {
             //Arrange
-            var bootstrapper = new FakeDefaultBootstrapper(); 
+            var bootstrapper = new FakeDefaultBootstrapper();
             var browser = new Browser(bootstrapper);
 
             //Act
