@@ -41,7 +41,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ISSUE_TEMPLATE", "ISSUE_TEM
 		.github\ISSUE_TEMPLATE\Support.md = .github\ISSUE_TEMPLATE\Support.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nancy.RapidCache.Couchbase", "src\Nancy.RapidCache.Couchbase\Nancy.RapidCache.Couchbase\Nancy.RapidCache.Couchbase.csproj", "{68E65B37-16EA-445E-BB4A-586AA22C090C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nancy.RapidCache.Couchbase", "src\Nancy.RapidCache.Couchbase\Nancy.RapidCache.Couchbase.csproj", "{68E65B37-16EA-445E-BB4A-586AA22C090C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
