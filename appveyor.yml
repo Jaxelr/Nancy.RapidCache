@@ -16,8 +16,10 @@ before_build:
 build_script:
   - cmd: dotnet build ./src/Nancy.RapidCache/Nancy.RapidCache.csproj -v quiet
   - cmd: dotnet build ./src/Nancy.RapidCache.Redis/Nancy.RapidCache.Redis.csproj -v quiet
+  - cmd: dotnet build ./src/Nancy.RapidCache.Couchbase/Nancy.RapidCache.Couchbase.csproj -v quiet
   - cmd: dotnet publish ./src/Nancy.RapidCache/Nancy.RapidCache.csproj -v quiet -f=netstandard2.0
   - cmd: dotnet publish ./src/Nancy.RapidCache.Redis/Nancy.RapidCache.Redis.csproj -v quiet -f=netstandard2.0
+  - cmd: dotnet publish ./src/Nancy.RapidCache.Couchbase/Nancy.RapidCache.Couchbase.csproj -v quiet -f=netstandard2.0
 test_script: 
   - cmd: dotnet test ./tests/Nancy.RapidCache.Tests.csproj -v quiet
 artifacts:
