@@ -15,6 +15,7 @@ Package | NuGet (Stable) | MyGet (Prerelease)
 | :--- | :---: | :---: |
 | Nancy.RapidCache | [![NuGet][nuget-rapid-img]][nuget-rapid] | [![MyGet][myget-rapid-img]][myget-rapid] |
 | Nancy.RapidCache.Redis | [![NuGet][nuget-redis-img]][nuget-redis] | [![MyGet][myget-redis-img]][myget-redis] |
+| Nancy.RapidCache.Couchbase | [![NuGet][nuget-couchbase-img]][nuget-couchbase] | [![MyGet][myget-couchbase-img]][myget-couchbase] |
 
 ## Installation
 
@@ -216,4 +217,8 @@ For more details please check the [documentation][wiki].
 [nuget-redis]: https://www.nuget.org/packages/Nancy.RapidCache.Redis
 [myget-redis-img]: https://img.shields.io/myget/nancy-rapid-cache/v/Nancy.RapidCache.Redis.svg
 [myget-redis]: https://www.myget.org/feed/nancy-rapid-cache/package/nuget/Nancy.RapidCache.Redis
+[nuget-couchbase-img]: https://img.shields.io/nuget/v/Nancy.RapidCache.Couchbase.svg
+[nuget-couchbase]: https://www.nuget.org/packages/Nancy.RapidCache.Couchbase
+[myget-couchbase-img]: https://img.shields.io/myget/nancy-rapid-cache/v/Nancy.RapidCache.Couchbase.svg
+[myget-couchbase]: https://www.myget.org/feed/nancy-rapid-cache/package/nuget/Nancy.RapidCache.Couchbase
 [wiki]: https://github.com/Jaxelr/Nancy.RapidCache/wiki
