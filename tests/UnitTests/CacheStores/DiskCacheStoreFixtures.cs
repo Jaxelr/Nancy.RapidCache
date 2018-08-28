@@ -10,18 +10,15 @@ namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
     public class DiskCacheStoreFixtures
     {
         private readonly string Path = @"c:\temp\";
-        private readonly string InvalidPath = @".\\invalid\\path";
         private TimeSpan TimeSpan => new TimeSpan(0, 0, 10);
-        private const string TEST_KEY_1 = "FileRequest1";
-        private const string TEST_KEY_2 = "FileRequest2";
-        private const string TEST_KEY_3 = "FileRequest3";
-        private const string TEST_KEY_4 = "FileRequest4";
 
-        [Fact]
-        public void Disk_cache_invalid_path() => Assert.Throws<ArgumentException>(() => new DiskCacheStore(InvalidPath));
+        [Theory]
+        [InlineData(@".\\invalid\\path")]
+        public void Disk_cache_invalid_path(string invalidPath) => Assert.Throws<ArgumentException>(() => new DiskCacheStore(invalidPath));
 
-        [Fact]
-        public void Disk_cache_invalid_path_with_timespan() => Assert.Throws<ArgumentException>(() => new DiskCacheStore(InvalidPath, new TimeSpan()));
+        [Theory]
+        [InlineData(@".\\invalid\\path")]
+        public void Disk_cache_invalid_path_with_timespan(string invalidPath) => Assert.Throws<ArgumentException>(() => new DiskCacheStore(invalidPath, new TimeSpan()));
 
         [Fact]
         public void Disk_cache_empty_get()
@@ -37,6 +34,25 @@ namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
             //Assert
             Assert.Null(response);
             Assert.True(Directory.Exists(Path));
+        }
+
+        [Fact]
+        public void Disk_cache_empty_get_not_existing_custom_path()
+        {
+            //Arrange
+            string tempPath = System.IO.Path.Combine(Path , "temp1");
+            var cache = new DiskCacheStore(tempPath);
+            var context = new NancyContext() { Response = new FakeResponse() { } };
+
+            //Act
+            cache.Set(string.Empty, context, DateTime.UtcNow.AddMinutes(1));
+            var response = cache.Get(string.Empty);
+
+            //Assert
+            Assert.Null(response);
+            Assert.True(Directory.Exists(Path));
+
+            Directory.Delete(tempPath);
         }
 
         [Fact]
@@ -56,7 +72,27 @@ namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
         }
 
         [Fact]
-        public void Disk_cache_set_get()
+        public void Disk_cache_empty_get_with_timespan_and_not_existing_custom_path()
+        {
+            //Arrange
+            string tempPath = System.IO.Path.Combine(Path , "temp2");
+            var cache = new DiskCacheStore(tempPath, TimeSpan);
+            var context = new NancyContext() { Response = new FakeResponse() { } };
+
+            //Act
+            cache.Set(string.Empty, context, DateTime.UtcNow.AddMinutes(1));
+            var response = cache.Get(string.Empty);
+
+            //Assert
+            Assert.Null(response);
+            Assert.True(Directory.Exists(Path));
+
+            Directory.Delete(tempPath);
+        }
+
+        [Theory]
+        [InlineData("FileRequest1")]
+        public void Disk_cache_set_get(string key)
         {
             //Arrange
             var expirationDate = DateTime.UtcNow.AddMinutes(15);
@@ -64,9 +100,9 @@ namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
             var context = new NancyContext() { Response = new FakeResponse() { } };
 
             //Act
-            cache.Set(TEST_KEY_1, context, expirationDate);
-            var response = cache.Get(TEST_KEY_1);
-            cache.Remove(TEST_KEY_1);
+            cache.Set(key, context, expirationDate);
+            var response = cache.Get(key);
+            cache.Remove(key);
 
             //Assert
             Assert.Equal(context.Response.ContentType, response.ContentType);
@@ -75,8 +111,9 @@ namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
             Assert.Equal(context.Response.Contents.ConvertStream(), response.Contents.ConvertStream());
         }
 
-        [Fact]
-        public void Disk_cache_set_set_get()
+        [Theory]
+        [InlineData("FileRequest2")]
+        public void Disk_cache_set_set_get(string key)
         {
             //Arrange
             var expirationDate = DateTime.UtcNow.AddMinutes(15);
@@ -84,10 +121,10 @@ namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
             var context = new NancyContext() { Response = new FakeResponse() { } };
 
             //Act
-            cache.Set(TEST_KEY_4, context, expirationDate);
-            cache.Set(TEST_KEY_4, context, expirationDate);
-            var response = cache.Get(TEST_KEY_4);
-            cache.Remove(TEST_KEY_4);
+            cache.Set(key, context, expirationDate);
+            cache.Set(key, context, expirationDate);
+            var response = cache.Get(key);
+            cache.Remove(key);
 
             //Assert
             Assert.Equal(context.Response.ContentType, response.ContentType);
@@ -96,8 +133,9 @@ namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
             Assert.Equal(context.Response.Contents.ConvertStream(), response.Contents.ConvertStream());
         }
 
-        [Fact]
-        public void Disk_cache_set_get_expired()
+        [Theory]
+        [InlineData("FileRequest3")]
+        public void Disk_cache_set_get_expired(string key)
         {
             //Arrange
             var expiredDate = DateTime.UtcNow;
@@ -105,16 +143,36 @@ namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
             var context = new NancyContext() { Response = new FakeResponse() { } };
 
             //Act
-            cache.Set(TEST_KEY_3, context, expiredDate);
-            var response = cache.Get(TEST_KEY_3);
+            cache.Set(key, context, expiredDate);
+            var response = cache.Get(key);
 
             //Assert
             Assert.Null(response);
             Assert.NotNull(context.Response);
         }
 
-        [Fact]
-        public void Disk_cache_set_remove_get()
+
+        [Theory]
+        [InlineData("FileRequest4")]
+        public void Disk_cache_set_then_get_expired(string key)
+        {
+            //Arrange
+            var expiredDate = DateTime.UtcNow;
+            var cache = new DiskCacheStore(Path);
+            var context = new NancyContext() { Response = new FakeResponse() { } };
+
+            //Act
+            cache.Set(key, context, expiredDate);
+            var response = cache.Get(key);
+
+            //Assert
+            Assert.Null(response);
+            Assert.NotNull(context.Response);
+        }
+
+        [Theory]
+        [InlineData("FileRequest5")]
+        public void Disk_cache_set_remove_get(string key)
         {
             //Arrange
             var expirationDate = DateTime.Now.AddMinutes(15);
@@ -122,11 +180,11 @@ namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
             var context = new NancyContext() { Response = new FakeResponse() { } };
 
             //Act
-            cache.Set(TEST_KEY_2, context, expirationDate);
+            cache.Set(key, context, expirationDate);
 
-            cache.Remove(TEST_KEY_2);
+            cache.Remove(key);
 
-            var response = cache.Get(TEST_KEY_2);
+            var response = cache.Get(key);
 
             //Assert
             Assert.Null(response);

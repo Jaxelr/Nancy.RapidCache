@@ -8,10 +8,6 @@ namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
 {
     public class MemoryCacheStoreFixtures
     {
-        private const string TEST_KEY_1 = "MemoryRequest1";
-        private const string TEST_KEY_2 = "MemoryRequest2";
-        private const string TEST_KEY_3 = "MemoryRequest3";
-
         [Fact]
         public void Memory_cache_empty_get()
         {
@@ -27,8 +23,9 @@ namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
             Assert.Null(response);
         }
 
-        [Fact]
-        public void Memory_cache_set_get()
+        [Theory]
+        [InlineData("MemoryRequest1")]
+        public void Memory_cache_set_get(string key)
         {
             //Arrange
             var expirationDate = DateTime.UtcNow.AddMinutes(15);
@@ -36,8 +33,8 @@ namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
             var context = new NancyContext() { Response = new FakeResponse() { } };
 
             //Act
-            cache.Set(TEST_KEY_1, context, expirationDate);
-            var response = cache.Get(TEST_KEY_1);
+            cache.Set(key, context, expirationDate);
+            var response = cache.Get(key);
 
             //Assert
             Assert.Equal(context.Response.ContentType, response.ContentType);
@@ -46,8 +43,9 @@ namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
             Assert.Equal(context.Response.Contents.ConvertStream(), response.Contents.ConvertStream());
         }
 
-        [Fact]
-        public void Memory_cache_set_get_expired()
+        [Theory]
+        [InlineData("MemoryRequest2")]
+        public void Memory_cache_set_get_expired(string key)
         {
             //Arrange
             var expiredDate = DateTime.UtcNow;
@@ -55,16 +53,17 @@ namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
             var context = new NancyContext() { Response = new FakeResponse() { } };
 
             //Act
-            cache.Set(TEST_KEY_3, context, expiredDate);
-            var response = cache.Get(TEST_KEY_3);
+            cache.Set(key, context, expiredDate);
+            var response = cache.Get(key);
 
             //Assert
             Assert.Null(response);
             Assert.NotNull(context.Response);
         }
 
-        [Fact]
-        public void Memory_cache_set_remove_get()
+        [Theory]
+        [InlineData("MemoryRequest3")]
+        public void Memory_cache_set_remove_get(string key)
         {
             //Arrange
             var expirationDate = DateTime.Now.AddMinutes(15);
@@ -72,11 +71,11 @@ namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
             var context = new NancyContext() { Response = new FakeResponse() { } };
 
             //Act
-            cache.Set(TEST_KEY_2, context, expirationDate);
+            cache.Set(key, context, expirationDate);
 
-            cache.Remove(TEST_KEY_2);
+            cache.Remove(key);
 
-            var response = cache.Get(TEST_KEY_2);
+            var response = cache.Get(key);
 
             //Assert
             Assert.Null(response);
