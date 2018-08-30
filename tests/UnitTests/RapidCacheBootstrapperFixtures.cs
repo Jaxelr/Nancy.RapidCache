@@ -1,10 +1,12 @@
+using Nancy.RapidCache.CacheKey;
+using Nancy.RapidCache.CacheStore;
 using Nancy.RapidCache.Tests.Fakes;
 using Nancy.Testing;
 using Xunit;
 
 namespace Nancy.RapidCache.Tests.UnitTests
 {
-    public class RapidCache
+    public class RapidCacheBootstrapperFixtures
     {
         private const string CACHED_RESPONSE_PATH = "/CachedResponse";
 
@@ -22,6 +24,20 @@ namespace Nancy.RapidCache.Tests.UnitTests
 
             //Assert
             Assert.Contains(response.Result.Body.AsString(), response2.Result.Body.AsString());
+        }
+
+        [Fact]
+        public void Enable_bootstrapper_with_keys_and_store()
+        {
+            //Arrange
+            var bootstrapper = new FakeDefaultBootstrapper();
+            var routeResolver = new FakeRouteResolver();
+
+            //Act
+            RapidCache.Enable(bootstrapper, routeResolver, new FakePipelines(), new DefaultCacheKeyGenerator(), new MemoryCacheStore());
+
+            //Assert
+            Assert.True(RapidCache.IsCacheEnabled());
         }
     }
 }
