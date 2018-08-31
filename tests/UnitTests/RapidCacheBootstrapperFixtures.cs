@@ -39,5 +39,34 @@ namespace Nancy.RapidCache.Tests.UnitTests
             //Assert
             Assert.True(RapidCache.IsCacheEnabled());
         }
+
+        [Fact]
+        public void Enable_bootstrapper_with_keys()
+        {
+            //Arrange
+            var bootstrapper = new FakeDefaultBootstrapper();
+            var routeResolver = new FakeRouteResolver();
+
+            //Act
+            RapidCache.Enable(bootstrapper, routeResolver, new FakePipelines(), new DefaultCacheKeyGenerator());
+
+            //Assert
+            Assert.True(RapidCache.IsCacheEnabled());
+        }
+
+
+        [Fact]
+        public void Enable_bootstrapper_with_keys_and_array_string()
+        {
+            //Arrange
+            var bootstrapper = new FakeDefaultBootstrapper();
+            var routeResolver = new FakeRouteResolver();
+
+            //Act
+            RapidCache.Enable(bootstrapper, routeResolver, new FakePipelines(), new[] { "query", "form", "accept" });
+
+            //Assert
+            Assert.True(RapidCache.IsCacheEnabled());
+        }
     }
 }

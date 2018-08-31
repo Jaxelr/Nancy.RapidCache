@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Nancy.RapidCache.Tests.UnitTests
 {
-    public class Projections
+    public class ProjectionFixtures
     {
         private readonly DateTime expirationDate = DateTime.Now.AddMinutes(15);
 
