@@ -54,7 +54,6 @@ namespace Nancy.RapidCache.Tests.UnitTests
             Assert.True(RapidCache.IsCacheEnabled());
         }
 
-
         [Fact]
         public void Enable_bootstrapper_with_keys_and_array_string()
         {

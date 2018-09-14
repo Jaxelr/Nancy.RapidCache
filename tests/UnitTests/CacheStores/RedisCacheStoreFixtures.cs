@@ -34,7 +34,6 @@ namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
             Assert.Equal(context.Response.Contents.ConvertStream(), response.Contents.ConvertStream());
         }
 
-
         [Theory]
         [InlineData(LOCALHOST, "RedisRequest2")]
         public void Redis_cache_set_get(string localhost, string key)
@@ -55,7 +54,6 @@ namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
             Assert.Equal(context.Response.Contents.ConvertStream(), response.Contents.ConvertStream());
         }
 
-
         [Theory]
         [InlineData(LOCALHOST, "RedisRequest3")]
         public void Redis_cache_set_get_expired(string localhost, string key)
@@ -73,7 +71,6 @@ namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
             Assert.Null(response);
             Assert.NotNull(context.Response);
         }
-
 
         [Theory]
         [InlineData(LOCALHOST, "RedisRequest4")]
@@ -95,7 +92,6 @@ namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
             Assert.Null(response);
             Assert.NotNull(context.Response);
         }
-
 
         [Theory]
         [InlineData(LOCALHOST, "RedisRequest5")]

@@ -40,7 +40,7 @@ namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
         public void Disk_cache_empty_get_not_existing_custom_path()
         {
             //Arrange
-            string tempPath = System.IO.Path.Combine(Path , "temp1");
+            string tempPath = System.IO.Path.Combine(Path, "temp1");
             var cache = new DiskCacheStore(tempPath);
             var context = new NancyContext() { Response = new FakeResponse() { } };
 
@@ -75,7 +75,7 @@ namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
         public void Disk_cache_empty_get_with_timespan_and_not_existing_custom_path()
         {
             //Arrange
-            string tempPath = System.IO.Path.Combine(Path , "temp2");
+            string tempPath = System.IO.Path.Combine(Path, "temp2");
             var cache = new DiskCacheStore(tempPath, TimeSpan);
             var context = new NancyContext() { Response = new FakeResponse() { } };
 
@@ -151,7 +151,6 @@ namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
             Assert.NotNull(context.Response);
         }
 
-
         [Theory]
         [InlineData("FileRequest4")]
         public void Disk_cache_set_then_get_expired(string key)
@@ -221,4 +220,3 @@ namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
         }
     }
 }
-

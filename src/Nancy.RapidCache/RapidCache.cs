@@ -130,7 +130,7 @@ namespace Nancy.RapidCache
             if (context.Request.Query is DynamicDictionary rmv)
             {
                 if (rmv.ContainsKey(RemoveCacheKey))
-                { 
+                {
                     _cacheStore.Remove(key);
                     return null;
                 }
