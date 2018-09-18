@@ -40,7 +40,7 @@ namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
         public void Disk_cache_empty_get_not_existing_custom_path()
         {
             //Arrange
-            string tempPath = System.IO.Path.Combine(Path , "temp1");
+            string tempPath = System.IO.Path.Combine(Path, "temp1");
             var cache = new DiskCacheStore(tempPath);
             var context = new NancyContext() { Response = new FakeResponse() { } };
 
@@ -75,7 +75,7 @@ namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
         public void Disk_cache_empty_get_with_timespan_and_not_existing_custom_path()
         {
             //Arrange
-            string tempPath = System.IO.Path.Combine(Path , "temp2");
+            string tempPath = System.IO.Path.Combine(Path, "temp2");
             var cache = new DiskCacheStore(tempPath, TimeSpan);
             var context = new NancyContext() { Response = new FakeResponse() { } };
 
@@ -151,7 +151,6 @@ namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
             Assert.NotNull(context.Response);
         }
 
-
         [Theory]
         [InlineData("FileRequest4")]
         public void Disk_cache_set_then_get_expired(string key)
@@ -188,6 +187,35 @@ namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
 
             //Assert
             Assert.Null(response);
+            Assert.NotNull(context.Response);
+        }
+
+        [Theory]
+        [InlineData("FileRequest6", "FileRequest7")]
+        public void Disk_cache_set_get_set_get(string key, string key2)
+        {
+            //Arrange
+            var cache = new DiskCacheStore(Path, new TimeSpan(0, 0, 5));
+            var context = new NancyContext() { Response = new FakeResponse() { } };
+
+            //Act
+            cache.Set(key, context, DateTime.UtcNow.AddSeconds(5));
+            var response = cache.Get(key);
+
+            System.Threading.Thread.Sleep(5000);
+
+            cache.Set(key2, context, DateTime.UtcNow.AddSeconds(5));
+
+            var response2 = cache.Get(key);
+            var response3 = cache.Get(key2);
+
+            cache.Remove(key);
+            cache.Remove(key2);
+
+            //Assert
+            Assert.NotNull(response);
+            Assert.Null(response2); //Expired
+            Assert.NotNull(response3);
             Assert.NotNull(context.Response);
         }
     }

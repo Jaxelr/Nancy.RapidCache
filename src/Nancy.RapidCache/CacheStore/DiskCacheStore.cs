@@ -89,9 +89,10 @@ namespace Nancy.RapidCache.CacheStore
         private void DeleteExpiredCacheFiles()
         {
             string[] files = FileKeyExpirationRecord
-            .Where(record => DateTime.UtcNow >= record.Value.Add(_expiredFilesDeletionOffset))
+            .Where(record => DateTime.UtcNow > record.Value)
             .Select(record => record.Key)
             .ToArray();
+
             foreach (string file in files)
             {
                 if (File.Exists(Path.Combine(_cacheDirectory, file)))
@@ -156,16 +157,22 @@ namespace Nancy.RapidCache.CacheStore
                 lock (_lock)
                 {
                     string fileName = Hash(key);
+
                     if (File.Exists(Path.Combine(_cacheDirectory, fileName)))
-                        File.Delete(Path.Combine(_cacheDirectory, fileName));
+                    {
+                        return;
+                    }
+
                     var serializedResponse = new SerializableResponse(context.Response, absoluteExpiration);
                     string json = _javaScriptSerializer.Serialize(serializedResponse);
+
                     File.WriteAllText(Path.Combine(_cacheDirectory, fileName), json);
 
-                    DeleteExpiredCacheFiles();
-                    FileKeyExpirationRecord[fileName] = absoluteExpiration;
+                    FileKeyExpirationRecord.Add(fileName, absoluteExpiration);
                 }
             }
+
+            DeleteExpiredCacheFiles();
         }
     }
 }
