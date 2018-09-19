@@ -25,7 +25,7 @@ Install via nuget https://nuget.org/packages/Nancy.RapidCache
 PM> Install-Package Nancy.RapidCache
 ```
 
-## Example usage 
+## Sample usage 
 
 The following example is using the default "In-Memory" CacheStore which is nothing more than a concurrent dictionary.
 
@@ -114,7 +114,7 @@ namespace WebApplication
 
  along with the url that identifies your resource (this is using the DefaultKeyGenerator). 
 
-## Using other Cache Stores
+## Using Different Cache Stores
 
 ### DiskCacheStore
 
