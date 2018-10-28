@@ -10,10 +10,10 @@
     <PackageProjectUrl>https://github.com/Jaxelr/Nancy.RapidCache</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Jaxelr/Nancy.RapidCache</RepositoryUrl>
     <PackageTags>cache;nancyfx;redis</PackageTags>
-    <Version>0.2.0</Version>
+    <Version>0.3.0</Version>
     <Description>This library adds Redis support as a store for RapidCache</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageVersion>0.2.0</PackageVersion>
+    <PackageVersion>0.3.0</PackageVersion>
     <PackageReleaseNotes>Added compatibility with Nancy Version 1.X</PackageReleaseNotes>
   </PropertyGroup>
 
