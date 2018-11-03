@@ -11,9 +11,20 @@ namespace Nancy.RapidCache.CacheStore
     public class MemoryCacheStore : ICacheStore
     {
         private ConcurrentDictionary<string, SerializableResponse> _cache;
+        private readonly int _maxSize = 0;
 
         public MemoryCacheStore()
         {
+            _cache = new ConcurrentDictionary<string, SerializableResponse>();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="MaxSize">Specifies the maximum size of items the cache can hold.</param>
+        public MemoryCacheStore(int MaxSize)
+        {
+            _maxSize = MaxSize;
             _cache = new ConcurrentDictionary<string, SerializableResponse>();
         }
 
@@ -51,6 +62,11 @@ namespace Nancy.RapidCache.CacheStore
         public void Set(string key, NancyContext context, DateTime absoluteExpiration)
         {
             if (string.IsNullOrEmpty(key))
+            {
+                return;
+            }
+
+            if (_maxSize > 0 && _maxSize == _cache.Count)
             {
                 return;
             }
