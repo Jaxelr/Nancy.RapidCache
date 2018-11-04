@@ -66,7 +66,7 @@ namespace Nancy.RapidCache.CacheStore
                 return;
             }
 
-            if (_maxSize > 0 && _maxSize == _cache.Count)
+            if (_maxSize > 0 && _maxSize == _cache.Count && !_cache.ContainsKey(key))
             {
                 return;
             }
