@@ -1,5 +1,4 @@
-Nancy.RapidCache [![Mit License][mit-img]][mit]
-====================
+# Nancy.RapidCache [![Mit License][mit-img]][mit]
 
 Cache content asynchronously inside NancyFx. Allows you to set a timespan of lifecycle for your cache. Also allows to redefine the desired Cache backend and desires key request. By default it provides a default memory cache and a default uri key.
 
@@ -25,7 +24,7 @@ Install via nuget https://nuget.org/packages/Nancy.RapidCache
 PM> Install-Package Nancy.RapidCache
 ```
 
-## Sample usage 
+## Sample usage
 
 The following example is using the default "In-Memory" CacheStore which is nothing more than a concurrent dictionary.
 
@@ -49,7 +48,7 @@ namespace WebApplication
 }
 ```
 
-2. Enable caching by adding the "AsCacheable" extension method to any of your routes
+1. Enable caching by adding the "AsCacheable" extension method to any of your routes
 
 ```c#
 using System;
@@ -105,12 +104,11 @@ namespace WebApplication
 }
 ```
 
- *Keep in mind that for *Post* methods, the requests body is __NOT__ part of the key in this scenario. 
- In context, you can filter by the values of: 
- 
- * Query
- * Form values
- * Accept Headers
+ *Keep in mind that for *Post* methods, the requests body is __NOT__ part of the key in this scenario. In context, you can filter by the values of:
+
+* Query
+* Form values
+* Accept Headers
 
  along with the url that identifies your resource (this is using the DefaultKeyGenerator). 
 
@@ -119,6 +117,7 @@ namespace WebApplication
 ### DiskCacheStore
 
 When using Nancy in self hosting mode, you can use the DiskCacheStore to enable caching throught RapidCache to a tmp file.
+
 ```c#
 using Nancy.RapidCache.CacheStore;
 using Nancy.RapidCache.Extensions;
@@ -142,7 +141,7 @@ namespace WebApplication
 
 RapidCache provides a small lib for integration with Redis, given that you provide a valid connection. It is provided as a separate package, so install it first via nuget:
 
-```
+``` powershell
 PM> Install-Package Nancy.RapidCache.Redis
 ```
 
@@ -162,6 +161,45 @@ namespace WebApplication
             base.ApplicationStartup(container, pipelines);
             /* Enable RapidCache using the RedisCacheStore, vary by url params id,query,takem, skip and accept header */
             this.EnableRapidCache(container.Resolve<IRouteResolver>(), ApplicationPipelines, new[] { "query", "form", "accept" }, new RedisCacheStore("localhost"));
+        }
+    }
+}
+```
+
+### CouchbaseCacheStore
+
+RapidCache also provides a small lib for a integration with Couchbase, given that you provide a valid Cluster object from the CouchbaseNetClient package and a bucket name that can be located. Install it via nuget:
+
+``` powershell
+PM> Install-Package Nancy.RapidCache.Couchbase
+```
+
+Once installed, we need to configure the cluster first, and then pass the cluster to the constructor:
+
+```c#
+using Nancy.RapidCache.CacheStore;
+using Nancy.RapidCache.Extensions;
+using Nancy.Routing;
+
+namespace WebApplication
+{
+    public class ApplicationBootrapper : Nancy.DefaultNancyBootstrapper
+    {
+        protected override void ApplicationStartup(Nancy.TinyIoc.TinyIoCContainer container, Nancy.Bootstrapper.IPipelines pipelines)
+        {
+            base.ApplicationStartup(container, pipelines);
+
+            var cluster = new Cluster(new ClientConfiguration
+            {
+                Servers = new List<Uri> { new Uri("http://127.0.0.1") }
+            });
+
+            var authenticator = new PasswordAuthenticator("user", "password");
+            cluster.Authenticate(authenticator);
+
+            /* Enable RapidCache using the CouchbaseCacheStore, vary by url params id,query,takem, skip and accept header */
+            /* Provide a bucket on the configuration */
+            this.EnableRapidCache(container.Resolve<IRouteResolver>(), ApplicationPipelines, new[] { "query", "form", "accept" }, new CouchbaseCacheStore(cluster, "myBucket")));
         }
     }
 }
