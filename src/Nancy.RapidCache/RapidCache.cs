@@ -181,11 +181,12 @@ namespace Nancy.RapidCache
                 return;
             }
 
+            var currentCache = _cacheStore.Get(key);
+            var now = DateTime.UtcNow;
+
             if (context.Response is CacheableResponse cacheableResponse)
             {
-                var currentCache = _cacheStore.Get(key);
-
-                if (currentCache == null || currentCache?.Expiration < DateTime.UtcNow)
+                if (currentCache == null || currentCache?.Expiration < now)
                 {
                     _cacheStore.Set(key, context, cacheableResponse.Expiration);
                 }
@@ -194,8 +195,13 @@ namespace Nancy.RapidCache
             {
                 var expiration = DateTime.Parse(context.NegotiationContext.Headers[CacheHeader],
                     CultureInfo.InvariantCulture);
+
                 context.NegotiationContext.Headers.Remove(CacheHeader);
-                _cacheStore.Set(key, context, expiration);
+
+                if (currentCache == null || currentCache?.Expiration < now)
+                {
+                    _cacheStore.Set(key, context, expiration);
+                }
             }
         }
 
