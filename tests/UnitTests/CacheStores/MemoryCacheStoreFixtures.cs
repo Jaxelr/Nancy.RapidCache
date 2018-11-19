@@ -66,7 +66,7 @@ namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
         public void Memory_cache_set_remove_get(string key)
         {
             //Arrange
-            var expirationDate = DateTime.Now.AddMinutes(15);
+            var expirationDate = DateTime.UtcNow.AddMinutes(15);
             var cache = new MemoryCacheStore();
             var context = new NancyContext() { Response = new FakeResponse() { } };
 
@@ -80,6 +80,51 @@ namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
             //Assert
             Assert.Null(response);
             Assert.NotNull(context.Response);
+        }
+
+        [Theory]
+        [InlineData("MemoryRequest5")]
+        public void Memory_cache_set_with_max_size(string key)
+        {
+            //Arrange
+            var expirationDate = DateTime.UtcNow.AddMinutes(15);
+            var cache = new MemoryCacheStore(1);
+            var context = new NancyContext() { Response = new FakeResponse() { } };
+
+            //Act
+            cache.Set(key, context, expirationDate);
+            var response = cache.Get(key);
+
+            //Assert
+            Assert.Equal(context.Response.ContentType, response.ContentType);
+            Assert.Equal(context.Response.StatusCode, response.StatusCode);
+            Assert.Equal(expirationDate, response.Expiration);
+            Assert.Equal(context.Response.Contents.ConvertStream(), response.Contents.ConvertStream());
+        }
+
+
+        [Theory]
+        [InlineData("MemoryRequest6", "MemoryRequest7")]
+        public void Memory_cache_set_full_with_max_size(string key, string key2)
+        {
+            //Arrange
+            var expirationDate = DateTime.UtcNow.AddMinutes(15);
+            var cache = new MemoryCacheStore(1);
+            var context = new NancyContext() { Response = new FakeResponse() { } };
+
+            //Act
+            cache.Set(key, context, expirationDate);
+            cache.Set(key2, context, expirationDate);
+
+            var response = cache.Get(key);
+            var response2 = cache.Get(key2);
+
+            //Assert
+            Assert.Equal(context.Response.ContentType, response.ContentType);
+            Assert.Equal(context.Response.StatusCode, response.StatusCode);
+            Assert.Equal(expirationDate, response.Expiration);
+            Assert.Equal(context.Response.Contents.ConvertStream(), response.Contents.ConvertStream());
+            Assert.Null(response2);
         }
     }
 }
