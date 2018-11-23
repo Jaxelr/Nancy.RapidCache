@@ -6,6 +6,7 @@
     <Authors>Jaxel Rojas</Authors>
     <Product>Nancy.RapidCache.Redis</Product>
     <Copyright>Copyright 2018</Copyright>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/Jaxelr/Nancy.RapidCache</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Jaxelr/Nancy.RapidCache</RepositoryUrl>
@@ -15,11 +16,17 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageVersion>0.3.0</PackageVersion>
     <PackageReleaseNotes>Added compatibility with Nancy Version 1.X</PackageReleaseNotes>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net452' ">
     <PackageReference Include="StackExchange.Redis" Version="1.2.6" />
   </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-63127-02" PrivateAssets="All"/>
+  </ItemGroup>
+
   
     <ItemGroup Condition="'$(TargetFramework)' != 'net452' ">
     <PackageReference Include="StackExchange.Redis" Version="2.0.513" />
