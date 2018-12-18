@@ -7,7 +7,7 @@
     <Product>Nancy.RapidCache.Couchbase</Product>
     <Copyright>Copyright 2018</Copyright>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Jaxelr/Nancy.RapidCache</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Jaxelr/Nancy.RapidCache</RepositoryUrl>
     <PackageTags>cache;nancyfx;couchbase;</PackageTags>
@@ -23,6 +23,10 @@
   <ItemGroup>
     <PackageReference Include="CouchbaseNetClient" Version="2.7.2" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-63127-02" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE" Pack="true" PackagePath="LICENSE" />
   </ItemGroup>
 
   <ItemGroup>

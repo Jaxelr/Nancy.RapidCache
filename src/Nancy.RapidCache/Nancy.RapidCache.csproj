@@ -6,7 +6,7 @@
     <Product>Nancy.RapidCache</Product>
     <Copyright>Copyright 2018</Copyright>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Jaxelr/Nancy.RapidCache</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Jaxelr/Nancy.RapidCache</RepositoryUrl>
     <PackageTags>cache;nancyfx</PackageTags>
@@ -25,6 +25,10 @@
     <PackageReference Include="System.Runtime.Serialization.Formatters" Version="4.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="..\..\LICENSE" Pack="true" PackagePath="LICENSE" />
+  </ItemGroup>
+
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
     <DefineConstants>NETSTANDARD2_0</DefineConstants>
   </PropertyGroup>
@@ -40,7 +44,6 @@
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-63127-02" PrivateAssets="All"/>
   </ItemGroup>
   
-
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net452' ">
     <DefineConstants>NET452</DefineConstants>
   </PropertyGroup>

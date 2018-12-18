@@ -7,7 +7,7 @@
     <Product>Nancy.RapidCache.Redis</Product>
     <Copyright>Copyright 2018</Copyright>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Jaxelr/Nancy.RapidCache</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Jaxelr/Nancy.RapidCache</RepositoryUrl>
     <PackageTags>cache;nancyfx;redis</PackageTags>
@@ -25,11 +25,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-63127-02" PrivateAssets="All"/>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-63127-02" PrivateAssets="All" />
   </ItemGroup>
 
-  
-    <ItemGroup Condition="'$(TargetFramework)' != 'net452' ">
+  <ItemGroup>
+    <None Include="..\..\LICENSE" Pack="true" PackagePath="LICENSE" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' != 'net452' ">
     <PackageReference Include="StackExchange.Redis" Version="2.0.519" />
   </ItemGroup>
 
@@ -44,11 +47,9 @@
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net461' ">
     <DefineConstants>net461</DefineConstants>
   </PropertyGroup>
-  
-  
+    
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net452' ">
     <DefineConstants>net452</DefineConstants>
   </PropertyGroup>
-
 
 </Project>
