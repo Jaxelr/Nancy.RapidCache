@@ -9,7 +9,7 @@ namespace Asp.Net.Example
 {
     public class Startup
     {
-        public static IServiceProvider ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddLogging(opt =>
             {
