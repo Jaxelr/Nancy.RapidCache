@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27130.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nancy.RapidCache", "src\Nancy.RapidCache\Nancy.RapidCache.csproj", "{52FD488C-472C-4D2B-B60A-B2B5EA97BBB3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nancy.RapidCache.SampleApplication", "samples\Nancy,RapidCache.SampleApplication\Nancy.RapidCache.SampleApplication.csproj", "{56F1A6DA-7C81-4099-9BE9-8876780BD65E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nancy.RapidCache.SampleApplication", "samples\Nancy.RapidCache.SampleApplication\Nancy.RapidCache.SampleApplication.csproj", "{56F1A6DA-7C81-4099-9BE9-8876780BD65E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".SolutionItems", ".SolutionItems", "{A916D343-9154-4239-A2C8-8F5BCBF2AE35}"
 	ProjectSection(SolutionItems) = preProject
@@ -27,7 +27,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{47F7C6AC
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{A568B937-CD6C-499B-8FDA-C40505220C7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nancy,RapidCache.SampleApplication.net452", "samples\Nancy,RapidCache.SampleApplication.net452\Nancy,RapidCache.SampleApplication.net452.csproj", "{9B3CABB5-4AD2-4AA0-8B41-E293CCD9563E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nancy.RapidCache.SampleApplication.net452", "samples\Nancy.RapidCache.SampleApplication.net452\Nancy.RapidCache.SampleApplication.net452.csproj", "{9B3CABB5-4AD2-4AA0-8B41-E293CCD9563E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{83AC5CFB-C840-4F71-A859-7F6201BA8837}"
 	ProjectSection(SolutionItems) = preProject
