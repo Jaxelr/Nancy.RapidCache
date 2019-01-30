@@ -4,9 +4,10 @@ Cache content asynchronously inside NancyFx. Allows you to set a timespan of lif
 
 ## Builds
 
-| Appveyor  |
-| :---:     |
-| [![Build status][build-img]][build] |
+| Appveyor  | Branch | 
+| :---:     | :---: |
+| [![Build status][build-master-img]][build-master] | master |
+| [![Build status][build-develop-img]][build-develop] | develop |
 
 ## Packages
 
@@ -245,8 +246,10 @@ For more details please check the [documentation][wiki].
 
 [mit-img]: http://img.shields.io/badge/License-MIT-blue.svg
 [mit]: https://github.com/Jaxelr/Nancy.RapidCache/blob/master/LICENSE
-[build-img]: https://ci.appveyor.com/api/projects/status/3cfeq9e3lh4edbcg?svg=true
-[build]: https://ci.appveyor.com/project/Jaxelr/nancy-rapidcache
+[build-master-img]: https://ci.appveyor.com/api/projects/status/3cfeq9e3lh4edbcg/branch/master?svg=true
+[build-master]: https://ci.appveyor.com/project/Jaxelr/nancy-rapidcache/branch/master
+[build-develop-img]: https://ci.appveyor.com/api/projects/status/3cfeq9e3lh4edbcg/branch/develop?svg=true
+[build-develop]: https://ci.appveyor.com/project/Jaxelr/nancy-rapidcache/branch/develop
 [nuget-rapid-img]: https://img.shields.io/nuget/v/Nancy.RapidCache.svg
 [nuget-rapid]: https://www.nuget.org/packages/Nancy.RapidCache
 [myget-rapid-img]: https://img.shields.io/myget/nancy-rapid-cache/v/Nancy.RapidCache.svg
