@@ -4,10 +4,14 @@ Cache content asynchronously inside NancyFx. Allows you to set a timespan of lif
 
 ## Builds
 
-| Appveyor  | Branch | 
-| :---:     | :---: |
-| [![Build status][build-master-img]][build-master] | master |
-| [![Build status][build-develop-img]][build-develop] | develop |
+| Appveyor  | Branch | Coverage |
+| :---:     | :---: | :--: |
+| [![Build status][build-master-img]][build-master] | master | [![CodeCov][codecov-master-img]][codecov-master] |
+| [![Build status][build-develop-img]][build-develop] | develop | [![CodeCov][codecov-develop-img]][codecov-develop] |
+
+| Code Coverage |
+| :--: |
+|  |
 
 ## Packages
 
@@ -250,6 +254,10 @@ For more details please check the [documentation][wiki].
 [build-master]: https://ci.appveyor.com/project/Jaxelr/nancy-rapidcache/branch/master
 [build-develop-img]: https://ci.appveyor.com/api/projects/status/3cfeq9e3lh4edbcg/branch/develop?svg=true
 [build-develop]: https://ci.appveyor.com/project/Jaxelr/nancy-rapidcache/branch/develop
+[codecov-master-img]: https://codecov.io/gh/Jaxelr/Nancy.RapidCache/branch/master/graph/badge.svg
+[codecov-master]: https://codecov.io/gh/Jaxelr/Nancy.RapidCache/branch/master
+[codecov-develop-img]: https://codecov.io/gh/Jaxelr/Nancy.RapidCache/branch/develop/graph/badge.svg
+[codecov-develop]: https://codecov.io/gh/Jaxelr/Nancy.RapidCache/branch/develop
 [nuget-rapid-img]: https://img.shields.io/nuget/v/Nancy.RapidCache.svg
 [nuget-rapid]: https://www.nuget.org/packages/Nancy.RapidCache
 [myget-rapid-img]: https://img.shields.io/myget/nancy-rapid-cache/v/Nancy.RapidCache.svg
