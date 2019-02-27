@@ -9,10 +9,6 @@ Cache content asynchronously inside NancyFx. Allows you to set a timespan of lif
 | [![Build status][build-master-img]][build-master] | master | [![CodeCov][codecov-master-img]][codecov-master] |
 | [![Build status][build-develop-img]][build-develop] | develop | [![CodeCov][codecov-develop-img]][codecov-develop] |
 
-| Code Coverage |
-| :--: |
-|  |
-
 ## Packages
 
 Package | NuGet (Stable) | MyGet (Prerelease)
