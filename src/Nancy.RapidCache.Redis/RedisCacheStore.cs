@@ -58,10 +58,8 @@ namespace Nancy.RapidCache.CacheStore
         /// <param name="absoluteExpiration"></param>
         public void Set(string key, NancyContext context, DateTime absoluteExpiration)
         {
-            int length = (absoluteExpiration - DateTime.UtcNow).Seconds;
-            var span = new TimeSpan(0, 0, length);
-
-            if (context.Response is Response && length > 0)
+            var span = absoluteExpiration - DateTime.UtcNow;
+            if (context.Response is Response && span.TotalSeconds > 0)
             {
                 var serialize = new SerializableResponse(context.Response, absoluteExpiration);
                 bool ack = _cache.StringSet(key, Serialize(serialize), expiry: span);
