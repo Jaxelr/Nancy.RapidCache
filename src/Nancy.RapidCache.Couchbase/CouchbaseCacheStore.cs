@@ -40,8 +40,7 @@ namespace Nancy.RapidCache.CacheStore
 
         public void Set(string key, NancyContext context, DateTime absoluteExpiration)
         {
-            int length = (absoluteExpiration - DateTime.UtcNow).Seconds;
-            var span = new TimeSpan(0, 0, length);
+            var span = absoluteExpiration - DateTime.UtcNow;
 
             using (var bucket = _cluster.OpenBucket(_bucketname))
             {
