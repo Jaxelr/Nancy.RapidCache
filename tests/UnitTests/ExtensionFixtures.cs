@@ -10,7 +10,7 @@ using static Nancy.RapidCache.Defaults;
 
 namespace Nancy.RapidCache.Tests.UnitTests
 {
-    public class Extensions
+    public class ExtensionFixtures
     {
         private DateTime expirationDate = DateTime.Now.AddMinutes(15);
         private readonly string CACHE_KEY = CacheHeader;

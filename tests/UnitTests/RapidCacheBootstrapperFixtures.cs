@@ -22,6 +22,7 @@ namespace Nancy.RapidCache.Tests.UnitTests
             System.Threading.Thread.Sleep(100);
             var response2 = browser.Get(CACHED_RESPONSE_PATH);
 
+
             //Assert
             Assert.Contains(response.Result.Body.AsString(), response2.Result.Body.AsString());
         }
