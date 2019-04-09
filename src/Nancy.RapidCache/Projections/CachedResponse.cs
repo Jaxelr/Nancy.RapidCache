@@ -31,8 +31,8 @@ namespace Nancy.RapidCache.Projection
         /// </summary>
         /// <param name="contents"></param>
         /// <returns></returns>
-        protected static Action<Stream> GetContents(string contents)
-         => stream =>
+        protected static Action<Stream> GetContents(string contents) =>
+            stream =>
             {
                 var writer = new StreamWriter(stream) { AutoFlush = true };
                 writer.Write(contents);

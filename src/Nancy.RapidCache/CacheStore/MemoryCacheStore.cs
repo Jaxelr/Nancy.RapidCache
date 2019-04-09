@@ -22,9 +22,9 @@ namespace Nancy.RapidCache.CacheStore
         /// 
         /// </summary>
         /// <param name="MaxSize">Specifies the maximum size of items the cache can hold.</param>
-        public MemoryCacheStore(int MaxSize)
+        public MemoryCacheStore(int maxSize)
         {
-            _maxSize = MaxSize;
+            _maxSize = maxSize;
             _cache = new ConcurrentDictionary<string, SerializableResponse>();
         }
 
