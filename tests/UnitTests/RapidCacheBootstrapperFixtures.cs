@@ -25,6 +25,7 @@ namespace Nancy.RapidCache.Tests.UnitTests
 
             //Assert
             Assert.Contains(response.Result.Body.AsString(), response2.Result.Body.AsString());
+            Assert.NotNull(response.Result.Headers["X-Nancy-RapidCache-Expiration"]);
         }
 
         [Fact]
