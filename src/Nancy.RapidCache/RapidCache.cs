@@ -164,6 +164,14 @@ namespace Nancy.RapidCache
                 return;
             }
 
+            if (context.Request.Query is DynamicDictionary dict)
+            {
+                if (dict.ContainsKey(NoRequestQueryKey))
+                {
+                    return;
+                }
+            }
+
             string key = _cacheKeyGenerator.Get(context.Request);
 
             if (string.IsNullOrEmpty(key))
