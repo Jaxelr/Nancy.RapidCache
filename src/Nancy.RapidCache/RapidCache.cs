@@ -1,12 +1,11 @@
-﻿using Nancy.Bootstrapper;
+﻿using System;
+using System.Globalization;
+using System.Threading;
+using Nancy.Bootstrapper;
 using Nancy.RapidCache.CacheKey;
 using Nancy.RapidCache.CacheStore;
 using Nancy.RapidCache.Projection;
 using Nancy.Routing;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Threading;
 using static Nancy.RapidCache.Defaults;
 
 namespace Nancy.RapidCache
@@ -143,9 +142,6 @@ namespace Nancy.RapidCache
                 return null;
             }
 
-            new Thread(() => HandleRequest(context.Request, key))
-                .Start();
-
             //make damn sure the pre-requirements are met before returning a cached response
             var preResponse = InvokePreRequirements(context);
             if (preResponse != null)
@@ -201,58 +197,6 @@ namespace Nancy.RapidCache
                 if (currentCache == null || currentCache?.Expiration < now)
                 {
                     _cacheStore.Set(key, context, expiration);
-                }
-            }
-        }
-
-        private static readonly List<string> RequestSyncKeys = new List<string>();
-        private static readonly object Lock = new object();
-
-        /// <summary>
-        /// used to asynchronously cache Nancy Requests
-        /// </summary>
-        /// <param name="context"></param>
-        private static void HandleRequest(object context, string key)
-        {
-            lock (Lock)
-            {
-                if (!(context is Request request) || string.IsNullOrEmpty(key))
-                {
-                    return;
-                }
-
-                try
-                {
-                    if (RequestSyncKeys.Contains(key))
-                    {
-                        return;
-                    }
-
-                    RequestSyncKeys.Add(key);
-
-                    request.Query[NoRequestQueryKey] = NoRequestQueryKey;
-
-                    var context2 = NancyEngine.HandleRequest(request);
-
-#if NETSTANDARD2_0
-                    if (context2.Result.Response.StatusCode != HttpStatusCode.OK)
-                    {
-                        _cacheStore.Remove(key);
-                    }
-#else
-                    if (context2.Response.StatusCode != HttpStatusCode.OK)
-                    {
-                        _cacheStore.Remove(key);
-                    }
-#endif
-                }
-                catch (Exception)
-                {
-                    _cacheStore.Remove(key);
-                }
-                finally
-                {
-                    RequestSyncKeys.Remove(key);
                 }
             }
         }
