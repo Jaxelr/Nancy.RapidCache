@@ -6,6 +6,11 @@ namespace Nancy.RapidCache.CacheKey
 {
     public class UrlHashKeyGenerator : ICacheKeyGenerator
     {
+        /// <summary>
+        /// Take the Url of the request and create an md5 hash to return as a key.
+        /// </summary>
+        /// <param name="request">Nancy Request object that represents the http request</param>
+        /// <returns></returns>
         public string Get(Request request)
         {
             using (var md5 = MD5.Create())
