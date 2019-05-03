@@ -20,7 +20,6 @@ namespace Nancy.RapidCache
         private static ICacheKeyGenerator _cacheKeyGenerator;
         private static IRouteResolver _routeResolver;
         private static INancyBootstrapper _nancyBootstrapper;
-        private static INancyEngine NancyEngine => _nancyBootstrapper.GetEngine();
 
         /// <summary>
         ///
