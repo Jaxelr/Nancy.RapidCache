@@ -12,9 +12,9 @@
     <PackageReference Include="Nancy" Version="2.0.0-clinteastwood" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Nancy.RapidCache.Redis\Nancy.RapidCache.Redis.csproj" />
-    <ProjectReference Include="..\..\src\Nancy.RapidCache.Couchbase\Nancy.RapidCache.Couchbase.csproj" />
-    <ProjectReference Include="..\..\src\Nancy.RapidCache\Nancy.RapidCache.csproj" />
+    <ProjectReference Include="..\src\Nancy.RapidCache.Couchbase\Nancy.RapidCache.Couchbase.csproj" />
+    <ProjectReference Include="..\src\Nancy.RapidCache.Redis\Nancy.RapidCache.Redis.csproj" />
+    <ProjectReference Include="..\src\Nancy.RapidCache\Nancy.RapidCache.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="Views\TestView.html">
