@@ -4,6 +4,8 @@ Cache content asynchronously inside NancyFx. Allows you to set a timespan of lif
 
 ## Builds
 
+This library targets Nancyfx 2 and above.
+
 | Appveyor  | Branch | Coverage |
 | :---:     | :---: | :--: |
 | [![Build status][build-master-img]][build-master] | master | [![CodeCov][codecov-master-img]][codecov-master] |
