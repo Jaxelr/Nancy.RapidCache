@@ -2,8 +2,8 @@
 {
     public static class Defaults
     {
-        public static readonly string NoRequestQueryKey = "rapidCacheDisabled";
-        public static readonly string RemoveCacheKey = "rapidCacheRemove";
+        public static (bool Enabled, string Key) RemoveCache = (false, "rapidCacheRemove");
+        public static (bool Enabled, string Key) DisableCache = (false, "rapidCacheDisabled");
         public static readonly string CacheHeader = "nancy-rapidcache";
         public static readonly string CacheExpiry = "X-Nancy-RapidCache-Expiration";
     }

@@ -112,7 +112,7 @@ namespace Nancy.RapidCache
         {
             if (context.Request.Query is DynamicDictionary dict)
             {
-                if (dict.ContainsKey(NoRequestQueryKey))
+                if (DisableCache.Enabled && dict.ContainsKey(DisableCache.Key))
                 {
                     return null;
                 }
@@ -127,7 +127,7 @@ namespace Nancy.RapidCache
 
             if (context.Request.Query is DynamicDictionary rmv)
             {
-                if (rmv.ContainsKey(RemoveCacheKey))
+                if (RemoveCache.Enabled && rmv.ContainsKey(RemoveCache.Key))
                 {
                     _cacheStore.Remove(key);
                     return null;
@@ -165,7 +165,7 @@ namespace Nancy.RapidCache
 
             if (context.Request.Query is DynamicDictionary dict)
             {
-                if (dict.ContainsKey(NoRequestQueryKey))
+                if (DisableCache.Enabled && dict.ContainsKey(DisableCache.Key))
                 {
                     return;
                 }
