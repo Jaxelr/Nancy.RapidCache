@@ -4,7 +4,7 @@ using Nancy.RapidCache.Tests.Helpers;
 using System;
 using Xunit;
 
-namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
+namespace Nancy.RapidCache.Tests.Unit.CacheStores
 {
     public class MemoryCacheStoreFixtures
     {

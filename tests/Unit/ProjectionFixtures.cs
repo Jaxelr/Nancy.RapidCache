@@ -4,7 +4,7 @@ using Nancy.RapidCache.Tests.Helpers;
 using System;
 using Xunit;
 
-namespace Nancy.RapidCache.Tests.UnitTests
+namespace Nancy.RapidCache.Tests.Unit
 {
     public class ProjectionFixtures
     {

@@ -8,12 +8,12 @@ using System.Globalization;
 using Xunit;
 using static Nancy.RapidCache.Defaults;
 
-namespace Nancy.RapidCache.Tests.UnitTests
+namespace Nancy.RapidCache.Tests.Unit
 {
     public class ExtensionFixtures
     {
         private DateTime expirationDate = DateTime.Now.AddMinutes(15);
-        private readonly string CACHE_KEY = CacheHeader;
+        private readonly string cacheKey = CacheHeader;
 
         [Fact]
         public void Cacheable_negotiator_created()
@@ -21,14 +21,14 @@ namespace Nancy.RapidCache.Tests.UnitTests
             //Arrange
             var context = new NancyContext() { Response = new FakeResponse() { } };
             var negotiator = new Negotiator(context);
-            var headerKey = new KeyValuePair<string, string>(CACHE_KEY, expirationDate.ToString(CultureInfo.InvariantCulture));
+            var headerKey = new KeyValuePair<string, string>(cacheKey, expirationDate.ToString(CultureInfo.InvariantCulture));
 
             //Act
             var cacheableNegotiator = negotiator.AsCacheable(expirationDate);
 
             //Assert
             Assert.NotNull(cacheableNegotiator);
-            Assert.True(cacheableNegotiator.NegotiationContext.Headers.ContainsKey(CACHE_KEY));
+            Assert.True(cacheableNegotiator.NegotiationContext.Headers.ContainsKey(cacheKey));
             Assert.True(cacheableNegotiator.NegotiationContext.Headers.Contains(headerKey));
         }
 

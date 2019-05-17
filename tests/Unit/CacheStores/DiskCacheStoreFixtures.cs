@@ -5,7 +5,7 @@ using System;
 using System.IO;
 using Xunit;
 
-namespace Nancy.RapidCache.Tests.UnitTests.CacheStores
+namespace Nancy.RapidCache.Tests.Unit.CacheStores
 {
     public class DiskCacheStoreFixtures
     {

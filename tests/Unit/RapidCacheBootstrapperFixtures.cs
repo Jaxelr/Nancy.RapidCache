@@ -4,7 +4,7 @@ using Nancy.RapidCache.Tests.Fakes;
 using Nancy.Testing;
 using Xunit;
 
-namespace Nancy.RapidCache.Tests.UnitTests
+namespace Nancy.RapidCache.Tests.Unit
 {
     public class RapidCacheBootstrapperFixtures
     {
@@ -21,7 +21,6 @@ namespace Nancy.RapidCache.Tests.UnitTests
             var response = browser.Get(CACHED_RESPONSE_PATH);
             System.Threading.Thread.Sleep(100);
             var response2 = browser.Get(CACHED_RESPONSE_PATH);
-
 
             //Assert
             Assert.Contains(response.Result.Body.AsString(), response2.Result.Body.AsString());

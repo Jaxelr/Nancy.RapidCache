@@ -3,7 +3,7 @@ using Nancy.RapidCache.Tests.Fakes;
 using System.Collections.Generic;
 using Xunit;
 
-namespace Nancy.RapidCache.Tests.UnitTests
+namespace Nancy.RapidCache.Tests.Unit
 {
     public class KeyGeneratorFixtures
     {
@@ -151,8 +151,8 @@ namespace Nancy.RapidCache.Tests.UnitTests
         public void Default_keyed_by_header_and_query_and_disabled_query()
         {
             //Arrange
-            const string DISABLED = "&rapidCacheDisabled";
-            string query = string.Concat(QUERY, DISABLED);
+            string disabled = string.Concat("&", Defaults.RemoveCache.Key);
+            string query = string.Concat(QUERY, disabled);
 
             var keyGen = new DefaultCacheKeyGenerator(new string[] { nameof(QUERY), nameof(ACCEPT) });
             var request = new FakeRequest(
@@ -171,7 +171,7 @@ namespace Nancy.RapidCache.Tests.UnitTests
             Assert.Contains(ACCEPT_VALUE, key);
             Assert.Contains(QUERY, key);
             Assert.Contains(PATH, key);
-            Assert.DoesNotContain(DISABLED, key);
+            Assert.DoesNotContain(disabled, key);
         }
 
         [Fact]
