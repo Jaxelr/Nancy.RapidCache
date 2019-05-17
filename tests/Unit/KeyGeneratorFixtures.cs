@@ -15,11 +15,11 @@ namespace Nancy.RapidCache.Tests.Unit
         private const string QUERY = "?FakeQuery=FakeValue";
         private const string FORM = "FakeForm";
         private const string FORM_VALUE = "FakeFormValue";
-        private readonly Dictionary<string, IEnumerable<string>> Acceptheader = new Dictionary<string, IEnumerable<string>>();
+        private readonly Dictionary<string, IEnumerable<string>> acceptHeader = new Dictionary<string, IEnumerable<string>>();
 
         public KeyGeneratorFixtures()
         {
-            Acceptheader.Add(ACCEPT, new[] { ACCEPT_VALUE });
+            acceptHeader.Add(ACCEPT, new[] { ACCEPT_VALUE });
         }
 
         [Fact]
@@ -43,7 +43,7 @@ namespace Nancy.RapidCache.Tests.Unit
             var request = new FakeRequest(
                     method: METHOD,
                     path: PATH,
-                    headers: Acceptheader,
+                    headers: acceptHeader,
                     body: null,
                     protocol: PROTOCOL,
                     query: QUERY);
@@ -65,7 +65,7 @@ namespace Nancy.RapidCache.Tests.Unit
             var request = new FakeRequest(
                     method: METHOD,
                     path: PATH,
-                    headers: Acceptheader,
+                    headers: acceptHeader,
                     body: null,
                     protocol: PROTOCOL,
                     query: QUERY);
@@ -87,7 +87,7 @@ namespace Nancy.RapidCache.Tests.Unit
             var request = new FakeRequest(
                     method: METHOD,
                     path: PATH,
-                    headers: Acceptheader,
+                    headers: acceptHeader,
                     body: null,
                     protocol: PROTOCOL,
                     query: QUERY);
@@ -109,7 +109,7 @@ namespace Nancy.RapidCache.Tests.Unit
             var request = new FakeRequest(
                     method: METHOD,
                     path: PATH,
-                    headers: Acceptheader,
+                    headers: acceptHeader,
                     body: null,
                     protocol: PROTOCOL,
                     query: QUERY);
@@ -132,7 +132,7 @@ namespace Nancy.RapidCache.Tests.Unit
             var request = new FakeRequest(
                     method: METHOD,
                     path: PATH,
-                    headers: Acceptheader,
+                    headers: acceptHeader,
                     body: null,
                     protocol: PROTOCOL,
                     query: QUERY);
@@ -158,7 +158,7 @@ namespace Nancy.RapidCache.Tests.Unit
             var request = new FakeRequest(
                     method: METHOD,
                     path: PATH,
-                    headers: Acceptheader,
+                    headers: acceptHeader,
                     body: null,
                     protocol: PROTOCOL,
                     query: query);
@@ -182,7 +182,7 @@ namespace Nancy.RapidCache.Tests.Unit
             var request = new FakeRequest(
                     method: METHOD,
                     path: PATH,
-                    headers: Acceptheader,
+                    headers: acceptHeader,
                     body: null,
                     protocol: PROTOCOL,
                     query: QUERY);
@@ -208,7 +208,7 @@ namespace Nancy.RapidCache.Tests.Unit
             var request = new FakeRequest(
                     method: METHOD,
                     path: PATH,
-                    headers: Acceptheader,
+                    headers: acceptHeader,
                     body: null,
                     protocol: PROTOCOL,
                     query: QUERY);
@@ -235,7 +235,7 @@ namespace Nancy.RapidCache.Tests.Unit
             var request = new FakeRequest(
                 method: METHOD,
                 path: PATH,
-                headers: Acceptheader);
+                headers: acceptHeader);
 
             //Act
             string key = keyGen.Get(request);

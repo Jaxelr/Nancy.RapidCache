@@ -1,15 +1,15 @@
-﻿using Nancy.RapidCache.CacheStore;
+﻿using System;
+using System.IO;
+using Nancy.RapidCache.CacheStore;
 using Nancy.RapidCache.Tests.Fakes;
 using Nancy.RapidCache.Tests.Helpers;
-using System;
-using System.IO;
 using Xunit;
 
 namespace Nancy.RapidCache.Tests.Unit.CacheStores
 {
     public class DiskCacheStoreFixtures
     {
-        private readonly string Path = @"c:\temp\";
+        private readonly string path = @"c:\temp\";
         private TimeSpan TimeSpan => new TimeSpan(0, 0, 10);
 
         [Theory]
@@ -24,7 +24,7 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
         public void Disk_cache_empty_get()
         {
             //Arrange
-            var cache = new DiskCacheStore(Path);
+            var cache = new DiskCacheStore(path);
             var context = new NancyContext() { Response = new FakeResponse() { } };
 
             //Act
@@ -33,14 +33,14 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
 
             //Assert
             Assert.Null(response);
-            Assert.True(Directory.Exists(Path));
+            Assert.True(Directory.Exists(path));
         }
 
         [Fact]
         public void Disk_cache_empty_get_not_existing_custom_path()
         {
             //Arrange
-            string tempPath = System.IO.Path.Combine(Path, "temp1");
+            string tempPath = Path.Combine(path, "temp1");
             var cache = new DiskCacheStore(tempPath);
             var context = new NancyContext() { Response = new FakeResponse() { } };
 
@@ -50,7 +50,7 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
 
             //Assert
             Assert.Null(response);
-            Assert.True(Directory.Exists(Path));
+            Assert.True(Directory.Exists(path));
 
             Directory.Delete(tempPath);
         }
@@ -59,7 +59,7 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
         public void Disk_cache_empty_get_with_timespan()
         {
             //Arrange
-            var cache = new DiskCacheStore(Path, TimeSpan);
+            var cache = new DiskCacheStore(path, TimeSpan);
             var context = new NancyContext() { Response = new FakeResponse() { } };
 
             //Act
@@ -68,14 +68,14 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
 
             //Assert
             Assert.Null(response);
-            Assert.True(Directory.Exists(Path));
+            Assert.True(Directory.Exists(path));
         }
 
         [Fact]
         public void Disk_cache_empty_get_with_timespan_and_not_existing_custom_path()
         {
             //Arrange
-            string tempPath = System.IO.Path.Combine(Path, "temp2");
+            string tempPath = Path.Combine(path, "temp2");
             var cache = new DiskCacheStore(tempPath, TimeSpan);
             var context = new NancyContext() { Response = new FakeResponse() { } };
 
@@ -85,7 +85,7 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
 
             //Assert
             Assert.Null(response);
-            Assert.True(Directory.Exists(Path));
+            Assert.True(Directory.Exists(path));
 
             Directory.Delete(tempPath);
         }
@@ -96,7 +96,7 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
         {
             //Arrange
             var expirationDate = DateTime.UtcNow.AddMinutes(15);
-            var cache = new DiskCacheStore(Path);
+            var cache = new DiskCacheStore(path);
             var context = new NancyContext() { Response = new FakeResponse() { } };
 
             //Act
@@ -117,7 +117,7 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
         {
             //Arrange
             var expirationDate = DateTime.UtcNow.AddMinutes(15);
-            var cache = new DiskCacheStore(Path);
+            var cache = new DiskCacheStore(path);
             var context = new NancyContext() { Response = new FakeResponse() { } };
 
             //Act
@@ -139,7 +139,7 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
         {
             //Arrange
             var expiredDate = DateTime.UtcNow;
-            var cache = new DiskCacheStore(Path);
+            var cache = new DiskCacheStore(path);
             var context = new NancyContext() { Response = new FakeResponse() { } };
 
             //Act
@@ -157,7 +157,7 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
         {
             //Arrange
             var expiredDate = DateTime.UtcNow;
-            var cache = new DiskCacheStore(Path);
+            var cache = new DiskCacheStore(path);
             var context = new NancyContext() { Response = new FakeResponse() { } };
 
             //Act
@@ -175,7 +175,7 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
         {
             //Arrange
             var expirationDate = DateTime.Now.AddMinutes(15);
-            var cache = new DiskCacheStore(Path);
+            var cache = new DiskCacheStore(path);
             var context = new NancyContext() { Response = new FakeResponse() { } };
 
             //Act
@@ -195,7 +195,7 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
         public void Disk_cache_set_get_set_get(string key, string key2)
         {
             //Arrange
-            var cache = new DiskCacheStore(Path, new TimeSpan(0, 0, 5));
+            var cache = new DiskCacheStore(path, new TimeSpan(0, 0, 5));
             var context = new NancyContext() { Response = new FakeResponse() { } };
 
             //Act
