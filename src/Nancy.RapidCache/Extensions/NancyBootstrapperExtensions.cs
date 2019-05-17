@@ -7,6 +7,9 @@ namespace Nancy.RapidCache.Extensions
 {
     public static class NancyBootstrapperExtensions
     {
+        const string RemovalExceptionMessage = "Rapid Cache is disabled, enable to use the removal key";
+        const string DisableExceptionMessage = "Rapid Cache is disabled, enable to use the disability key";
+
         /// <summary>
         /// Enables Nancy.RapidCache using default store and key generator
         /// </summary>
@@ -58,5 +61,41 @@ namespace Nancy.RapidCache.Extensions
         /// <param name="cacheStore"> </param>
         public static void EnableRapidCache(this INancyBootstrapper bootstrapper, IRouteResolver routeResolver, IPipelines pipelines, ICacheKeyGenerator cacheKeyGenerator, ICacheStore cacheStore)
             => RapidCache.Enable(bootstrapper, routeResolver, pipelines, cacheKeyGenerator, cacheStore);
+
+        /// <summary>
+        /// Enable the option of removing cache keys by a request, this option is off by default for security measurements.
+        /// </summary>
+        /// <param name="bootstrapper"></param>
+        /// <param name="key"></param>
+        public static void EnableCacheRemovalKey(this INancyBootstrapper bootstrapper, string key = null)
+        {
+            if (!RapidCache.IsCacheEnabled())
+                throw new BootstrapperException(RemovalExceptionMessage);
+
+            Defaults.RemoveCache.Enabled = true;
+
+            if (!string.IsNullOrEmpty(key))
+            {
+                Defaults.RemoveCache.Key = key;
+            }
+        }
+
+        /// <summary>
+        /// Enable the option of disability cache keys by a request, this option is off by default for security measurements.
+        /// </summary>
+        /// <param name="bootstrapper"></param>
+        /// <param name="key"></param>
+        public static void EnableCacheDisableKey(this INancyBootstrapper bootstrapper, string key = null)
+        {
+            if (!RapidCache.IsCacheEnabled())
+                throw new BootstrapperException(DisableExceptionMessage);
+
+            Defaults.DisableCache.Enabled = true;
+
+            if (!string.IsNullOrEmpty(key))
+            {
+                Defaults.DisableCache.Key = key;
+            }
+        }
     }
 }
