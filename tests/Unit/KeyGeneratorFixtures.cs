@@ -242,7 +242,6 @@ namespace Nancy.RapidCache.Tests.Unit
             byte[] bytekey = System.Convert.FromBase64String(key);
 
             //Assert
-
             //Validating lengths from hash created.
             Assert.Equal(24, key.Length);
             Assert.Equal(16, bytekey.Length);

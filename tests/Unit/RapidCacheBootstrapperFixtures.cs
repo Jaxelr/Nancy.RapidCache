@@ -8,12 +8,12 @@ using Xunit;
 
 namespace Nancy.RapidCache.Tests.Unit
 {
-    [TestCaseOrderer("Nancy.RapidCache.Tests.AlphabeticalTestOrderer", "Nancy.RapidCache.Tests")]
+    [TestCaseOrderer("Nancy.RapidCache.Tests.PriorityOrderer", "Nancy.RapidCache.Tests")]
     public class RapidCacheBootstrapperFixtures
     {
         private const string CACHED_RESPONSE_PATH = "/CachedResponse";
 
-        [Fact]
+        [Fact, Priority(2)]
         public void Cached_response_request()
         {
             //Arrange
@@ -30,7 +30,7 @@ namespace Nancy.RapidCache.Tests.Unit
             Assert.NotNull(response.Result.Headers["X-Nancy-RapidCache-Expiration"]);
         }
 
-        [Fact]
+        [Fact, Priority(3)]
         public void Enable_bootstrapper_with_keys_and_store()
         {
             //Arrange
@@ -44,7 +44,7 @@ namespace Nancy.RapidCache.Tests.Unit
             Assert.True(RapidCache.IsCacheEnabled());
         }
 
-        [Fact]
+        [Fact, Priority(3)]
         public void Enable_bootstrapper_with_keys()
         {
             //Arrange
@@ -58,7 +58,7 @@ namespace Nancy.RapidCache.Tests.Unit
             Assert.True(RapidCache.IsCacheEnabled());
         }
 
-        [Fact]
+        [Fact, Priority(3)]
         public void Enable_bootstrapper_with_keys_and_array_string()
         {
             //Arrange
@@ -72,8 +72,8 @@ namespace Nancy.RapidCache.Tests.Unit
             Assert.True(RapidCache.IsCacheEnabled());
         }
 
-        [Fact]
-        public void A_disabled_bootstrapper_with_cache_disable_key()
+        [Fact, Priority(1)]
+        public void Disabled_bootstrapper_with_cache_disable_key()
         {
             //Arrange
             var bootstrapper = new FakeDefaultBootstrapper();
@@ -86,8 +86,8 @@ namespace Nancy.RapidCache.Tests.Unit
             Assert.False(Defaults.DisableCache.Enabled);
         }
 
-        [Fact]
-        public void A_disabled_bootstrapper_with_cache_removal_key()
+        [Fact, Priority(1)]
+        public void Disabled_bootstrapper_with_cache_removal_key()
         {
             //Arrange
             var bootstrapper = new FakeDefaultBootstrapper();
@@ -100,7 +100,7 @@ namespace Nancy.RapidCache.Tests.Unit
             Assert.False(Defaults.DisableCache.Enabled);
         }
 
-        [Theory]
+        [Theory, Priority(3)]
         [InlineData("CustomRemoval1Key")]
         public void Enable_bootstrapper_with_cache_removal_key(string mockKey)
         {
@@ -118,7 +118,7 @@ namespace Nancy.RapidCache.Tests.Unit
             Assert.True(Defaults.RemoveCache.Enabled);
         }
 
-        [Theory]
+        [Theory, Priority(3)]
         [InlineData("CustomDisable1Key")]
         public void Enable_bootstrapper_with_cache_disable_key(string mockKey)
         {
