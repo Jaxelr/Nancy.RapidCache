@@ -135,5 +135,41 @@ namespace Nancy.RapidCache.Tests.Unit
             Assert.Equal(Defaults.DisableCache.Key, mockKey);
             Assert.True(Defaults.DisableCache.Enabled);
         }
+
+        [Fact, Priority(3)]
+        public void Enable_bootstrapper_with_default_removal_key()
+        {
+            //Arrange
+            var bootstrapper = new FakeDefaultBootstrapper();
+            var routeResolver = new FakeRouteResolver();
+            string mockKey = Defaults.RemoveCache.Key;
+
+            //Act
+            RapidCache.Enable(bootstrapper, routeResolver, new FakePipelines());
+            bootstrapper.EnableCacheRemovalKey();
+
+            //Assert
+            Assert.True(RapidCache.IsCacheEnabled());
+            Assert.Equal(Defaults.RemoveCache.Key, mockKey);
+            Assert.True(Defaults.RemoveCache.Enabled);
+        }
+
+        [Fact, Priority(3)]
+        public void Enable_bootstrapper_with_default_disable_key()
+        {
+            //Arrange
+            var bootstrapper = new FakeDefaultBootstrapper();
+            var routeResolver = new FakeRouteResolver();
+            string mockKey = Defaults.DisableCache.Key;
+
+            //Act
+            RapidCache.Enable(bootstrapper, routeResolver, new FakePipelines());
+            bootstrapper.EnableCacheDisableKey();
+
+            //Assert
+            Assert.True(RapidCache.IsCacheEnabled());
+            Assert.Equal(Defaults.DisableCache.Key, mockKey);
+            Assert.True(Defaults.DisableCache.Enabled);
+        }
     }
 }
