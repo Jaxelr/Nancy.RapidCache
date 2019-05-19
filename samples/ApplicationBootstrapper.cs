@@ -16,6 +16,12 @@ namespace Asp.Net.Example
             /*enable RapidCache, vary by url params query, form and accept headers */
             this.EnableRapidCache(container.Resolve<IRouteResolver>(), ApplicationPipelines, new[] { "query", "form", "accept" });
 
+            //This option enables the ability to disable the cache per request by adding a query string param that includes ?DisableMeQuery=true
+            this.EnableCacheDisableKey("DisableMeQuery");
+
+            //This option enables the ability to remove keys from the cache per request by adding a query string param that includes ?RemoveMeQuery=true
+            this.EnableCacheDisableKey("RemoveMeQuery");
+            
             /* Can also call just without keys and it will cache urls based on base urls only. */
             //this.EnableRapidCache(container.Resolve<IRouteResolver>(), ApplicationPipelines);
 
