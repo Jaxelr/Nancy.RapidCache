@@ -93,7 +93,7 @@ namespace Nancy.RapidCache.Tests.Unit
             var bootstrapper = new FakeDefaultBootstrapper();
 
             //Act
-            Assert.Throws<BootstrapperException>(() => bootstrapper.EnableCacheDisableKey(null));
+            Assert.Throws<BootstrapperException>(() => bootstrapper.EnableCacheRemovalKey(null));
 
             //Assert
             Assert.False(RapidCache.IsCacheEnabled());

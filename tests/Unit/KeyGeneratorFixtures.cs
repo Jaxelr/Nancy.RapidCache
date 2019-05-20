@@ -23,7 +23,7 @@ namespace Nancy.RapidCache.Tests.Unit
         }
 
         [Fact]
-        public void Default_keyed_empty()
+        public void Default_keyed_null()
         {
             //Arrange
             var keyGen = new DefaultCacheKeyGenerator();
@@ -47,6 +47,51 @@ namespace Nancy.RapidCache.Tests.Unit
                     body: null,
                     protocol: PROTOCOL,
                     query: QUERY);
+
+            //Act
+            string key = keyGen.Get(request);
+
+            //Assert
+            Assert.DoesNotContain(ACCEPT, key);
+            Assert.DoesNotContain(QUERY, key);
+            Assert.Contains(PATH, key);
+        }
+
+
+        [Fact]
+        public void Default_keyed_by_url_only_with_disable_key()
+        {
+            //Arrange
+            var keyGen = new DefaultCacheKeyGenerator();
+            var request = new FakeRequest(
+                    method: METHOD,
+                    path: PATH,
+                    headers: acceptHeader,
+                    body: null,
+                    protocol: PROTOCOL,
+                    query: string.Concat(QUERY, "?RapidCacheDisabled=true"));
+
+            //Act
+            string key = keyGen.Get(request);
+
+            //Assert
+            Assert.DoesNotContain(ACCEPT, key);
+            Assert.DoesNotContain(QUERY, key);
+            Assert.Contains(PATH, key);
+        }
+
+        [Fact]
+        public void Default_keyed_by_url_only_with_removal_key()
+        {
+            //Arrange
+            var keyGen = new DefaultCacheKeyGenerator();
+            var request = new FakeRequest(
+                    method: METHOD,
+                    path: PATH,
+                    headers: acceptHeader,
+                    body: null,
+                    protocol: PROTOCOL,
+                    query: string.Concat(QUERY, "?RapidCacheRemove=true"));
 
             //Act
             string key = keyGen.Get(request);
