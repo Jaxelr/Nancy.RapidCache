@@ -20,7 +20,7 @@ namespace Asp.Net.Example
             this.EnableCacheDisableKey("DisableMeQuery");
 
             //This option enables the ability to remove keys from the cache per request by adding a query string param that includes ?RemoveMeQuery=true
-            this.EnableCacheDisableKey("RemoveMeQuery");
+            this.EnableCacheRemovalKey("RemoveMeQuery");
             
             /* Can also call just without keys and it will cache urls based on base urls only. */
             //this.EnableRapidCache(container.Resolve<IRouteResolver>(), ApplicationPipelines);
