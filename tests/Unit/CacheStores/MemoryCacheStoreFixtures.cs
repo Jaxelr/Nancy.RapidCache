@@ -43,8 +43,40 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
             Assert.Equal(context.Response.Contents.ConvertStream(), response.Contents.ConvertStream());
         }
 
+
         [Theory]
         [InlineData("MemoryRequest2")]
+        public void Memory_cache_set_get_empty(string key)
+        {
+            //Arrange
+            var expirationDate = DateTime.UtcNow.AddMinutes(15);
+            var cache = new MemoryCacheStore();
+            
+            //Act
+            cache.Set(key, null, expirationDate);
+            var response = cache.Get(key);
+
+            //Assert
+            Assert.Null(response);
+        }
+
+        [Fact]
+        public void Memory_cache_set_get_empty_key()
+        {
+            //Arrange
+            var expirationDate = DateTime.UtcNow.AddMinutes(15);
+            var cache = new MemoryCacheStore();
+
+            //Act
+            cache.Set(null, null, expirationDate);
+            var response = cache.Get(null);
+
+            //Assert
+            Assert.Null(response);
+        }
+
+        [Theory]
+        [InlineData("MemoryRequest3")]
         public void Memory_cache_set_get_expired(string key)
         {
             //Arrange
@@ -62,7 +94,7 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
         }
 
         [Theory]
-        [InlineData("MemoryRequest3")]
+        [InlineData("MemoryRequest4")]
         public void Memory_cache_set_remove_get(string key)
         {
             //Arrange
