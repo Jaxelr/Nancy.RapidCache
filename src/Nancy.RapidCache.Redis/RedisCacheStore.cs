@@ -1,8 +1,8 @@
-﻿using Nancy.RapidCache.Projection;
-using StackExchange.Redis;
-using System;
+﻿using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using Nancy.RapidCache.Projection;
+using StackExchange.Redis;
 
 namespace Nancy.RapidCache.CacheStore
 {
@@ -39,6 +39,11 @@ namespace Nancy.RapidCache.CacheStore
         /// <returns></returns>
         public CachedResponse Get(string key)
         {
+            if (string.IsNullOrEmpty(key))
+            {
+                return null;
+            }
+
             var result = (_cache.StringGet(key));
 
             if (result.HasValue)
@@ -58,6 +63,11 @@ namespace Nancy.RapidCache.CacheStore
         /// <param name="absoluteExpiration"></param>
         public void Set(string key, NancyContext context, DateTime absoluteExpiration)
         {
+            if (string.IsNullOrEmpty(key))
+            {
+                return;
+            }
+
             var span = absoluteExpiration - DateTime.UtcNow;
             if (context?.Response is Response && span.TotalSeconds > 0)
             {
