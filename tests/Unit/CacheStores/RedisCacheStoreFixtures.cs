@@ -72,6 +72,21 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
             Assert.Null(response);
         }
 
+        [Theory]
+        [InlineData(LOCALHOST)]
+        public void Redis_cache_set_get_empty_key(string localhost)
+        {
+            //Arrange
+            var expirationDate = DateTime.UtcNow.AddMinutes(15);
+            var cache = new RedisCacheStore(localhost);
+
+            //Act
+            cache.Set(null, null, expirationDate);
+            var response = cache.Get(null);
+
+            //Assert
+            Assert.Null(response);
+        }
 
         [Theory]
         [InlineData(LOCALHOST, "RedisRequest4")]
