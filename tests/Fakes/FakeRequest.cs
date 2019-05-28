@@ -10,18 +10,8 @@ namespace Nancy.RapidCache.Tests.Fakes
     /// </summary>
     public class FakeRequest : Request
     {
-        public FakeRequest(string method, string path)
-            : this(method, path, new Dictionary<string, IEnumerable<string>>(), RequestStream.FromStream(new MemoryStream()), "http", string.Empty)
-        {
-        }
-
         public FakeRequest(string method, string path, IDictionary<string, IEnumerable<string>> headers)
             : this(method, path, headers, RequestStream.FromStream(new MemoryStream()), "http", string.Empty)
-        {
-        }
-
-        public FakeRequest(string method, string path, string query, string userHostAddress = null)
-            : this(method, path, new Dictionary<string, IEnumerable<string>>(), RequestStream.FromStream(new MemoryStream()), "http", query, userHostAddress)
         {
         }
 
