@@ -44,12 +44,15 @@ namespace Nancy.RapidCache.CacheStore
 
             using (var bucket = _cluster.OpenBucket(_bucketname))
             {
-                var serialize = new SerializableResponse(context.Response, absoluteExpiration);
-                var result = bucket.Upsert(key, serialize, span);
+                if (context?.Response is Response)
+                { 
+                    var serialize = new SerializableResponse(context.Response, absoluteExpiration);
+                    var result = bucket.Upsert(key, serialize, span);
 
-                if (!result.Success)
-                {
-                    throw new Exception($"Could not complete operation of Upsert, using cluster configuration: {_cluster.Configuration}");
+                    if (!result.Success)
+                    {
+                        throw new Exception($"Could not complete operation of Upsert, using cluster configuration: {_cluster.Configuration}");
+                    }
                 }
             }
         }
