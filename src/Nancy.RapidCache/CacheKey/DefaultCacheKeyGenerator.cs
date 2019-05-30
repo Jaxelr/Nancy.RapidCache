@@ -44,11 +44,19 @@ namespace Nancy.RapidCache.CacheKey
                 {
                     foreach (string key in dynQuery.Keys)
                     {
+#if NETSTANDARD2_0
                         if (key.Equals(Defaults.DisableCache.Key, StringComparison.OrdinalIgnoreCase) ||
                             key.Equals(Defaults.RemoveCache.Key, StringComparison.OrdinalIgnoreCase))
                         {
                             continue;
                         }
+#else
+                        if (key.Equals(Defaults.NoRequestQueryKey, StringComparison.OrdinalIgnoreCase) ||
+                            key.Equals(Defaults.RemoveCacheKey, StringComparison.OrdinalIgnoreCase))
+                        {
+                            continue;
+                        }
+#endif
 
                         query[key] = (string) dynQuery[key];
                     }

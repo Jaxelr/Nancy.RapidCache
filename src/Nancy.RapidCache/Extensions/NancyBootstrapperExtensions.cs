@@ -72,12 +72,21 @@ namespace Nancy.RapidCache.Extensions
             if (!RapidCache.IsCacheEnabled())
                 throw new BootstrapperException(RemovalExceptionMessage);
 
+#if NETSTANDARD2_0
             Defaults.RemoveCache.Enabled = true;
 
             if (!string.IsNullOrEmpty(key))
             {
                 Defaults.RemoveCache.Key = key;
             }
+#else
+            Defaults.RemoveCacheEnabled = true;
+
+            if (!string.IsNullOrEmpty(key))
+            {
+                Defaults.RemoveCacheKey = key;
+            }
+#endif
         }
 
         /// <summary>
@@ -90,12 +99,22 @@ namespace Nancy.RapidCache.Extensions
             if (!RapidCache.IsCacheEnabled())
                 throw new BootstrapperException(DisableExceptionMessage);
 
+#if NETSTANDARD2_0
+
             Defaults.DisableCache.Enabled = true;
 
             if (!string.IsNullOrEmpty(key))
             {
                 Defaults.DisableCache.Key = key;
             }
+#else
+            Defaults.NoRequestQueryEnabled = true;
+
+            if (!string.IsNullOrEmpty(key))
+            {
+                Defaults.NoRequestQueryKey = key;
+            }
+#endif
         }
     }
 }

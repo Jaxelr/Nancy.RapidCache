@@ -112,10 +112,17 @@ namespace Nancy.RapidCache
         {
             if (context.Request.Query is DynamicDictionary dict)
             {
+#if NETSTANDARD2_0
                 if (DisableCache.Enabled && dict.ContainsKey(DisableCache.Key))
                 {
                     return null;
                 }
+#else
+                if (NoRequestQueryEnabled && dict.ContainsKey(NoRequestQueryKey))
+                {
+                    return null;
+                }
+#endif
             }
 
             string key = _cacheKeyGenerator.Get(context.Request);
@@ -127,11 +134,19 @@ namespace Nancy.RapidCache
 
             if (context.Request.Query is DynamicDictionary rmv)
             {
+#if NETSTANDARD2_0
                 if (RemoveCache.Enabled && rmv.ContainsKey(RemoveCache.Key))
                 {
                     _cacheStore.Remove(key);
                     return null;
                 }
+#else
+                if (RemoveCacheEnabled && rmv.ContainsKey(RemoveCacheKey))
+                {
+                    _cacheStore.Remove(key);
+                    return null;   
+                }
+#endif
             }
 
             var response = _cacheStore.Get(key);
@@ -165,10 +180,17 @@ namespace Nancy.RapidCache
 
             if (context.Request.Query is DynamicDictionary dict)
             {
+#if NETSTANDARD2_0
                 if (DisableCache.Enabled && dict.ContainsKey(DisableCache.Key))
                 {
                     return;
                 }
+#else
+                if (NoRequestQueryEnabled && dict.ContainsKey(NoRequestQueryKey))
+                {
+                    return;
+                }
+#endif
             }
 
             string key = _cacheKeyGenerator.Get(context.Request);
