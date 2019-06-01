@@ -15,6 +15,7 @@
     <Description>This library adds Couchbase support as a store for RapidCache</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageVersion>0.4.1</PackageVersion>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReleaseNotes>Upgrade to target Nancy 2.0</PackageReleaseNotes>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
      <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>     

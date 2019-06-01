@@ -17,6 +17,7 @@
     <PackageVersion>0.4.1</PackageVersion>
     <PackageReleaseNotes>Upgrade to target Nancy 2.0</PackageReleaseNotes>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
      <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>     
   </PropertyGroup>
 
