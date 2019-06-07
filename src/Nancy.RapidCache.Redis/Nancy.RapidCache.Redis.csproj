@@ -33,11 +33,6 @@
     <PackageReference Include="StackExchange.Redis" Version="2.0.601" />
   </ItemGroup>
 
-
-  <ItemGroup>
-    <None Include="..\..\LICENSE" Pack="true" PackagePath="LICENSE" />
-  </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\Nancy.RapidCache\Nancy.RapidCache.csproj" />
   </ItemGroup>

@@ -27,10 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\..\LICENSE" Pack="true" PackagePath="LICENSE" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Nancy.RapidCache\Nancy.RapidCache.csproj" />
   </ItemGroup>
 
