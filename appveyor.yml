@@ -26,7 +26,7 @@ build_script:
   - cmd: dotnet publish ./src/Nancy.RapidCache.Redis/Nancy.RapidCache.Redis.csproj -v quiet -f=netstandard2.0
   - cmd: dotnet publish ./src/Nancy.RapidCache.Couchbase/Nancy.RapidCache.Couchbase.csproj -v quiet -f=netstandard2.0
 test_script: 
-  - cmd: dotnet test ./tests/Nancy.RapidCache.Tests.csproj -v quiet /p:AltCover=true
+  - cmd: dotnet test ./tests/Nancy.RapidCache.Tests.csproj -v quiet /p:AltCover=true /p:AltCoverAssemblyExcludeFilter="xunit"
 after_test:
   - codecov -f "./tests/coverage.xml" -t $(codecov_token)
 artifacts:
