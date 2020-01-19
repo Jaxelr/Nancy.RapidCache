@@ -9,14 +9,12 @@ namespace Asp.Net.Example
 {
     public class Startup
     {
-        public void ConfigureServices(IServiceCollection services)
-        {
+        public void ConfigureServices(IServiceCollection services) =>
             services.AddLogging(opt =>
             {
                 opt.AddConsole();
                 opt.AddDebug();
             });
-        }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
