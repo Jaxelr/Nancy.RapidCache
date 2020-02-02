@@ -15,11 +15,11 @@ namespace Nancy.RapidCache.CacheStore
     /// </summary>
     public class DiskCacheStore : ICacheStore
     {
-        private readonly string _cacheDirectory = string.Empty;
-        private readonly JavaScriptSerializer _javaScriptSerializer;
-        private readonly object _lock = new object();
+        private readonly string cacheDirectory = string.Empty;
+        private readonly JavaScriptSerializer javaScriptSerializer;
+        private readonly object @lock = new object();
         private static readonly Dictionary<string, DateTime> FileKeyExpirationRecord = new Dictionary<string, DateTime>();
-        private static TimeSpan _expiredFilesDeletionOffset;
+        private static TimeSpan expiredFilesDeletionOffset;
 
         /// <summary>
         ///
@@ -37,10 +37,10 @@ namespace Nancy.RapidCache.CacheStore
             File.WriteAllText(Path.Combine(cacheDirectory, GetType().FullName), GetType().FullName);
             File.Delete(Path.Combine(cacheDirectory, GetType().FullName));
 
-            _cacheDirectory = cacheDirectory;
-            _javaScriptSerializer = new JavaScriptSerializer();
+            this.cacheDirectory = cacheDirectory;
+            javaScriptSerializer = new JavaScriptSerializer();
 
-            _expiredFilesDeletionOffset = expiredFilesDeletionOffset;
+            DiskCacheStore.expiredFilesDeletionOffset = expiredFilesDeletionOffset;
         }
 
         /// <summary>
@@ -58,10 +58,10 @@ namespace Nancy.RapidCache.CacheStore
             File.WriteAllText(Path.Combine(cacheDirectory, GetType().FullName), GetType().FullName);
             File.Delete(Path.Combine(cacheDirectory, GetType().FullName));
 
-            _cacheDirectory = cacheDirectory;
-            _javaScriptSerializer = new JavaScriptSerializer();
+            this.cacheDirectory = cacheDirectory;
+            javaScriptSerializer = new JavaScriptSerializer();
 
-            _expiredFilesDeletionOffset = new TimeSpan(0, 0, 24, 0);
+            expiredFilesDeletionOffset = new TimeSpan(0, 0, 24, 0);
         }
 
         /// <summary>
@@ -95,9 +95,9 @@ namespace Nancy.RapidCache.CacheStore
 
             foreach (string file in files)
             {
-                if (File.Exists(Path.Combine(_cacheDirectory, file)))
+                if (File.Exists(Path.Combine(cacheDirectory, file)))
                 {
-                    File.Delete(Path.Combine(_cacheDirectory, file));
+                    File.Delete(Path.Combine(cacheDirectory, file));
                 }
                 FileKeyExpirationRecord.Remove(file);
             }
@@ -110,13 +110,13 @@ namespace Nancy.RapidCache.CacheStore
         /// <returns></returns>
         public CachedResponse Get(string key)
         {
-            lock (_lock)
+            lock (@lock)
             {
                 string fileName = Hash(key);
-                if (File.Exists(Path.Combine(_cacheDirectory, fileName)))
+                if (File.Exists(Path.Combine(cacheDirectory, fileName)))
                 {
-                    string json = File.ReadAllText(Path.Combine(_cacheDirectory, fileName));
-                    var serializedResponse = _javaScriptSerializer.Deserialize<SerializableResponse>(json);
+                    string json = File.ReadAllText(Path.Combine(cacheDirectory, fileName));
+                    var serializedResponse = javaScriptSerializer.Deserialize<SerializableResponse>(json);
                     return new CachedResponse(serializedResponse);
                 }
             }
@@ -129,11 +129,11 @@ namespace Nancy.RapidCache.CacheStore
         /// <param name="key"></param>
         public void Remove(string key)
         {
-            lock (_lock)
+            lock (@lock)
             {
                 string fileName = Hash(key);
-                if (File.Exists(Path.Combine(_cacheDirectory, fileName)))
-                    File.Delete(Path.Combine(_cacheDirectory, fileName));
+                if (File.Exists(Path.Combine(cacheDirectory, fileName)))
+                    File.Delete(Path.Combine(cacheDirectory, fileName));
                 if (FileKeyExpirationRecord.ContainsKey(fileName))
                     FileKeyExpirationRecord.Remove(fileName);
             }
@@ -154,19 +154,19 @@ namespace Nancy.RapidCache.CacheStore
 
             if (context.Response is Response response && absoluteExpiration > DateTime.UtcNow)
             {
-                lock (_lock)
+                lock (@lock)
                 {
                     string fileName = Hash(key);
 
-                    if (File.Exists(Path.Combine(_cacheDirectory, fileName)))
+                    if (File.Exists(Path.Combine(cacheDirectory, fileName)))
                     {
                         return;
                     }
 
-                    var serializedResponse = new SerializableResponse(context.Response, absoluteExpiration);
-                    string json = _javaScriptSerializer.Serialize(serializedResponse);
+                    var serializedResponse = new SerializableResponse(response, absoluteExpiration);
+                    string json = javaScriptSerializer.Serialize(serializedResponse);
 
-                    File.WriteAllText(Path.Combine(_cacheDirectory, fileName), json);
+                    File.WriteAllText(Path.Combine(cacheDirectory, fileName), json);
 
                     FileKeyExpirationRecord.Add(fileName, absoluteExpiration);
                 }

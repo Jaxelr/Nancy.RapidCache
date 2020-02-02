@@ -11,7 +11,7 @@ namespace Nancy.RapidCache.CacheKey
     /// </summary>
     public class DefaultCacheKeyGenerator : ICacheKeyGenerator
     {
-        private IEnumerable<string> _varyParams;
+        private readonly IEnumerable<string> varyParams;
 
         /// <summary>
         /// Defaults usage to url only
@@ -22,7 +22,7 @@ namespace Nancy.RapidCache.CacheKey
 
         public DefaultCacheKeyGenerator(string[] varyParams)
         {
-            _varyParams = varyParams.Select(x => x.ToLowerInvariant());
+            this.varyParams = varyParams.Select(x => x.ToLowerInvariant());
         }
 
         /// <summary>
@@ -37,10 +37,10 @@ namespace Nancy.RapidCache.CacheKey
 
             var query = new Dictionary<string, string>();
 
-            if (_varyParams is IEnumerable<string>)
+            if (varyParams is IEnumerable<string>)
             {
                 if (request.Query is DynamicDictionary dynQuery &&
-                    _varyParams.Contains(nameof(request.Query), StringComparer.InvariantCultureIgnoreCase))
+                    varyParams.Contains(nameof(request.Query), StringComparer.InvariantCultureIgnoreCase))
                 {
                     foreach (string key in dynQuery.Keys)
                     {
@@ -63,7 +63,7 @@ namespace Nancy.RapidCache.CacheKey
                 }
 
                 if (request.Form is DynamicDictionary dynForm &&
-                    _varyParams.Contains(nameof(request.Form), StringComparer.InvariantCultureIgnoreCase))
+                    varyParams.Contains(nameof(request.Form), StringComparer.InvariantCultureIgnoreCase))
                 {
                     foreach (string key in dynForm.Keys)
                     {
@@ -72,7 +72,7 @@ namespace Nancy.RapidCache.CacheKey
                 }
 
                 if (request.Headers.Accept?.Count() > 0 &&
-                    _varyParams.Contains(nameof(request.Headers.Accept), StringComparer.InvariantCultureIgnoreCase))
+                    varyParams.Contains(nameof(request.Headers.Accept), StringComparer.InvariantCultureIgnoreCase))
                 {
                     string acceptHeaders = string.Join(",", request.Headers.Accept.Select(x => x.Item1));
                     query.Add(nameof(request.Headers.Accept), acceptHeaders);

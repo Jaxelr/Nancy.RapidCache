@@ -15,11 +15,11 @@ namespace Nancy.RapidCache
     /// </summary>
     public class RapidCache
     {
-        private static bool _enabled;
-        private static ICacheStore _cacheStore;
-        private static ICacheKeyGenerator _cacheKeyGenerator;
-        private static IRouteResolver _routeResolver;
-        private static INancyBootstrapper _nancyBootstrapper;
+        private static bool enabled;
+        private static ICacheStore cacheStore;
+        private static ICacheKeyGenerator cacheKeyGenerator;
+        private static IRouteResolver routeResolver;
+        private static INancyBootstrapper nancyBootstrapper;
 
         /// <summary>
         ///
@@ -67,16 +67,16 @@ namespace Nancy.RapidCache
         public static void Enable(INancyBootstrapper nancyBootstrapper, IRouteResolver routeResolver,
             IPipelines pipeline, ICacheKeyGenerator cacheKeyGenerator, ICacheStore cacheStore)
         {
-            if (_enabled || cacheKeyGenerator is null || cacheStore is null)
+            if (enabled || cacheKeyGenerator is null || cacheStore is null)
             {
                 return;
             }
 
-            _enabled = true;
-            _cacheKeyGenerator = cacheKeyGenerator;
-            _cacheStore = cacheStore;
-            _nancyBootstrapper = nancyBootstrapper;
-            _routeResolver = routeResolver;
+            enabled = true;
+            RapidCache.cacheKeyGenerator = cacheKeyGenerator;
+            RapidCache.cacheStore = cacheStore;
+            RapidCache.nancyBootstrapper = nancyBootstrapper;
+            RapidCache.routeResolver = routeResolver;
             pipeline.BeforeRequest.AddItemToStartOfPipeline(CheckCache);
             pipeline.AfterRequest.AddItemToEndOfPipeline(SetCache);
         }
@@ -86,7 +86,7 @@ namespace Nancy.RapidCache
         /// Mostly used for discovery purposes since this is a static value.
         /// </summary>
         /// <returns></returns>
-        public static bool IsCacheEnabled() => _enabled;
+        public static bool IsCacheEnabled() => enabled;
 
         /// <summary>
         /// Invokes pre-requirements such as authentication and stuff for the supplied context
@@ -96,7 +96,7 @@ namespace Nancy.RapidCache
         /// <returns></returns>
         private static Response InvokePreRequirements(NancyContext context)
         {
-            var resolution = _routeResolver.Resolve(context);
+            var resolution = routeResolver.Resolve(context);
             var preRequirements = resolution.Before;
             var task = preRequirements.Invoke(context, new CancellationToken(false));
             task.Wait();
@@ -125,7 +125,7 @@ namespace Nancy.RapidCache
 #endif
             }
 
-            string key = _cacheKeyGenerator.Get(context.Request);
+            string key = cacheKeyGenerator.Get(context.Request);
 
             if (string.IsNullOrEmpty(key))
             {
@@ -137,19 +137,19 @@ namespace Nancy.RapidCache
 #if NETSTANDARD2_0
                 if (RemoveCache.Enabled && rmv.ContainsKey(RemoveCache.Key))
                 {
-                    _cacheStore.Remove(key);
+                    cacheStore.Remove(key);
                     return null;
                 }
 #else
                 if (RemoveCacheEnabled && rmv.ContainsKey(RemoveCacheKey))
                 {
-                    _cacheStore.Remove(key);
+                    cacheStore.Remove(key);
                     return null;   
                 }
 #endif
             }
 
-            var response = _cacheStore.Get(key);
+            var response = cacheStore.Get(key);
 
             if (response == null || response.Expiration < DateTime.UtcNow)
             {
@@ -193,7 +193,7 @@ namespace Nancy.RapidCache
 #endif
             }
 
-            string key = _cacheKeyGenerator.Get(context.Request);
+            string key = cacheKeyGenerator.Get(context.Request);
 
             if (string.IsNullOrEmpty(key))
             {
@@ -202,18 +202,18 @@ namespace Nancy.RapidCache
 
             if (context.Response.StatusCode != HttpStatusCode.OK)
             {
-                _cacheStore.Remove(key);
+                cacheStore.Remove(key);
                 return;
             }
 
-            var currentCache = _cacheStore.Get(key);
+            var currentCache = cacheStore.Get(key);
             var now = DateTime.UtcNow;
 
             if (context.Response is CacheableResponse cacheableResponse)
             {
                 if (currentCache == null || currentCache?.Expiration < now)
                 {
-                    _cacheStore.Set(key, context, cacheableResponse.Expiration);
+                    cacheStore.Set(key, context, cacheableResponse.Expiration);
                 }
             }
             else if (context.NegotiationContext.Headers.ContainsKey(CacheHeader.ToLowerInvariant()))
@@ -225,7 +225,7 @@ namespace Nancy.RapidCache
 
                 if (currentCache == null || currentCache?.Expiration < now)
                 {
-                    _cacheStore.Set(key, context, expiration);
+                    cacheStore.Set(key, context, expiration);
                 }
             }
         }
