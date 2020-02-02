@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\src\Nancy.RapidCache.IMemory\Nancy.RapidCache.IMemory\Nancy.RapidCache.IMemory.csproj" />
     <ProjectReference Include="..\src\Nancy.RapidCache.Redis\Nancy.RapidCache.Redis.csproj" />
     <ProjectReference Include="..\src\Nancy.RapidCache\Nancy.RapidCache.csproj" />
   </ItemGroup>
