@@ -45,6 +45,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nancy.RapidCache.Couchbase"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nancy.RapidCache.SampleApplication.net452", "samples\Nancy.RapidCache.SampleApplication.net452\Nancy.RapidCache.SampleApplication.net452.csproj", "{9B3CABB5-4AD2-4AA0-8B41-E293CCD9563E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nancy.RapidCache.IMemory", "src\Nancy.RapidCache.IMemory\Nancy.RapidCache.IMemory\Nancy.RapidCache.IMemory.csproj", "{6DE68CBA-AFFE-4F65-9348-D6AACA9C60A1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{9B3CABB5-4AD2-4AA0-8B41-E293CCD9563E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B3CABB5-4AD2-4AA0-8B41-E293CCD9563E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B3CABB5-4AD2-4AA0-8B41-E293CCD9563E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DE68CBA-AFFE-4F65-9348-D6AACA9C60A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DE68CBA-AFFE-4F65-9348-D6AACA9C60A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DE68CBA-AFFE-4F65-9348-D6AACA9C60A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DE68CBA-AFFE-4F65-9348-D6AACA9C60A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,6 +94,7 @@ Global
 		{F0C2CEBD-E954-4CAE-A7DF-AB07CFDA4C13} = {83AC5CFB-C840-4F71-A859-7F6201BA8837}
 		{68E65B37-16EA-445E-BB4A-586AA22C090C} = {B3747F77-626C-4002-958D-41467C955F6B}
 		{9B3CABB5-4AD2-4AA0-8B41-E293CCD9563E} = {A568B937-CD6C-499B-8FDA-C40505220C7A}
+		{6DE68CBA-AFFE-4F65-9348-D6AACA9C60A1} = {B3747F77-626C-4002-958D-41467C955F6B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CF3E688B-A195-4C64-B28E-3290DD9F6EF2}
