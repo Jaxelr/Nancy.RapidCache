@@ -5,7 +5,7 @@
     <PackageId>Nancy.RapidCache.Redis</PackageId>
     <Authors>Jaxel Rojas</Authors>
     <Product>Nancy.RapidCache.Redis</Product>
-    <Copyright>Copyright 2019</Copyright>
+    <Copyright>Copyright 2020</Copyright>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Jaxelr/Nancy.RapidCache</PackageProjectUrl>
@@ -14,7 +14,6 @@
     <Version>0.4.1</Version>
     <Description>This library adds Redis support as a store for RapidCache</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageVersion>0.4.1</PackageVersion>
     <PackageReleaseNotes>Upgrade to target Nancy 2.0</PackageReleaseNotes>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

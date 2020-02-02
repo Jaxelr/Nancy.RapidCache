@@ -4,7 +4,7 @@
     <PackageId>Nancy.RapidCache</PackageId>
     <Authors>Jaxel Rojas</Authors>
     <Product>Nancy.RapidCache</Product>
-    <Copyright>Copyright 2019</Copyright>
+    <Copyright>Copyright 2020</Copyright>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Jaxelr/Nancy.RapidCache</PackageProjectUrl>
@@ -13,7 +13,6 @@
     <Version>0.4.1</Version>
     <Description>Cache library that integrates with Nancyfx</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageVersion>0.4.1</PackageVersion>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReleaseNotes>Upgrade to target Nancy 2.0</PackageReleaseNotes>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
