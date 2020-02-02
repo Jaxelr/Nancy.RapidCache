@@ -10,12 +10,12 @@ namespace Nancy.RapidCache.CacheStore
     /// </summary>
     public class MemoryCacheStore : ICacheStore
     {
-        private ConcurrentDictionary<string, SerializableResponse> _cache;
-        private readonly int _maxSize = 0;
+        private readonly ConcurrentDictionary<string, SerializableResponse> cache;
+        private readonly int maxSize = 0;
 
         public MemoryCacheStore()
         {
-            _cache = new ConcurrentDictionary<string, SerializableResponse>();
+            cache = new ConcurrentDictionary<string, SerializableResponse>();
         }
 
         /// <summary>
@@ -24,8 +24,8 @@ namespace Nancy.RapidCache.CacheStore
         /// <param name="MaxSize">Specifies the maximum size of items the cache can hold.</param>
         public MemoryCacheStore(int maxSize)
         {
-            _maxSize = maxSize;
-            _cache = new ConcurrentDictionary<string, SerializableResponse>();
+            this.maxSize = maxSize;
+            cache = new ConcurrentDictionary<string, SerializableResponse>();
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Nancy.RapidCache.CacheStore
                 return null;
             }
 
-            _cache.TryGetValue(key, out SerializableResponse value);
+            cache.TryGetValue(key, out SerializableResponse value);
 
             return (value == null) ? null : new CachedResponse(value);
         }
@@ -50,7 +50,7 @@ namespace Nancy.RapidCache.CacheStore
         /// Removes the value from the Concurrent Dictionary using the key provided.
         /// </summary>
         /// <param name="key">The unique key provided by the client</param>
-        public void Remove(string key) => _cache.TryRemove(key, out SerializableResponse value);
+        public void Remove(string key) => cache.TryRemove(key, out SerializableResponse value);
 
         /// <summary>
         /// Sets the value from the Concurrent Dictionary using the key provided.
@@ -66,14 +66,14 @@ namespace Nancy.RapidCache.CacheStore
                 return;
             }
 
-            if (_maxSize > 0 && _maxSize == _cache.Count && !_cache.ContainsKey(key))
+            if (maxSize > 0 && maxSize == cache.Count && !cache.ContainsKey(key))
             {
                 return;
             }
 
             if (context?.Response is Response response && absoluteExpiration > DateTime.UtcNow)
             {
-                _cache[key] = new SerializableResponse(response, absoluteExpiration);
+                cache[key] = new SerializableResponse(response, absoluteExpiration);
             }
         }
     }

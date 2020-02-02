@@ -6,18 +6,18 @@ namespace Nancy.RapidCache.CacheStore
 {
     public class CouchbaseCacheStore : ICacheStore
     {
-        private readonly ICluster _cluster;
-        private readonly string _bucketname;
+        private readonly ICluster cluster;
+        private readonly string bucketname;
 
         public CouchbaseCacheStore(ICluster cluster, string bucketname)
         {
-            _cluster = cluster;
-            _bucketname = bucketname;
+            this.cluster = cluster;
+            this.bucketname = bucketname;
         }
 
         public CachedResponse Get(string key)
         {
-            using (var bucket = _cluster.OpenBucket(_bucketname))
+            using (var bucket = cluster.OpenBucket(bucketname))
             {
                 var result = bucket.Get<SerializableResponse>(key);
 
@@ -32,7 +32,7 @@ namespace Nancy.RapidCache.CacheStore
 
         public void Remove(string key)
         {
-            using (var bucket = _cluster.OpenBucket(_bucketname))
+            using (var bucket = cluster.OpenBucket(bucketname))
             {
                 bucket.Remove(key);
             }
@@ -42,7 +42,7 @@ namespace Nancy.RapidCache.CacheStore
         {
             var span = absoluteExpiration - DateTime.UtcNow;
 
-            using (var bucket = _cluster.OpenBucket(_bucketname))
+            using (var bucket = cluster.OpenBucket(bucketname))
             {
                 if (context?.Response is Response)
                 { 
@@ -51,7 +51,7 @@ namespace Nancy.RapidCache.CacheStore
 
                     if (!result.Success)
                     {
-                        throw new Exception($"Could not complete operation of Upsert, using cluster configuration: {_cluster.Configuration}");
+                        throw new Exception($"Could not complete operation of Upsert, using cluster configuration: {cluster.Configuration}");
                     }
                 }
             }

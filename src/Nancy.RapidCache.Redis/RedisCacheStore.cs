@@ -11,26 +11,26 @@ namespace Nancy.RapidCache.CacheStore
     /// </summary>
     public class RedisCacheStore : ICacheStore
     {
-        private ConnectionMultiplexer _redis;
-        private IDatabase _cache;
+        private readonly ConnectionMultiplexer redis;
+        private readonly IDatabase cache;
 
         public RedisCacheStore(string configurations)
         {
-            _redis = ConnectionMultiplexer.Connect(configurations);
-            _cache = _redis.GetDatabase();
+            redis = ConnectionMultiplexer.Connect(configurations);
+            cache = redis.GetDatabase();
         }
 
         public RedisCacheStore(ConfigurationOptions options)
         {
-            _redis = ConnectionMultiplexer.Connect(options);
-            _cache = _redis.GetDatabase();
+            redis = ConnectionMultiplexer.Connect(options);
+            cache = redis.GetDatabase();
         }
 
         /// <summary>
         /// Removes the object from the cache by key.
         /// </summary>
         /// <param name="key"></param>
-        public void Remove(string key) => _cache.KeyDelete(key);
+        public void Remove(string key) => cache.KeyDelete(key);
 
         /// <summary>
         /// Gets the serializable object from redis.
@@ -44,7 +44,7 @@ namespace Nancy.RapidCache.CacheStore
                 return null;
             }
 
-            var result = (_cache.StringGet(key));
+            var result = (cache.StringGet(key));
 
             if (result.HasValue)
             {
@@ -72,11 +72,11 @@ namespace Nancy.RapidCache.CacheStore
             if (context?.Response is Response && span.TotalSeconds > 0)
             {
                 var serialize = new SerializableResponse(context.Response, absoluteExpiration);
-                bool ack = _cache.StringSet(key, Serialize(serialize), expiry: span);
+                bool ack = cache.StringSet(key, Serialize(serialize), expiry: span);
 
                 if (!ack)
                 {
-                    throw new Exception($"Could not complete operation of Set, using redis configuration: {_redis.Configuration}");
+                    throw new Exception($"Could not complete operation of Set, using redis configuration: {redis.Configuration}");
                 }
             }
         }
