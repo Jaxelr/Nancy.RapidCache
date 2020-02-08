@@ -2,28 +2,10 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net452;</TargetFrameworks>
-    <PackageId>Nancy.RapidCache.Redis</PackageId>
-    <Authors>Jaxel Rojas</Authors>
-    <Product>Nancy.RapidCache.Redis</Product>
-    <Copyright>Copyright 2020</Copyright>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/Jaxelr/Nancy.RapidCache</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/Jaxelr/Nancy.RapidCache</RepositoryUrl>
     <PackageTags>cache;nancyfx;redis</PackageTags>
-    <Version>0.4.2</Version>
     <Description>This library adds Redis support as a store for RapidCache</Description>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReleaseNotes>Upgrade to target Nancy 2.0</PackageReleaseNotes>
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>     
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
-  </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFramework)' == 'net452' ">
     <PackageReference Include="StackExchange.Redis" Version="1.2.6" />
   </ItemGroup>

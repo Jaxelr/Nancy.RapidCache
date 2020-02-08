@@ -2,32 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageId>Nancy.RapidCache.IMemory</PackageId>
-    <Authors>Jaxel Rojas</Authors>
-    <Product>Nancy.RapidCache.IMemory</Product>
-    <Copyright>Copyright 2020</Copyright>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/Jaxelr/Nancy.RapidCache</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/Jaxelr/Nancy.RapidCache</RepositoryUrl>
     <PackageTags>cache;nancyfx;memory</PackageTags>
-    <Version>0.4.2</Version>
     <Description>This library adds support integration to Microsoft.Extensions.Caching.Memory as a store for RapidCache</Description>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReleaseNotes>Initial version, targeting netstandard 2.0</PackageReleaseNotes>
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="3.1.1" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
-
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Nancy.RapidCache\Nancy.RapidCache.csproj" />
   </ItemGroup>
-
 </Project>

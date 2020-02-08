@@ -13,6 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".SolutionItems", ".Solution
 		.gitignore = .gitignore
 		appveyor.yml = appveyor.yml
 		codecov.yml = codecov.yml
+		Directory.Build.props = Directory.Build.props
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
@@ -45,7 +46,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nancy.RapidCache.Couchbase"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nancy.RapidCache.SampleApplication.net452", "samples\Nancy.RapidCache.SampleApplication.net452\Nancy.RapidCache.SampleApplication.net452.csproj", "{9B3CABB5-4AD2-4AA0-8B41-E293CCD9563E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nancy.RapidCache.IMemory", "src\Nancy.RapidCache.IMemory\Nancy.RapidCache.IMemory.csproj", "{6DE68CBA-AFFE-4F65-9348-D6AACA9C60A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nancy.RapidCache.IMemory", "src\Nancy.RapidCache.IMemory\Nancy.RapidCache.IMemory.csproj", "{6DE68CBA-AFFE-4F65-9348-D6AACA9C60A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
