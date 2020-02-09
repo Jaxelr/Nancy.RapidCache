@@ -3,7 +3,7 @@
     <TargetFrameworks>netstandard2.0;net452;</TargetFrameworks>
     <PackageTags>cache;nancyfx</PackageTags>
     <Description>Cache library that integrates with Nancyfx</Description>
-    <PackageReleaseNotes>Upgrade to target Nancy 2.0</PackageReleaseNotes>
+    <PackageReleaseNotes>Upgrade to target latest dependencies, minor fixes</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' ">
@@ -22,6 +22,5 @@
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Nancy" Version="2.0.0" />
     <PackageReference Include="Nancy.Authentication.Forms" Version="2.0.0" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
   </ItemGroup>
 </Project>

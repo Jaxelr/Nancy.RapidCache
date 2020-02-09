@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageTags>cache;nancyfx;memory</PackageTags>
-    <Description>This library adds support integration to Microsoft.Extensions.Caching.Memory as a store for RapidCache</Description>
+    <Description>This library adds support to Microsoft.Extensions.Caching.Memory as a store for RapidCache</Description>
     <PackageReleaseNotes>Initial version, targeting netstandard 2.0</PackageReleaseNotes>
   </PropertyGroup>
 
