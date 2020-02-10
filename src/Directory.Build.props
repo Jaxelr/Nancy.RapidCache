@@ -9,7 +9,7 @@
     <PackageProjectUrl>https://github.com/Jaxelr/Nancy.RapidCache</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Jaxelr/Nancy.RapidCache</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <Version>0.4.3</Version>
+    <Version>0.4.2</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
