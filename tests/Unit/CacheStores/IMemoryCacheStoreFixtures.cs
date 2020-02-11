@@ -135,50 +135,49 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
             Assert.NotNull(context.Response);
         }
 
-        //TODO: Fix Tests
-        //[Theory]
-        //[InlineData("IMemoryRequest5")]
-        //public void IMemory_cache_set_with_max_size(string key)
-        //{
-        //    //Arrange
-        //    var expirationDate = DateTime.UtcNow.AddMinutes(15);
-        //    var cache = new IMemoryCacheStore(new MemoryCacheOptions() { SizeLimit = 1 });
-        //    var context = new NancyContext() { Response = new FakeResponse() { } };
+        [Theory]
+        [InlineData("IMemoryRequest5", 0)]
+        public void IMemory_cache_set_with_max_size(string key, int sizeLimit)
+        {
+            //Arrange
+            var expirationDate = DateTime.UtcNow.AddMinutes(15);
+            var cache = new IMemoryCacheStore(new MemoryCacheOptions() { SizeLimit = sizeLimit });
+            var context = new NancyContext() { Response = new FakeResponse() { } };
 
-        //    //Act
-        //    cache.Set(key, context, expirationDate);
-        //    var response = cache.Get(key);
+            //Act
+            cache.Set(key, context, expirationDate, sizeLimit);
+            var response = cache.Get(key);
 
-        //    //Assert
-        //    Assert.Equal(context.Response.ContentType, response.ContentType);
-        //    Assert.Equal(context.Response.StatusCode, response.StatusCode);
-        //    Assert.Equal(expirationDate, response.Expiration);
-        //    Assert.Equal(context.Response.Contents.ConvertStream(), response.Contents.ConvertStream());
-        //}
+            //Assert
+            Assert.Equal(context.Response.ContentType, response.ContentType);
+            Assert.Equal(context.Response.StatusCode, response.StatusCode);
+            Assert.Equal(expirationDate, response.Expiration);
+            Assert.Equal(context.Response.Contents.ConvertStream(), response.Contents.ConvertStream());
+        }
 
 
-        //[Theory]
-        //[InlineData("IMemoryRequest6", "IMemoryRequest7")]
-        //public void IMemory_cache_set_full_with_max_size(string key, string key2)
-        //{
-        //    //Arrange
-        //    var expirationDate = DateTime.UtcNow.AddMinutes(15);
-        //    var cache = new IMemoryCacheStore(new MemoryCacheOptions() { SizeLimit = 1 });
-        //    var context = new NancyContext() { Response = new FakeResponse() { } };
+        [Theory]
+        [InlineData("IMemoryRequest6", "IMemoryRequest7", 1)]
+        public void IMemory_cache_set_full_with_max_size(string key, string key2, int sizeLimit)
+        {
+            //Arrange
+            var expirationDate = DateTime.UtcNow.AddMinutes(15);
+            var cache = new IMemoryCacheStore(new MemoryCacheOptions() { SizeLimit = sizeLimit });
+            var context = new NancyContext() { Response = new FakeResponse() { } };
 
-        //    //Act
-        //    cache.Set(key, context, expirationDate);
-        //    cache.Set(key2, context, expirationDate);
+            //Act
+            cache.Set(key, context, expirationDate, sizeLimit);
+            cache.Set(key2, context, expirationDate, sizeLimit);
 
-        //    var response = cache.Get(key);
-        //    var response2 = cache.Get(key2);
+            var response = cache.Get(key);
+            var response2 = cache.Get(key2);
 
-        //    //Assert
-        //    Assert.Equal(context.Response.ContentType, response.ContentType);
-        //    Assert.Equal(context.Response.StatusCode, response.StatusCode);
-        //    Assert.Equal(expirationDate, response.Expiration);
-        //    Assert.Equal(context.Response.Contents.ConvertStream(), response.Contents.ConvertStream());
-        //    Assert.Null(response2);
-        //}
+            //Assert
+            Assert.Equal(context.Response.ContentType, response.ContentType);
+            Assert.Equal(context.Response.StatusCode, response.StatusCode);
+            Assert.Equal(expirationDate, response.Expiration);
+            Assert.Equal(context.Response.Contents.ConvertStream(), response.Contents.ConvertStream());
+            Assert.Null(response2);
+        }
     }
 }
