@@ -35,14 +35,18 @@ namespace Nancy.RapidCache.CacheStore
 
         public void Remove(string key) => cache.Remove(key);
 
-        public void Set(string key, NancyContext context, DateTime absoluteExpiration)
+        public void Set(string key, NancyContext context, DateTime absoluteExpiration) => Set(key, context, absoluteExpiration, 0);
+        
+
+        public void Set(string key, NancyContext context, DateTime absoluteExpiration, long size)
         {
             var span = absoluteExpiration - DateTime.UtcNow;
 
             if (context?.Response is Response response && span.TotalSeconds > 0)
             {
                 var options = new MemoryCacheEntryOptions()
-                    .SetAbsoluteExpiration(span);
+                    .SetAbsoluteExpiration(span)
+                    .SetSize(size);
 
                 var serializable = new SerializableResponse(response, absoluteExpiration);
                 cache.Set(key, serializable, options);
