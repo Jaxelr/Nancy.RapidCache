@@ -19,6 +19,10 @@ namespace Nancy.RapidCache.CacheStore
             sizeLimit = options.SizeLimit ?? 0;
         }
 
+        public IMemoryCacheStore(int maxSize) : this(new MemoryCacheOptions() { SizeLimit = maxSize })
+        {
+        }
+
         public IMemoryCacheStore(MemoryCache cache)
         {
             this.cache = cache;
