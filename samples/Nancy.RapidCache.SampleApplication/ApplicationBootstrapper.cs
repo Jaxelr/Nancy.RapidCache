@@ -21,7 +21,7 @@ namespace Asp.Net.Example
 
             //This option enables the ability to remove keys from the cache per request by adding a query string param that includes ?RemoveMeQuery=true
             this.EnableCacheRemovalKey("RemoveMeQuery");
-            
+
             /* Can also call just without keys and it will cache urls based on base urls only. */
             //this.EnableRapidCache(container.Resolve<IRouteResolver>(), ApplicationPipelines);
 
@@ -30,6 +30,9 @@ namespace Asp.Net.Example
 
             /* Enable cache using the DiskCacheStore, vary by url query, form and accept headers */
             //this.EnableRapidCache(container.Resolve<IRouteResolver>(), ApplicationPipelines, new[] { "query", "form", "accept" }, new DiskCacheStore("c:/tmp/cache"));
+
+            /* Enable cache using the IMemoryCacheStore, which uses the MsCaching Memory library, using the same key variations */
+            this.EnableRapidCache(container.Resolve<IRouteResolver>(), ApplicationPipelines, new[] { "query", "form", "accept" }, new IMemoryCacheStore(new Microsoft.Extensions.Caching.Memory.MemoryCacheOptions() { SizeLimit = 1 }));
 
             /* Enable cache using Redis , using the same key variations */
             //this.EnableRapidCache(container.Resolve<IRouteResolver>(), ApplicationPipelines, new[] { "query", "form", "accept" }, new RedisCacheStore("localhost"));

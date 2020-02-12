@@ -7,7 +7,7 @@ namespace Asp.Net.Example
 {
     public class Module : NancyModule
     {
-        private int _cachedTime = 1000;
+        private readonly int cachedTime = 1000;
 
         public Module()
         {
@@ -15,20 +15,20 @@ namespace Asp.Net.Example
             {
                 return
                     View["TestView.html", new { Hello = DateTime.Now.ToString(CultureInfo.InvariantCulture) }]
-                    .AsCacheable(DateTime.UtcNow.AddSeconds(_cachedTime));
+                    .AsCacheable(DateTime.UtcNow.AddSeconds(cachedTime));
             });
 
             Get("/CachedResponse", _ =>
             {
                 return Response
                     .AsText($"this is a cached response: {DateTime.Now.ToString(CultureInfo.InvariantCulture)}")
-                    .AsCacheable(DateTime.Now.AddSeconds(_cachedTime));
+                    .AsCacheable(DateTime.Now.AddSeconds(cachedTime));
             });
 
             Get("/CachedResponse/{hello}", dict =>
             {
                 return Response.AsText($"Hello {dict.hello}, this is a cached response: {Guid.NewGuid()}")
-                    .AsCacheable(DateTime.UtcNow.AddSeconds(_cachedTime));
+                    .AsCacheable(DateTime.UtcNow.AddSeconds(cachedTime));
             });
 
             Get("/faultyResponse", _ =>
@@ -36,7 +36,7 @@ namespace Asp.Net.Example
                 return Response
                     .AsText($"This is a faulty response.")
                     .WithStatusCode(HttpStatusCode.InternalServerError)
-                    .AsCacheable(DateTime.UtcNow.AddSeconds(_cachedTime));
+                    .AsCacheable(DateTime.UtcNow.AddSeconds(cachedTime));
             });
         }
     }
