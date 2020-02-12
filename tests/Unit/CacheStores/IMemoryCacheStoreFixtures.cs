@@ -145,7 +145,7 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
             var context = new NancyContext() { Response = new FakeResponse() { } };
 
             //Act
-            cache.Set(key, context, expirationDate, sizeLimit);
+            cache.Set(key, context, expirationDate);
             var response = cache.Get(key);
 
             //Assert
@@ -166,8 +166,8 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
             var context = new NancyContext() { Response = new FakeResponse() { } };
 
             //Act
-            cache.Set(key, context, expirationDate, sizeLimit);
-            cache.Set(key2, context, expirationDate, sizeLimit);
+            cache.Set(key, context, expirationDate);
+            cache.Set(key2, context, expirationDate);
 
             var response = cache.Get(key);
             var response2 = cache.Get(key2);

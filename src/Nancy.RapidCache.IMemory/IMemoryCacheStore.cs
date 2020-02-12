@@ -7,7 +7,8 @@ namespace Nancy.RapidCache.CacheStore
     public class IMemoryCacheStore : ICacheStore
     {
         private readonly IMemoryCache cache;
-        private long sizeLimit;
+        private readonly long sizeLimit;
+        private long size;
 
         public IMemoryCacheStore() : this(new MemoryCache(new MemoryCacheOptions()))
         {
@@ -21,6 +22,7 @@ namespace Nancy.RapidCache.CacheStore
         public IMemoryCacheStore(MemoryCache cache)
         {
             this.cache = cache;
+            size = 0;
         }
 
         public CachedResponse Get(string key)
@@ -37,11 +39,14 @@ namespace Nancy.RapidCache.CacheStore
 
         public void Remove(string key) => cache.Remove(key);
 
-        public void Set(string key, NancyContext context, DateTime absoluteExpiration) => Set(key, context, absoluteExpiration, 0);
-
-        public void Set(string key, NancyContext context, DateTime absoluteExpiration, long size)
+        public void Set(string key, NancyContext context, DateTime absoluteExpiration)
         {
             if (string.IsNullOrEmpty(key))
+            {
+                return;
+            }
+
+            if (sizeLimit > 0 && sizeLimit == size && !ContainsKey(key))
             {
                 return;
             }
@@ -56,7 +61,10 @@ namespace Nancy.RapidCache.CacheStore
 
                 var serializable = new SerializableResponse(response, absoluteExpiration);
                 cache.Set(key, serializable, options);
+                size++;
             }
         }
+
+        private bool ContainsKey(string key) => cache.TryGetValue(key, out _);
     }
 }
