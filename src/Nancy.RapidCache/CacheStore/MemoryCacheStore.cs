@@ -1,6 +1,7 @@
-﻿using Nancy.RapidCache.Projection;
-using System;
+﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using Nancy.RapidCache.Projection;
 
 namespace Nancy.RapidCache.CacheStore
 {
@@ -19,7 +20,7 @@ namespace Nancy.RapidCache.CacheStore
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="MaxSize">Specifies the maximum size of items the cache can hold.</param>
         public MemoryCacheStore(int maxSize)
@@ -66,8 +67,9 @@ namespace Nancy.RapidCache.CacheStore
                 return;
             }
 
-            if (maxSize > 0 && maxSize == cache.Count && !cache.ContainsKey(key))
+            if (maxSize > 0 && maxSize == cache.Count && !cache.ContainsKey(key) && !EvictExpired())
             {
+                //Dictionary is full at size, bail.
                 return;
             }
 
@@ -75,6 +77,20 @@ namespace Nancy.RapidCache.CacheStore
             {
                 cache[key] = new SerializableResponse(response, absoluteExpiration);
             }
+        }
+
+        internal bool EvictExpired()
+        {
+            foreach (KeyValuePair<string, SerializableResponse> entry in cache)
+            {
+                if (entry.Value.Expiration < DateTime.UtcNow)
+                {
+                    Remove(entry.Key);
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
