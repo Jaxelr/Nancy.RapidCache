@@ -158,5 +158,32 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
             Assert.Equal(context.Response.Contents.ConvertStream(), response.Contents.ConvertStream());
             Assert.Null(response2);
         }
+
+
+        [Theory]
+        [InlineData("MemoryRequest8", "MemoryRequest9")]
+        public void Memory_cache_set_full_with_max_size_expired(string key, string key2)
+        {
+            //Arrange
+            var expirationDate = DateTime.UtcNow.AddSeconds(1);
+            var cache = new MemoryCacheStore(1);
+            var context = new NancyContext() { Response = new FakeResponse() { } };
+
+            //Act
+            cache.Set(key, context, expirationDate);
+
+            System.Threading.Thread.Sleep(1000);
+            expirationDate = DateTime.UtcNow.AddSeconds(10);
+            cache.Set(key2, context, expirationDate);
+
+            var response = cache.Get(key);
+            var response2 = cache.Get(key2);
+
+            //Assert
+            Assert.Equal(context.Response.ContentType, response2.ContentType);
+            Assert.Equal(context.Response.StatusCode, response2.StatusCode);
+            Assert.Equal(expirationDate, response2.Expiration);
+            Assert.Equal(context.Response.Contents.ConvertStream(), response2.Contents.ConvertStream());
+        }
     }
 }
