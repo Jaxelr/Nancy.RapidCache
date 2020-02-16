@@ -13,7 +13,8 @@ namespace Asp.Net.Example
         {
             base.ApplicationStartup(container, pipelines);
 
-            /*enable RapidCache, vary by url params query, form and accept headers */
+            /* Enable RapidCache, vary by url params query, form and accept headers */
+            /* This uses by default the MemoryCacheStore */
             this.EnableRapidCache(container.Resolve<IRouteResolver>(), ApplicationPipelines, new[] { "query", "form", "accept" });
 
             //This option enables the ability to disable the cache per request by adding a query string param that includes ?DisableMeQuery=true
@@ -32,7 +33,7 @@ namespace Asp.Net.Example
             //this.EnableRapidCache(container.Resolve<IRouteResolver>(), ApplicationPipelines, new[] { "query", "form", "accept" }, new DiskCacheStore("c:/tmp/cache"));
 
             /* Enable cache using the IMemoryCacheStore, which uses the MsCaching Memory library, using the same key variations */
-            this.EnableRapidCache(container.Resolve<IRouteResolver>(), ApplicationPipelines, new[] { "query", "form", "accept" }, new IMemoryCacheStore(new Microsoft.Extensions.Caching.Memory.MemoryCacheOptions() { SizeLimit = 1 }));
+            //this.EnableRapidCache(container.Resolve<IRouteResolver>(), ApplicationPipelines, new[] { "query", "form", "accept" }, new IMemoryCacheStore(new Microsoft.Extensions.Caching.Memory.MemoryCacheOptions() { SizeLimit = 10 }));
 
             /* Enable cache using Redis , using the same key variations */
             //this.EnableRapidCache(container.Resolve<IRouteResolver>(), ApplicationPipelines, new[] { "query", "form", "accept" }, new RedisCacheStore("localhost"));
