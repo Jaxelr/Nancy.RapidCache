@@ -15,6 +15,7 @@ before_build:
   - choco install codecov
   - redis-server --service-install
   - redis-server --service-start
+  - cmd: nuget restore
 build_script:
   - cmd: dotnet build ./src/Nancy.RapidCache/Nancy.RapidCache.csproj -v quiet
   - cmd: dotnet build ./src/Nancy.RapidCache.Redis/Nancy.RapidCache.Redis.csproj -v quiet
