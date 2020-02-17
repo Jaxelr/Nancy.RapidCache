@@ -32,7 +32,7 @@ test_script:
 after_test:
   - codecov -f "./tests/coverage.xml" -t $(codecov_token)
 artifacts:
-  - path: '**/*.nupkg'
+  - path: '**/*RapidCache*.nupkg'
 skip_commits:
   files:
     - '**/*.md'
