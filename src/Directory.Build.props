@@ -7,7 +7,7 @@
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Jaxelr/Nancy.RapidCache</PackageProjectUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/Jaxelr/Nancy.RapidCache/develop/icon.png</PackageIconUrl>
+    <PackageIcon>icon.png</PackageIcon>
     <RepositoryUrl>https://github.com/Jaxelr/Nancy.RapidCache</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <Version>0.4.2</Version>
@@ -18,5 +18,9 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+        <None Include="..\..\icon.png" Pack="true" PackagePath="\"/>
   </ItemGroup>
 </Project>
