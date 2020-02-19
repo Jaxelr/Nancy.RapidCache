@@ -141,6 +141,31 @@ namespace WebApplication
 }
 ```
 
+### IMemoryCacheStore
+
+One of the lightweight alternatives to the MemoryCacheStore which is included as part of the RapidCache library is the external IMemoryCacheStore, which requires a separate nuget lib installation:
+
+``` powershell
+PM> Install-Package Nancy.RapidCache.IMemory
+```
+
+the difference being that the store uses the `Microsoft.Extensions.Caching.Memory` as a dependency. The declaration is the same, simply replacing the previous one:
+
+```c#
+namespace WebApplication
+{
+    public class ApplicationBootrapper : Nancy.DefaultNancyBootstrapper
+    {
+        protected override void ApplicationStartup(Nancy.TinyIoc.TinyIoCContainer container, Nancy.Bootstrapper.IPipelines pipelines)
+        {
+            base.ApplicationStartup(container, pipelines);
+            /* Enable cache using the IMemoryCacheStore, which uses the MsCaching Memory library, using the same key variations */
+            this.EnableRapidCache(container.Resolve<IRouteResolver>(), ApplicationPipelines, new[] { "query", "form", "accept" }, new IMemoryCacheStore());
+        }
+    }
+}
+```
+
 ### RedisCacheStore
 
 RapidCache provides a small lib for integration with Redis, given that you provide a valid connection. It is provided as a separate package, so install it first via nuget:
