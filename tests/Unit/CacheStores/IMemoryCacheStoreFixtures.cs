@@ -211,7 +211,7 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
         {
             //Arrange
             var expirationDate = DateTime.UtcNow.AddSeconds(1);
-            var cache = new MemoryCacheStore(1);
+            var cache = new IMemoryCacheStore(1);
             var context = new NancyContext() { Response = new FakeResponse() { } };
 
             //Act
