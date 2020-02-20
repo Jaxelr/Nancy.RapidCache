@@ -32,6 +32,7 @@ namespace Nancy.RapidCache.CacheStore
         /// <summary>
         /// Tries to get the value from the Concurrent Dictionary using the key provided.
         /// If not found, returns null.
+        /// If the key is null or empty, return null.
         /// </summary>
         /// <param name="key">The unique key provided by the client</param>
         /// <returns></returns>
@@ -69,7 +70,7 @@ namespace Nancy.RapidCache.CacheStore
 
             if (maxSize > 0 && maxSize == cache.Count && !cache.ContainsKey(key) && !EvictExpired())
             {
-                //Dictionary is full at size, bail.
+                //Dictionary is full at size and nothing is expired, bail.
                 return;
             }
 
