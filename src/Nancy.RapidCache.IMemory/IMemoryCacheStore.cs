@@ -61,6 +61,7 @@ namespace Nancy.RapidCache.CacheStore
             {
                 var options = new MemoryCacheEntryOptions()
                     .SetAbsoluteExpiration(span)
+                    .RegisterPostEvictionCallback(callback: Eviction, state: this)
                     .SetSize(size);
 
                 var serializable = new SerializableResponse(response, absoluteExpiration);
@@ -70,5 +71,7 @@ namespace Nancy.RapidCache.CacheStore
         }
 
         private bool ContainsKey(string key) => cache.TryGetValue(key, out _);
+
+        private void Eviction(object key, object value, EvictionReason reason, object state) => size--;
     }
 }
