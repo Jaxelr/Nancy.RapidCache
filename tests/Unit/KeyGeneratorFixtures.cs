@@ -69,7 +69,7 @@ namespace Nancy.RapidCache.Tests.Unit
                     headers: acceptHeader,
                     body: null,
                     protocol: PROTOCOL,
-                    query: string.Concat(QUERY, "?RapidCacheDisabled=true"));
+                    query: string.Concat(QUERY, "&RapidCacheDisabled=true"));
 
             //Act
             string key = keyGen.Get(request);
@@ -91,7 +91,7 @@ namespace Nancy.RapidCache.Tests.Unit
                     headers: acceptHeader,
                     body: null,
                     protocol: PROTOCOL,
-                    query: string.Concat(QUERY, "?RapidCacheDisabled=true"));
+                    query: string.Concat(QUERY, "&RapidCacheDisabled=true"));
 
             //Act
             string key = keyGen.Get(request);
@@ -113,7 +113,7 @@ namespace Nancy.RapidCache.Tests.Unit
                     headers: acceptHeader,
                     body: null,
                     protocol: PROTOCOL,
-                    query: string.Concat(QUERY, "?RapidCacheRemove=true"));
+                    query: string.Concat(QUERY, "&RapidCacheRemove=true"));
 
             //Act
             string key = keyGen.Get(request);
@@ -136,7 +136,7 @@ namespace Nancy.RapidCache.Tests.Unit
                     headers: acceptHeader,
                     body: null,
                     protocol: PROTOCOL,
-                    query: string.Concat(QUERY, "?RapidCacheRemove=true"));
+                    query: string.Concat(QUERY, "&RapidCacheRemove=true"));
 
             //Act
             string key = keyGen.Get(request);
