@@ -32,8 +32,10 @@ namespace Nancy.RapidCache.CacheKey
         /// <returns></returns>
         public string Get(Request request)
         {
-            if (request == null || request.Url == null)
+            if (request == null)
+            { 
                 return string.Empty;
+            }
 
             var query = new Dictionary<string, string>();
 
