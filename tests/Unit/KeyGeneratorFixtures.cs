@@ -81,6 +81,28 @@ namespace Nancy.RapidCache.Tests.Unit
         }
 
         [Fact]
+        public void Default_keyed_by_url_only_with_disable_key_with_query()
+        {
+            //Arrange
+            var keyGen = new DefaultCacheKeyGenerator(new string[] { nameof(QUERY), nameof(ACCEPT) });
+            var request = new FakeRequest(
+                    method: METHOD,
+                    path: PATH,
+                    headers: acceptHeader,
+                    body: null,
+                    protocol: PROTOCOL,
+                    query: string.Concat(QUERY, "?RapidCacheDisabled=true"));
+
+            //Act
+            string key = keyGen.Get(request);
+
+            //Assert
+            Assert.Contains(ACCEPT, key);
+            Assert.Contains(QUERY, key);
+            Assert.Contains(PATH, key);
+        }
+
+        [Fact]
         public void Default_keyed_by_url_only_with_removal_key()
         {
             //Arrange
@@ -99,6 +121,29 @@ namespace Nancy.RapidCache.Tests.Unit
             //Assert
             Assert.DoesNotContain(ACCEPT, key);
             Assert.DoesNotContain(QUERY, key);
+            Assert.Contains(PATH, key);
+        }
+
+
+        [Fact]
+        public void Default_keyed_by_url_only_with_removal_key_with_query()
+        {
+            //Arrange
+            var keyGen = new DefaultCacheKeyGenerator(new string[] { nameof(QUERY), nameof(ACCEPT) });
+            var request = new FakeRequest(
+                    method: METHOD,
+                    path: PATH,
+                    headers: acceptHeader,
+                    body: null,
+                    protocol: PROTOCOL,
+                    query: string.Concat(QUERY, "?RapidCacheRemove=true"));
+
+            //Act
+            string key = keyGen.Get(request);
+
+            //Assert
+            Assert.DoesNotContain(ACCEPT, key);
+            Assert.Contains(QUERY, key);
             Assert.Contains(PATH, key);
         }
 
