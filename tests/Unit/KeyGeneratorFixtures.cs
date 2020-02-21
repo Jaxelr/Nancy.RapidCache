@@ -215,6 +215,27 @@ namespace Nancy.RapidCache.Tests.Unit
             Assert.Contains(PATH, key);
         }
 
+
+        [Fact]
+        public void Default_keyed_by_query_without_value()
+        {
+            //Arrange
+            var keyGen = new DefaultCacheKeyGenerator(new string[] { nameof(QUERY) });
+            var request = new FakeRequest(
+                    method: METHOD,
+                    path: PATH,
+                    headers: acceptHeader);
+
+            //Act
+            string key = keyGen.Get(request);
+
+            //Assert
+            Assert.DoesNotContain(ACCEPT, key);
+            Assert.DoesNotContain(QUERY, key);
+            Assert.Contains(PATH, key);
+        }
+
+
         [Fact]
         public void Default_keyed_by_query_with_another_param()
         {
@@ -256,6 +277,29 @@ namespace Nancy.RapidCache.Tests.Unit
             //Assert
             Assert.Contains(ACCEPT, key);
             Assert.Contains(ACCEPT_VALUE, key);
+            Assert.DoesNotContain(QUERY, key);
+            Assert.Contains(PATH, key);
+        }
+
+        [Fact]
+        public void Default_keyed_by_header_without_value()
+        {
+            //Arrange
+            var keyGen = new DefaultCacheKeyGenerator(new string[] { nameof(ACCEPT) });
+            var request = new FakeRequest(
+                    method: METHOD,
+                    path: PATH,
+                    headers: null,
+                    body: null,
+                    protocol: PROTOCOL,
+                    query: QUERY);
+
+            //Act
+            string key = keyGen.Get(request);
+
+            //Assert
+            Assert.DoesNotContain(ACCEPT, key);
+            Assert.DoesNotContain(ACCEPT_VALUE, key);
             Assert.DoesNotContain(QUERY, key);
             Assert.Contains(PATH, key);
         }
@@ -333,6 +377,30 @@ namespace Nancy.RapidCache.Tests.Unit
             Assert.DoesNotContain(QUERY, key);
             Assert.Contains(FORM, key);
             Assert.Contains(FORM_VALUE, key);
+            Assert.Contains(PATH, key);
+        }
+
+        [Fact]
+        public void Default_keyed_by_form_without_value()
+        {
+            //Arrange
+            var keyGen = new DefaultCacheKeyGenerator(new string[] { nameof(FORM) });
+            var request = new FakeRequest(
+                    method: METHOD,
+                    path: PATH,
+                    headers: acceptHeader,
+                    body: null,
+                    protocol: PROTOCOL,
+                    query: QUERY);
+
+            //Act
+            string key = keyGen.Get(request);
+
+            //Assert
+            Assert.DoesNotContain(ACCEPT, key);
+            Assert.DoesNotContain(QUERY, key);
+            Assert.DoesNotContain(FORM, key);
+            Assert.DoesNotContain(FORM_VALUE, key);
             Assert.Contains(PATH, key);
         }
 
