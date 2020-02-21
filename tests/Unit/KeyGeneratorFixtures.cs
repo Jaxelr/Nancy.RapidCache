@@ -291,6 +291,33 @@ namespace Nancy.RapidCache.Tests.Unit
         }
 
         [Fact]
+        public void Default_keyed_by_form_query_accept()
+        {
+            //Arrange
+            var keyGen = new DefaultCacheKeyGenerator(new string[] { nameof(FORM), nameof(ACCEPT), nameof(QUERY) });
+            var request = new FakeRequest(
+                    method: METHOD,
+                    path: PATH,
+                    headers: acceptHeader,
+                    body: null,
+                    protocol: PROTOCOL,
+                    query: QUERY);
+
+            request.Form[FORM] = FORM_VALUE;
+
+            //Act
+            string key = keyGen.Get(request);
+
+            //Assert
+            Assert.Contains(ACCEPT, key);
+            Assert.Contains(QUERY, key);
+            Assert.Contains(FORM, key);
+            Assert.Contains(FORM_VALUE, key);
+            Assert.Contains(PATH, key);
+        }
+
+
+        [Fact]
         public void Default_keyed_by_form_header_query()
         {
             //Arrange
