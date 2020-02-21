@@ -142,7 +142,7 @@ namespace Nancy.RapidCache.Tests.Unit
             string key = keyGen.Get(request);
 
             //Assert
-            Assert.DoesNotContain(ACCEPT, key);
+            Assert.Contains(ACCEPT, key);
             Assert.Contains(QUERY, key);
             Assert.Contains(PATH, key);
         }
