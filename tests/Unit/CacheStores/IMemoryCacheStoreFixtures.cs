@@ -14,7 +14,7 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
         {
             //Arrange
             var cache = new IMemoryCacheStore();
-            var context = new NancyContext() { Response = new FakeResponse() { } };
+            var context = new NancyContext() { Response = new FakeResponse() };
 
             //Act
             cache.Set(string.Empty, context, DateTime.UtcNow.AddMinutes(1));
@@ -31,7 +31,7 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
             //Arrange
             var expirationDate = DateTime.UtcNow.AddMinutes(15);
             var cache = new IMemoryCacheStore(new MemoryCacheOptions());
-            var context = new NancyContext() { Response = new FakeResponse() { } };
+            var context = new NancyContext() { Response = new FakeResponse() };
 
             //Act
             cache.Set(key, context, expirationDate);
@@ -51,7 +51,7 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
             //Arrange
             var expirationDate = DateTime.UtcNow.AddMinutes(15);
             var cache = new IMemoryCacheStore();
-            var context = new NancyContext() { Response = new FakeResponse() { } };
+            var context = new NancyContext() { Response = new FakeResponse() };
 
             //Act
             cache.Set(key, context, expirationDate);
@@ -103,7 +103,7 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
             //Arrange
             var expiredDate = DateTime.UtcNow;
             var cache = new IMemoryCacheStore();
-            var context = new NancyContext() { Response = new FakeResponse() { } };
+            var context = new NancyContext() { Response = new FakeResponse() };
 
             //Act
             cache.Set(key, context, expiredDate);
@@ -121,7 +121,7 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
             //Arrange
             var expirationDate = DateTime.UtcNow.AddMinutes(15);
             var cache = new IMemoryCacheStore();
-            var context = new NancyContext() { Response = new FakeResponse() { } };
+            var context = new NancyContext() { Response = new FakeResponse() };
 
             //Act
             cache.Set(key, context, expirationDate);
@@ -142,7 +142,7 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
             //Arrange
             var expirationDate = DateTime.UtcNow.AddMinutes(15);
             var cache = new IMemoryCacheStore(new MemoryCacheOptions() { SizeLimit = sizeLimit });
-            var context = new NancyContext() { Response = new FakeResponse() { } };
+            var context = new NancyContext() { Response = new FakeResponse() };
 
             //Act
             cache.Set(key, context, expirationDate);
@@ -163,7 +163,7 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
             //Arrange
             var expirationDate = DateTime.UtcNow.AddMinutes(15);
             var cache = new IMemoryCacheStore(new MemoryCacheOptions() { SizeLimit = sizeLimit });
-            var context = new NancyContext() { Response = new FakeResponse() { } };
+            var context = new NancyContext() { Response = new FakeResponse() };
 
             //Act
             cache.Set(key, context, expirationDate);
@@ -187,7 +187,7 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
             //Arrange
             var expirationDate = DateTime.UtcNow.AddMinutes(15);
             var cache = new IMemoryCacheStore(sizeLimit);
-            var context = new NancyContext() { Response = new FakeResponse() { } };
+            var context = new NancyContext() { Response = new FakeResponse() };
 
             //Act
             cache.Set(key, context, expirationDate);
@@ -212,7 +212,7 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
             //Arrange
             var expirationDate = DateTime.UtcNow.AddSeconds(1);
             var cache = new IMemoryCacheStore(1);
-            var context = new NancyContext() { Response = new FakeResponse() { } };
+            var context = new NancyContext() { Response = new FakeResponse() };
 
             //Act
             cache.Set(key, context, expirationDate);

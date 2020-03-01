@@ -25,7 +25,7 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
         {
             //Arrange
             var cache = new DiskCacheStore(path);
-            var context = new NancyContext() { Response = new FakeResponse() { } };
+            var context = new NancyContext() { Response = new FakeResponse() };
 
             //Act
             cache.Set(string.Empty, context, DateTime.UtcNow.AddMinutes(1));
@@ -42,7 +42,7 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
             //Arrange
             string tempPath = Path.Combine(path, "temp1");
             var cache = new DiskCacheStore(tempPath);
-            var context = new NancyContext() { Response = new FakeResponse() { } };
+            var context = new NancyContext() { Response = new FakeResponse() };
 
             //Act
             cache.Set(string.Empty, context, DateTime.UtcNow.AddMinutes(1));
@@ -60,7 +60,7 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
         {
             //Arrange
             var cache = new DiskCacheStore(path, TimeSpan);
-            var context = new NancyContext() { Response = new FakeResponse() { } };
+            var context = new NancyContext() { Response = new FakeResponse() };
 
             //Act
             cache.Set(string.Empty, context, DateTime.UtcNow.AddMinutes(1));
@@ -77,7 +77,7 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
             //Arrange
             string tempPath = Path.Combine(path, "temp2");
             var cache = new DiskCacheStore(tempPath, TimeSpan);
-            var context = new NancyContext() { Response = new FakeResponse() { } };
+            var context = new NancyContext() { Response = new FakeResponse() };
 
             //Act
             cache.Set(string.Empty, context, DateTime.UtcNow.AddMinutes(1));
@@ -97,7 +97,7 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
             //Arrange
             var expirationDate = DateTime.UtcNow.AddMinutes(15);
             var cache = new DiskCacheStore(path);
-            var context = new NancyContext() { Response = new FakeResponse() { } };
+            var context = new NancyContext() { Response = new FakeResponse() };
 
             //Act
             cache.Set(key, context, expirationDate);
@@ -118,7 +118,7 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
             //Arrange
             var expirationDate = DateTime.UtcNow.AddMinutes(15);
             var cache = new DiskCacheStore(path);
-            var context = new NancyContext() { Response = new FakeResponse() { } };
+            var context = new NancyContext() { Response = new FakeResponse() };
 
             //Act
             cache.Set(key, context, expirationDate);
@@ -140,7 +140,7 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
             //Arrange
             var expiredDate = DateTime.UtcNow;
             var cache = new DiskCacheStore(path);
-            var context = new NancyContext() { Response = new FakeResponse() { } };
+            var context = new NancyContext() { Response = new FakeResponse() };
 
             //Act
             cache.Set(key, context, expiredDate);
@@ -158,7 +158,7 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
             //Arrange
             var expiredDate = DateTime.UtcNow;
             var cache = new DiskCacheStore(path);
-            var context = new NancyContext() { Response = new FakeResponse() { } };
+            var context = new NancyContext() { Response = new FakeResponse() };
 
             //Act
             cache.Set(key, context, expiredDate);
@@ -176,7 +176,7 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
             //Arrange
             var expirationDate = DateTime.Now.AddMinutes(15);
             var cache = new DiskCacheStore(path);
-            var context = new NancyContext() { Response = new FakeResponse() { } };
+            var context = new NancyContext() { Response = new FakeResponse() };
 
             //Act
             cache.Set(key, context, expirationDate);
@@ -196,7 +196,7 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
         {
             //Arrange
             var cache = new DiskCacheStore(path, new TimeSpan(0, 0, 5));
-            var context = new NancyContext() { Response = new FakeResponse() { } };
+            var context = new NancyContext() { Response = new FakeResponse() };
 
             //Act
             cache.Set(key, context, DateTime.UtcNow.AddSeconds(5));

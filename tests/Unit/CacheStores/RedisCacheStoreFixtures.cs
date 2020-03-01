@@ -21,7 +21,7 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
             var configOptions = ConfigurationOptions.Parse(localhost);
             var cache = new RedisCacheStore(configOptions);
 
-            var context = new NancyContext() { Response = new FakeResponse() { } };
+            var context = new NancyContext() { Response = new FakeResponse() };
 
             //Act
             cache.Set(key, context, expirationDate);
@@ -42,7 +42,7 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
             //Arrange
             var expirationDate = DateTime.UtcNow.AddMinutes(15);
             var cache = new RedisCacheStore(localhost);
-            var context = new NancyContext() { Response = new FakeResponse() { } };
+            var context = new NancyContext() { Response = new FakeResponse() };
 
             //Act
             cache.Set(key, context, expirationDate);
@@ -95,7 +95,7 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
             //Arrange
             var expiredDate = DateTime.UtcNow;
             var cache = new RedisCacheStore(localhost);
-            var context = new NancyContext() { Response = new FakeResponse() { } };
+            var context = new NancyContext() { Response = new FakeResponse() };
 
             //Act
             cache.Set(key, context, expiredDate);
@@ -113,7 +113,7 @@ namespace Nancy.RapidCache.Tests.Unit.CacheStores
             //Arrange
             var expirationDate = DateTime.UtcNow.AddMinutes(15);
             var cache = new RedisCacheStore(localhost);
-            var context = new NancyContext() { Response = new FakeResponse() { } };
+            var context = new NancyContext() { Response = new FakeResponse() };
 
             //Act
             cache.Set(key, context, expirationDate);

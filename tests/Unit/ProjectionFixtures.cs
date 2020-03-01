@@ -51,7 +51,7 @@ namespace Nancy.RapidCache.Tests.Unit
         public void Serializable_response_created_empty()
         {
             //Arrange
-            var fakeResponse = new FakeResponse();
+            _ = new FakeResponse();
 
             //Act
             var serializableResponse = new SerializableResponse();

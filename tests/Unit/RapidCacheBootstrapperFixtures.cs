@@ -12,9 +12,11 @@ namespace Nancy.RapidCache.Tests.Unit
     public class RapidCacheBootstrapperFixtures
     {
         private const string CACHED_RESPONSE_PATH = "/CachedResponse";
+        private readonly string[] defaultFilters = new[] { "query", "form", "accept" };
 
-        [Fact, Priority(2)]
-        public void Cached_response_request()
+        [Theory, Priority(2)]
+        [InlineData("X-Nancy-RapidCache-Expiration")]
+        public void Cached_response_request(string expirationHeader)
         {
             //Arrange
             var bootstrapper = new FakeDefaultBootstrapper();
@@ -27,7 +29,7 @@ namespace Nancy.RapidCache.Tests.Unit
 
             //Assert
             Assert.Contains(response.Result.Body.AsString(), response2.Result.Body.AsString());
-            Assert.NotNull(response.Result.Headers["X-Nancy-RapidCache-Expiration"]);
+            Assert.NotNull(response.Result.Headers[expirationHeader]);
         }
 
         [Fact, Priority(3)]
@@ -66,7 +68,7 @@ namespace Nancy.RapidCache.Tests.Unit
             var routeResolver = new FakeRouteResolver();
 
             //Act
-            RapidCache.Enable(bootstrapper, routeResolver, new FakePipelines(), new[] { "query", "form", "accept" });
+            RapidCache.Enable(bootstrapper, routeResolver, new FakePipelines(), defaultFilters);
 
             //Assert
             Assert.True(RapidCache.IsCacheEnabled());

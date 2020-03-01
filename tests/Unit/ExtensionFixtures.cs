@@ -12,14 +12,14 @@ namespace Nancy.RapidCache.Tests.Unit
 {
     public class ExtensionFixtures
     {
-        private DateTime expirationDate = DateTime.Now.AddMinutes(15);
+        private readonly DateTime expirationDate = DateTime.Now.AddMinutes(15);
         private readonly string cacheKey = CacheHeader;
 
         [Fact]
         public void Cacheable_negotiator_created()
         {
             //Arrange
-            var context = new NancyContext() { Response = new FakeResponse() { } };
+            var context = new NancyContext() { Response = new FakeResponse() };
             var negotiator = new Negotiator(context);
             var headerKey = new KeyValuePair<string, string>(cacheKey, expirationDate.ToString(CultureInfo.InvariantCulture));
 

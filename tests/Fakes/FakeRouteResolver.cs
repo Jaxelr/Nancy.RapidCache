@@ -4,9 +4,9 @@ namespace Nancy.RapidCache.Tests.Fakes
 {
     public class FakeRouteResolver : IRouteResolver
     {
-        public string Path { get; private set; }
+        public string Path { get; }
 
-        public string ModulePath { get; private set; }
+        public string ModulePath { get; }
 
         ResolveResult IRouteResolver.Resolve(NancyContext context)
         {
