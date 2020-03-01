@@ -237,6 +237,28 @@ namespace Nancy.RapidCache.Tests.Unit
 
 
         [Fact]
+        public void Default_keyed_by_query_without_declaration()
+        {
+            //Arrange
+            var keyGen = new DefaultCacheKeyGenerator(new string[] { });
+            var request = new FakeRequest(
+                    method: METHOD,
+                    path: PATH,
+                    headers: acceptHeader,
+                    body: null,
+                    protocol: PROTOCOL,
+                    query: QUERY);
+
+            //Act
+            string key = keyGen.Get(request);
+
+            //Assert
+            Assert.DoesNotContain(ACCEPT, key);
+            Assert.DoesNotContain(QUERY, key);
+            Assert.Contains(PATH, key);
+        }
+
+        [Fact]
         public void Default_keyed_by_query_with_another_param()
         {
             //Arrange
@@ -392,6 +414,33 @@ namespace Nancy.RapidCache.Tests.Unit
                     body: null,
                     protocol: PROTOCOL,
                     query: QUERY);
+
+            //Act
+            string key = keyGen.Get(request);
+
+            //Assert
+            Assert.DoesNotContain(ACCEPT, key);
+            Assert.DoesNotContain(QUERY, key);
+            Assert.DoesNotContain(FORM, key);
+            Assert.DoesNotContain(FORM_VALUE, key);
+            Assert.Contains(PATH, key);
+        }
+
+
+        [Fact]
+        public void Default_keyed_by_form_without_declaration()
+        {
+            //Arrange
+            var keyGen = new DefaultCacheKeyGenerator(new string[] { });
+            var request = new FakeRequest(
+                    method: METHOD,
+                    path: PATH,
+                    headers: acceptHeader,
+                    body: null,
+                    protocol: PROTOCOL,
+                    query: QUERY);
+
+            request.Form[FORM] = FORM_VALUE;
 
             //Act
             string key = keyGen.Get(request);
