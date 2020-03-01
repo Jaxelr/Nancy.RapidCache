@@ -8,8 +8,17 @@ namespace Nancy.RapidCache.Tests.Fakes
     {
         protected override void ApplicationStartup(TinyIoc.TinyIoCContainer container, Bootstrapper.IPipelines pipelines)
         {
+            string[] parameters = new[] { "query", "form", "accept" };
+
             base.ApplicationStartup(container, pipelines);
+
+            //TODO: Since its complicated to test using multiple boostrappers (thanks to assembly scanning done by Nancy)
+            //      We call all declarations here just to verify that they are not broken 
             this.EnableRapidCache(container.Resolve<IRouteResolver>(), ApplicationPipelines);
+            this.EnableRapidCache(container.Resolve<IRouteResolver>(), ApplicationPipelines, parameters);
+            this.EnableRapidCache(container.Resolve<IRouteResolver>(), ApplicationPipelines, parameters, new CacheStore.MemoryCacheStore());
+            this.EnableRapidCache(container.Resolve<IRouteResolver>(), ApplicationPipelines, new CacheKey.DefaultCacheKeyGenerator(parameters));
+            this.EnableRapidCache(container.Resolve<IRouteResolver>(), ApplicationPipelines, new CacheKey.DefaultCacheKeyGenerator(parameters), new CacheStore.MemoryCacheStore());
 
             pipelines.AfterRequest.AddItemToStartOfPipeline(ConfigureCache);
         }
