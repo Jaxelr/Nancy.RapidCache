@@ -1,8 +1,8 @@
 # How to contribute
 
-I've tried to keep the requirements to the minimum possible. 
+Here's some brief points to follow in order to contribute
 
-## Pull requests.
+## Pull requests
 
 * Please dont use a master branch for PRs.
 * Rebase any relevant changes from upstream before asking for PRs.
@@ -10,4 +10,4 @@ I've tried to keep the requirements to the minimum possible.
 
 ## Styles
 
-Just following the .editorconfig guidelines will suffice for now. 
+Just following the .editorconfig guidelines will suffice for now.
