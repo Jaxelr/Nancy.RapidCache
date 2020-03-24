@@ -88,10 +88,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Nancy.RapidCache.Couchbase\Nancy.RapidCache.Couchbase.csproj">
-      <Project>{68e65b37-16ea-445e-bb4a-586aa22c090c}</Project>
-      <Name>Nancy.RapidCache.Couchbase</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\src\Nancy.RapidCache.Redis\Nancy.RapidCache.Redis.csproj">
       <Project>{7fb87e29-9306-428f-a26f-1e71e37c28ac}</Project>
       <Name>Nancy.RapidCache.Redis</Name>
