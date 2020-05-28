@@ -2,6 +2,8 @@
 
 Cache content asynchronously inside NancyFx. Allows you to set a timespan of lifecycle for your cache. Also allows to redefine the desired Cache backend and desires key request. By default it provides a default memory cache and a default uri key.
 
+__Note:__ Since Nancyfx is no longer being maintained i will be deprioritizing this library, please check [here for details](https://github.com/NancyFx/Nancy/issues/3010)
+
 ## Builds
 
 This library targets Nancyfx 2 and above.
