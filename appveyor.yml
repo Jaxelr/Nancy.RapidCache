@@ -11,7 +11,7 @@ configuration:
 before_build:
   - cmd: dotnet --version
   - cmd: msbuild -version
-  - choco install redis-64
+  - choco install redis-64 --version=3.0.503
   - choco install codecov
   - redis-server --service-install
   - redis-server --service-start
