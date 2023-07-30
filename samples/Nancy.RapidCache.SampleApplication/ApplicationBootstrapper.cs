@@ -41,12 +41,12 @@ namespace Asp.Net.Example
             /* Enable cache using Couchbase , using the same key variations */
             //Couchbase requires the nuget package: https://www.nuget.org/packages/CouchbaseNetClient/
 
-            /*                
+            /*
                 var cluster = new Cluster(new ClientConfiguration
 	            {
 	                Servers = new List<Uri> { new Uri("http://127.0.0.1") }
 	            });
-	
+
 	            var authenticator = new PasswordAuthenticator("user1", "password");
 	            cluster.Authenticate(authenticator);
              */

@@ -34,7 +34,7 @@ namespace Asp.Net.Example
             Get("/faultyResponse", _ =>
             {
                 return Response
-                    .AsText($"This is a faulty response.")
+                    .AsText("This is a faulty response.")
                     .WithStatusCode(HttpStatusCode.InternalServerError)
                     .AsCacheable(DateTime.UtcNow.AddSeconds(cachedTime));
             });
